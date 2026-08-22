@@ -89,11 +89,16 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 /* ---------- conseils aux parents (repliés) ---------- */
 
 .conseils { margin: 34px 0 0; padding: 4px 22px; }
-.conseils summary { cursor: pointer; padding: 12px 0; list-style: none; }
+.conseils summary {
+  cursor: pointer; padding: 12px 0; list-style: none;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: space-between; justify-content: space-between;
+}
 .conseils summary::-webkit-details-marker { display: none; }
-.conseils-titre { display: inline; font-size: 1.05rem; margin: 0; }
-.conseils summary::after { content: " ▾"; color: var(--muted); }
-.conseils details[open] summary::after { content: " ▴"; }
+.conseils-titre { font-size: 1.05rem; margin: 0; }
+.conseils summary::after { content: "▾"; color: var(--muted); margin-left: 10px; -webkit-flex-shrink: 0; flex-shrink: 0; }
+.conseils details[open] summary::after { content: "▴"; }
 .conseils-corps { padding: 0 0 18px; color: var(--muted); }
 .conseils-corps h3 { color: var(--text); font-size: .98rem; margin: 18px 0 6px; }
 .conseils-corps p { margin: 6px 0; }
