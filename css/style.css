@@ -99,6 +99,14 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 .conseils-corps p { margin: 6px 0; }
 .conseils-corps em { color: var(--text); font-style: normal; font-weight: 600; }
 
+#btn-installer {
+  font-family: inherit; font-size: 1rem; font-weight: 700;
+  color: #201500; background: linear-gradient(180deg, var(--sun), var(--sun-deep));
+  border: none; border-radius: 999px; padding: 10px 22px; margin: 4px 0 6px;
+  cursor: pointer;
+}
+#btn-installer:hover, #btn-installer:focus { background: var(--sun); }
+
 /* ---------- pied de page ---------- */
 
 .site-footer {

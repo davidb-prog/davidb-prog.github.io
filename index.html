@@ -23,7 +23,7 @@
     <p class="kicker">Petit labo</p>
     <h1>De grandes questions d’enfants</h1>
     <p class="tagline">Des petits sites à toucher, à faire tourner, à écouter.
-      Le parent lit à voix haute, l’enfant explore.
+      Le conteur raconte l’histoire, l’enfant explore.
       <strong>Choisis ta question !</strong></p>
   </header>
 
@@ -60,11 +60,17 @@
             sortir du labo ni appeler la maîtresse par accident.</p>
 
           <h3>1&nbsp;· Mettre le labo sur l’écran d’accueil</h3>
-          <p><strong>iPhone / iPad</strong> — dans Safari&nbsp;: bouton
+          <p id="deja-installe" hidden>✅ C’est fait&nbsp;: vous êtes déjà dans le
+            labo installé, en plein écran.</p>
+          <p id="bloc-installer" hidden><button id="btn-installer" type="button">➕
+            Installer le Petit labo</button><br>
+            Un appui, et l’icône arrive sur l’écran d’accueil.</p>
+          <p id="conseil-ios"><strong>iPhone / iPad</strong> — dans Safari&nbsp;: bouton
             <em>Partager</em> (le carré avec la flèche), puis
-            <em>«&nbsp;Sur l’écran d’accueil&nbsp;»</em>. Le labo s’ouvrira en plein
-            écran, sans barre d’adresse ni onglets.</p>
-          <p><strong>Android</strong> — dans Chrome&nbsp;: menu <em>⋮</em>, puis
+            <em>«&nbsp;Sur l’écran d’accueil&nbsp;»</em> (Apple n’autorise pas les sites
+            à le faire à votre place). Le labo s’ouvrira en plein écran, sans barre
+            d’adresse ni onglets.</p>
+          <p id="conseil-android"><strong>Android</strong> — dans Chrome&nbsp;: menu <em>⋮</em>, puis
             <em>«&nbsp;Ajouter à l’écran d’accueil&nbsp;»</em>.</p>
 
           <h3>2&nbsp;· Verrouiller le téléphone sur le labo</h3>
@@ -85,5 +91,6 @@
       juste des questions d’enfants et des réponses honnêtes.</p>
   </footer>
 
+  <script src="/js/install.js" defer></script>
 </body>
 </html>
