@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Petit labo — de grandes questions d’enfants</title>
+  <meta name="description" content="Le Petit labo : des petits sites à toucher qui répondent aux grandes questions des enfants. Le parent lit, l’enfant explore.">
+
+  <!-- PWA : installable sur l’écran d’accueil, plein écran, portée = tout le domaine -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Petit labo">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <p class="kicker">Petit labo</p>
+    <h1>De grandes questions d’enfants</h1>
+    <p class="tagline">Des petits sites à toucher, à faire tourner, à écouter.
+      Le parent lit à voix haute, l’enfant explore.
+      <strong>Choisis ta question !</strong></p>
+  </header>
+
+  <main>
+    <section class="serie" aria-labelledby="titre-astro">
+      <h2 id="titre-astro"><span class="serie-emoji" aria-hidden="true">🌌</span> Petit labo d’astronomie</h2>
+
+      <nav class="cartes" aria-label="Les épisodes du Petit labo d’astronomie">
+        <a class="carte" href="/ou-va-le-soleil/">
+          <span class="carte-emoji" aria-hidden="true">☀️</span>
+          <span class="carte-titre">Où va le Soleil la nuit&nbsp;?</span>
+          <span class="carte-sous">Le Soleil ne bouge pas… c’est la Terre qui tourne&nbsp;!</span>
+        </a>
+        <a class="carte" href="/la-terre-tourne/">
+          <span class="carte-emoji" aria-hidden="true">🌍</span>
+          <span class="carte-titre">Quelle heure est-il là-bas&nbsp;?</span>
+          <span class="carte-sous">Quand tu déjeunes, d’autres enfants dorment déjà.</span>
+        </a>
+        <a class="carte" href="/la-lune-change-de-forme/">
+          <span class="carte-emoji" aria-hidden="true">🌙</span>
+          <span class="carte-titre">Pourquoi la Lune change de forme&nbsp;?</span>
+          <span class="carte-sous">La Lune ne change pas — on la voit autrement chaque nuit.</span>
+        </a>
+      </nav>
+
+      <p class="a-venir">D’autres questions mijotent dans le labo… reviens bientôt&nbsp;!</p>
+    </section>
+
+    <section class="panel conseils">
+      <details>
+        <summary><h2 class="conseils-titre">📱 Prêter le téléphone à votre enfant</h2></summary>
+        <div class="conseils-corps">
+          <p>Deux petits réglages, et votre enfant peut explorer tout seul, sans
+            sortir du labo ni appeler la maîtresse par accident.</p>
+
+          <h3>1&nbsp;· Mettre le labo sur l’écran d’accueil</h3>
+          <p><strong>iPhone / iPad</strong> — dans Safari&nbsp;: bouton
+            <em>Partager</em> (le carré avec la flèche), puis
+            <em>«&nbsp;Sur l’écran d’accueil&nbsp;»</em>. Le labo s’ouvrira en plein
+            écran, sans barre d’adresse ni onglets.</p>
+          <p><strong>Android</strong> — dans Chrome&nbsp;: menu <em>⋮</em>, puis
+            <em>«&nbsp;Ajouter à l’écran d’accueil&nbsp;»</em>.</p>
+
+          <h3>2&nbsp;· Verrouiller le téléphone sur le labo</h3>
+          <p><strong>iPhone / iPad</strong> — activez une fois
+            <em>Réglages → Accessibilité → Accès guidé</em>. Ensuite, labo ouvert&nbsp;:
+            triple-clic sur le bouton latéral → <em>Démarrer</em>. L’enfant ne peut
+            plus changer d’appli&nbsp;; triple-clic + code pour sortir.</p>
+          <p><strong>Android</strong> — activez une fois
+            <em>Paramètres → Sécurité → Épinglage d’appli</em>. Ensuite&nbsp;:
+            bouton des applis récentes, icône du labo, <em>«&nbsp;Épingler&nbsp;»</em>.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Le Petit labo est fait maison, sans publicité ni cookies —
+      juste des questions d’enfants et des réponses honnêtes.</p>
+  </footer>
+
+</body>
+</html>

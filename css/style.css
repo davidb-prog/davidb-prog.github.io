@@ -1,0 +1,107 @@
+/* Petit labo — portail de la famille (petit-labo.fr).
+   Thème sombre « espace » de la série d'astronomie, rond et joueur (public : 5 ans).
+   Zéro dépendance. Compat mobiles anciens : pas d'inset, pas d'aspect-ratio requis. */
+
+:root {
+  --bg: #0b1020;
+  --bg2: #0e1530;
+  --surface: #121a33;
+  --surface-2: #1c2540;
+  --border: #26304f;
+  --text: #e9edf8;
+  --muted: #9aa5c3;
+  --sun: #ffcf5c;
+  --sun-deep: #ff9f1c;
+  --rose: #ff6b9d;
+  --teal: #46c2a5;
+  --violet: #a98bff;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1100px 700px at 72% -8%, #182450 0%, rgba(11, 16, 32, 0) 60%),
+    radial-gradient(900px 600px at 8% 108%, rgba(169, 139, 255, 0.10) 0%, rgba(11, 16, 32, 0) 55%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+/* ---------- entête ---------- */
+
+.site-header { max-width: 900px; margin: 0 auto; padding: 46px 20px 10px; text-align: center; }
+.kicker {
+  margin: 0; color: var(--sun); font-size: .8rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.site-header h1 { margin: .22em 0 .3em; font-size: clamp(2rem, 5.5vw, 3rem); line-height: 1.1; }
+.tagline { margin: 0 auto; max-width: 56ch; color: var(--muted); }
+.tagline strong { color: var(--sun); }
+
+main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
+
+.panel {
+  background: linear-gradient(180deg, var(--surface), var(--bg2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------- la série et ses cartes ---------- */
+
+.serie { margin: 26px 0 8px; }
+.serie h2 { font-size: 1.15rem; margin: 0 0 14px; }
+.serie-emoji { margin-right: 6px; }
+
+.cartes { display: block; }
+
+.carte {
+  display: block;
+  background: linear-gradient(180deg, var(--surface), var(--bg2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 0 0 14px;
+  color: var(--text);
+  text-decoration: none;
+  -webkit-transform: translateZ(0);
+}
+.carte:hover, .carte:focus {
+  border-color: var(--sun-deep);
+  background: linear-gradient(180deg, var(--surface-2), var(--bg2));
+}
+.carte-emoji { display: block; font-size: 2rem; margin-bottom: 6px; }
+.carte-titre { display: block; font-size: 1.35rem; font-weight: 700; color: var(--sun); }
+.carte-sous { display: block; margin-top: 4px; color: var(--muted); }
+
+/* côte à côte dès qu'il y a la place */
+@media (min-width: 720px) {
+  .cartes { display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 14px; }
+  .carte { -webkit-flex: 1 1 280px; flex: 1 1 280px; margin: 0; }
+}
+
+.a-venir { color: var(--muted); font-size: .9rem; text-align: center; margin: 16px 0 0; }
+
+/* ---------- conseils aux parents (repliés) ---------- */
+
+.conseils { margin: 34px 0 0; padding: 4px 22px; }
+.conseils summary { cursor: pointer; padding: 12px 0; list-style: none; }
+.conseils summary::-webkit-details-marker { display: none; }
+.conseils-titre { display: inline; font-size: 1.05rem; margin: 0; }
+.conseils summary::after { content: " ▾"; color: var(--muted); }
+.conseils details[open] summary::after { content: " ▴"; }
+.conseils-corps { padding: 0 0 18px; color: var(--muted); }
+.conseils-corps h3 { color: var(--text); font-size: .98rem; margin: 18px 0 6px; }
+.conseils-corps p { margin: 6px 0; }
+.conseils-corps em { color: var(--text); font-style: normal; font-weight: 600; }
+
+/* ---------- pied de page ---------- */
+
+.site-footer {
+  max-width: 980px; margin: 0 auto; padding: 10px 20px 44px;
+  color: var(--muted); font-size: .88rem; text-align: center;
+}
