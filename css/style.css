@@ -97,7 +97,11 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 }
 .conseils summary::-webkit-details-marker { display: none; }
 .conseils-titre { font-size: 1.05rem; margin: 0; }
-.conseils summary::after { content: "▾"; color: var(--muted); margin-left: 10px; -webkit-flex-shrink: 0; flex-shrink: 0; }
+.conseils summary::after {
+  content: "▾"; color: var(--muted); margin-left: 10px;
+  font-size: 1.6rem; line-height: 1;
+  -webkit-flex-shrink: 0; flex-shrink: 0;
+}
 .conseils details[open] summary::after { content: "▴"; }
 .conseils-corps { padding: 0 0 18px; color: var(--muted); }
 .conseils-corps h3 { color: var(--text); font-size: .98rem; margin: 18px 0 6px; }
