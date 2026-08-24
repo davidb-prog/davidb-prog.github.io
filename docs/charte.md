@@ -67,11 +67,17 @@ joueuses.
 du logo — auto-hébergée dans le dépôt (`assets/fonts/baloo2-latin.woff2`,
 variable 400–800, ~33 Ko, licence OFL, repli
 `"Arial Rounded MT Bold", "Trebuchet MS", system-ui`). Le corps du texte reste en
-pile système : seule la voix des titres est de la marque. Règle : **aucune police
-tierce à l'exécution** (pas de CDN) — une police libre commitée et servie par le
-même GitHub Pages est permise. Kicker en capitales espacées couleur accent,
-titres-questions, apostrophe typographique « ' ». Le détail (planchers mobiles,
-compat anciens navigateurs) est dans le skill `petit-labo`.
+**pile système**, et c'est un choix assumé : le rendu varie un peu d'une machine à
+l'autre (SF Pro sur iPhone/Mac, Roboto sur Android, Segoe UI sur Windows) mais
+chaque OS sert sa meilleure police, optimisée pour ses écrans — « différent »
+n'est pas « moche », et la signature de la page (titres, cartes, logotype) est
+déjà identique partout grâce à la Baloo auto-hébergée. Option de réserve si
+l'uniformité totale devenait souhaitée : **Nunito Sans** (rondeur cousine, OFL),
+réversible en une ligne de CSS. Règle : **aucune police tierce à l'exécution**
+(pas de CDN) — une police libre commitée et servie par le même GitHub Pages est
+permise. Kicker en capitales espacées couleur accent, titres-questions,
+apostrophe typographique « ' ». Le détail (planchers mobiles, compat anciens
+navigateurs) est dans le skill `petit-labo`.
 
 ## Le registre des séries
 
@@ -117,6 +123,21 @@ Les palettes des séries non lancées sont des points de départ : chacune se ro
 premier épisode, dans le même gabarit de variables. L'emoji de série apparaît sur
 le portail et dans les pieds de page ; chaque **épisode** garde en plus son
 emoji-signature à lui (☀️ 🌍 🌙…), qui sert de favicon à sa page.
+
+## Quelle fiole, quel emoji, où ?
+
+Trois niveaux, un usage chacun :
+
+- **Le maître** (la fiole au « ? ») = la famille entière : portail (en-tête,
+  favicon), icône PWA, et tout support qui parle du Petit labo en général.
+- **L'emoji de série** (🔭 ✈️ ⛅…) = le texte courant : titres de sections du
+  portail, pieds de page des épisodes, phrases.
+- **La fiole de série** = la série affichée en image :
+  1. l'**en-tête des épisodes** — chaque épisode porte la fiole de sa série à
+     côté de son kicker, comme le portail porte le maître à côté de son nom
+     (à déployer au fil des chantiers) ;
+  2. les **og:image** (fond de série + fiole de série + titre-question) ;
+  3. les sections du portail quand plusieurs séries seront en ligne.
 
 ## Où la marque s'applique
 
