@@ -86,17 +86,25 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 /* ---------- la série et ses cartes ---------- */
 
 .serie { margin: 26px 0 8px; }
-.serie h2 { font-family: var(--titres); font-weight: 700; font-size: 1.2rem; margin: 0 0 14px; }
-.serie-emoji { margin-right: 6px; }
+.serie h2 {
+  font-family: var(--titres); font-weight: 700; font-size: 1.2rem; margin: 0 0 14px;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center; gap: 9px;
+}
+.serie-fiole { width: 30px; height: 30px; -webkit-flex-shrink: 0; flex-shrink: 0; }
 
 .cartes { display: block; }
 
+/* carte = médaillon SVG maison + texte, côte à côte (les emojis-illustrations
+   sont bannis du portail : langage de la fiole partout) */
 .carte {
-  display: block;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  gap: 16px;
   background: linear-gradient(180deg, var(--surface), var(--bg2));
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px 22px;
+  padding: 16px 20px;
   margin: 0 0 14px;
   color: var(--text);
   text-decoration: none;
@@ -106,8 +114,17 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
   border-color: var(--sun-deep);
   background: linear-gradient(180deg, var(--surface-2), var(--bg2));
 }
-.carte-emoji { display: block; font-size: 2rem; margin-bottom: 6px; }
-.carte-titre { display: block; font-family: var(--titres); font-size: 1.4rem; font-weight: 700; color: var(--sun); }
+.carte-medaillon {
+  -webkit-flex: 0 0 auto; flex: 0 0 auto;
+  width: 72px; height: 72px; border-radius: 18px;
+  background: #070b17; border: 1px solid var(--border);
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+}
+.carte-medaillon svg { width: 62px; height: 62px; display: block; }
+.carte-texte { display: block; min-width: 0; }
+.carte-titre { display: block; font-family: var(--titres); font-size: 1.32rem; line-height: 1.2; font-weight: 700; color: var(--sun); }
 .carte-sous { display: block; margin-top: 4px; color: var(--muted); }
 
 /* côte à côte dès qu'il y a la place */

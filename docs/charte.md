@@ -130,8 +130,13 @@ Trois niveaux, un usage chacun :
 
 - **Le maître** (la fiole au « ? ») = la famille entière : portail (en-tête,
   favicon), icône PWA, et tout support qui parle du Petit labo en général.
-- **L'emoji de série** (🔭 ✈️ ⛅…) = le texte courant : titres de sections du
-  portail, pieds de page des épisodes, phrases.
+- **L'emoji de série** (🔭 ✈️ ⛅…) = le texte courant : pieds de page des
+  épisodes, phrases. **Jamais d'emoji en illustration** : en grand, le rendu
+  système (Apple, Google…) jure avec l'univers dessiné à la main — sur le
+  portail, chaque carte d'épisode porte un **médaillon SVG maison** (tuile
+  `#070b17` arrondie, traits or épais, un accent de la famille, une à deux
+  étoiles), et le titre de rayon porte la fiole de sa série en petit.
+  L'emoji-signature d'un épisode reste son favicon.
 - **La fiole de série** = la série affichée en image :
   1. l'**en-tête des épisodes** — chaque épisode porte la fiole de sa série à
      côté de son kicker, comme le portail porte le maître à côté de son nom
@@ -144,7 +149,8 @@ Trois niveaux, un usage chacun :
 - **Portail** : la marque d'un bloc en tête de page — fiole (SVG inline) et nom
   « Petit labo » côte à côte, titre-question dessous, étoiles de décor — favicon
   SVG (fiole-petite en data-URI), icônes PWA générées par `tools/build-icons.mjs`,
-  Baloo 2 sur tous les titres.
+  Baloo 2 sur tous les titres, cartes d'épisodes à médaillon SVG (médaillon +
+  texte côte à côte), fiole de série sur les titres de rayons.
 - **Épisodes** : gardent leur favicon-emoji (c'est une force, pas une dette) et le
   pied de page série avec l'emoji de série.
 - **Les images de partage `og:image`** (1200 × 630 — la carte que WhatsApp,
