@@ -25,17 +25,19 @@
     color: #e9edf8;
   }
   .etoile { position: absolute; border-radius: 50%; }
-  .fiole { position: absolute; left: 78px; top: 116px; width: 400px; height: 400px;
-    filter: drop-shadow(0 0 60px rgba(255,207,92,.28)); }
+  /* la fiole un peu plus discrète, le texte plus large (retour de David sur
+     les vraies cartes WhatsApp : c'est le titre qui doit dominer) */
+  .fiole { position: absolute; left: 66px; top: 145px; width: 340px; height: 340px;
+    filter: drop-shadow(0 0 50px rgba(255,207,92,.28)); }
   .fiole[hidden] { display: none; }
-  .textes { position: absolute; left: 540px; top: 0; right: 70px; height: 630px;
+  .textes { position: absolute; left: 460px; top: 0; right: 64px; height: 630px;
     display: flex; flex-direction: column; justify-content: center; }
   .kicker { color: #ffcf5c; font-weight: 700; font-size: 30px; letter-spacing: .14em;
     text-transform: uppercase; margin: 0 0 18px; }
   h1 { margin: 0; font-weight: 800; font-size: 78px; line-height: 1.08; }
   h1.long { font-size: 64px; }
   .sous { color: #9aa5c3; font-size: 33px; margin: 26px 0 0; font-weight: 400; line-height: 1.35; }
-  .domaine { position: absolute; left: 540px; bottom: 54px; color: #9aa5c3; font-size: 27px;
+  .domaine { position: absolute; left: 460px; bottom: 54px; color: #9aa5c3; font-size: 27px;
     font-weight: 600; }
   .domaine b { color: #ffcf5c; font-weight: 700; }
 </style>

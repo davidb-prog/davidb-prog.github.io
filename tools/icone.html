@@ -3,36 +3,35 @@
 <head>
 <meta charset="utf-8">
 <title>Icône Petit labo — gabarit de rendu</title>
-<!-- Gabarit rendu par tools/build-icons.mjs : la fenêtre fait la taille de l'icône
-     (512, 192, 180…), tout est en vmin pour que chaque taille sorte identique.
-     L'illustration reste dans les ~86 % centraux : marge de sécurité pour les
+<!-- Gabarit rendu par tools/build-icons.mjs : la tuile fait 512 px FIXES, ancrée
+     en haut à gauche — jamais de tailles en vmin/vh ici, car le « headless » de
+     Chromium ampute le viewport de ses bordures de fenêtre (leçon payée : une
+     fiole « centrée » sur un viewport plus court que la tuile, donc trop haute
+     à l'écran d'accueil). Le script capture large puis rogne à 512 exactement.
+     L'illustration reste dans les ~85 % centraux : marge de sécurité pour les
      masques d'icônes (coins arrondis iOS/Android). -->
 <style>
-  /* fond sombre sur html ET body : si la capture dépasse la tuile d'un pixel,
-     rien de blanc ne peut apparaître */
-  html, body { margin: 0; height: 100%; overflow: hidden; background: #070b17; }
+  html, body { margin: 0; background: #070b17; }
   .tuile {
-    position: relative; width: 100vw; height: 100vh;
+    position: absolute; top: 0; left: 0; width: 512px; height: 512px;
+    overflow: hidden;
     background-color: #070b17;
-    background-image: radial-gradient(72vmin 72vmin at 68% 22%, #16204a 0%, #070b17 72%);
+    background-image: radial-gradient(369px 369px at 68% 22%, #16204a 0%, #070b17 72%);
   }
-  .tuile svg {
-    position: absolute; top: 50%; left: 50%;
-    /* le dessin de la fiole est plus haut que bas dans son viewBox : la taille
-       (102vmin) et le décalage (-47vmin) donnent un centrage OPTIQUE — marges
-       hautes/basses quasi égales, la masse de la fiole légèrement assise */
-    width: 102vmin; height: 102vmin; margin: -47vmin 0 0 -51vmin;
-  }
+  /* centrage OPTIQUE calculé : le dessin occupe les lignes 3,75 → 86,5 de son
+     viewBox ; à 522 px de côté, top:18px donne 38 px d'air en haut et 42 en
+     bas — la masse de la fiole légèrement assise */
+  .tuile svg { position: absolute; top: 18px; left: -5px; width: 522px; height: 522px; }
   .etoile { position: absolute; border-radius: 50%; }
 </style>
 </head>
 <body>
 <div class="tuile">
-  <span class="etoile" style="width:2.6vmin;height:2.6vmin;background:#e9edf8;top:12vmin;left:16vmin"></span>
-  <span class="etoile" style="width:2vmin;height:2vmin;background:#9aa5c3;top:24vmin;right:13vmin"></span>
-  <span class="etoile" style="width:2vmin;height:2vmin;background:#46c2a5;bottom:17vmin;left:12vmin"></span>
-  <span class="etoile" style="width:2.6vmin;height:2.6vmin;background:#ff6b9d;bottom:24vmin;right:17vmin"></span>
-  <span class="etoile" style="width:1.6vmin;height:1.6vmin;background:#a98bff;top:44vmin;left:9vmin"></span>
+  <span class="etoile" style="width:13px;height:13px;background:#e9edf8;top:61px;left:82px"></span>
+  <span class="etoile" style="width:10px;height:10px;background:#9aa5c3;top:123px;right:67px"></span>
+  <span class="etoile" style="width:10px;height:10px;background:#46c2a5;bottom:87px;left:61px"></span>
+  <span class="etoile" style="width:13px;height:13px;background:#ff6b9d;bottom:123px;right:87px"></span>
+  <span class="etoile" style="width:8px;height:8px;background:#a98bff;top:225px;left:46px"></span>
   <svg viewBox="0 0 100 100" aria-hidden="true">
     <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
           fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
