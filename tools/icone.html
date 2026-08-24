@@ -18,9 +18,10 @@
   }
   .tuile svg {
     position: absolute; top: 50%; left: 50%;
-    /* le dessin de la fiole est plus haut que bas dans son viewBox :
-       -43.5vmin (et non -46) pour un centrage optique */
-    width: 92vmin; height: 92vmin; margin: -41.5vmin 0 0 -46vmin;
+    /* le dessin de la fiole est plus haut que bas dans son viewBox : la taille
+       (102vmin) et le décalage (-47vmin) donnent un centrage OPTIQUE — marges
+       hautes/basses quasi égales, la masse de la fiole légèrement assise */
+    width: 102vmin; height: 102vmin; margin: -47vmin 0 0 -51vmin;
   }
   .etoile { position: absolute; border-radius: 50%; }
 </style>
