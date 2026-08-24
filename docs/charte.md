@@ -147,8 +147,13 @@ Trois niveaux, un usage chacun :
   Baloo 2 sur tous les titres.
 - **Épisodes** : gardent leur favicon-emoji (c'est une force, pas une dette) et le
   pied de page série avec l'emoji de série.
-- **À outiller ensuite** : les images de partage `og:image` (1200 × 630 — fond de
-  la série, fiole, titre-question), aujourd'hui absentes de tous les épisodes.
+- **Les images de partage `og:image`** (1200 × 630 — la carte que WhatsApp,
+  iMessage ou les réseaux affichent sous un lien) : gabarit `tools/og.html`,
+  génération `node tools/build-og.mjs` (le registre des titres/sous-titres vit
+  dans le script ; capture large puis rognage exact en pur Node). La carte du
+  portail (fiole **maître**) est commitée ici (`assets/og.png`) ; celle de chaque
+  épisode (fiole de **série**) sort dans `tools/sorties-og/` et se copie dans son
+  dépôt (`docs/og.png`) avec les balises `og:` dans le `<head>`.
 
 ## La liste de propagation
 
@@ -160,5 +165,7 @@ Trois niveaux, un usage chacun :
   téléchargée » → « aucune police tierce à l'exécution ; une police libre
   auto-hébergée est permise pour les titres »).
 - `la-lune-change-de-forme` : pied de page « Petit labo d'astronomie 🌌 » → 🔭.
-- Les épisodes : Baloo 2 sur les titres (au fil des chantiers, en copiant
-  `assets/fonts/`), et balises `og:image` quand le gabarit existera.
+- Les épisodes : Baloo 2 sur les titres et la fiole de série en en-tête (au fil
+  des chantiers, en copiant `assets/fonts/`). Les `og:image` et leurs balises
+  sont livrées par le chantier og (une PR par épisode) — après tout changement
+  de titre affiché, re-passer `node tools/build-og.mjs` et recopier la carte.
