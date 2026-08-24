@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Petit labo — de grandes questions d’enfants</title>
   <meta name="description" content="Le Petit labo : des petits sites à toucher qui répondent aux grandes questions des enfants. Le parent lit, l’enfant explore.">
 
@@ -180,5 +180,10 @@
   </footer>
 
   <script src="/js/install.js" defer></script>
+  <!-- Safari iOS ignore user-scalable=no dans le navigateur : on bloque
+       aussi le geste de pincement lui-même pour empêcher tout zoom -->
+  <script>
+    document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+  </script>
 </body>
 </html>
