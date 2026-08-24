@@ -2,7 +2,18 @@
    Thème sombre « espace » de la série d'astronomie, rond et joueur (public : 5 ans).
    Zéro dépendance. Compat mobiles anciens : pas d'inset, pas d'aspect-ratio requis. */
 
+/* la rondeur des titres : Baloo 2, auto-hébergée (assets/fonts/, licence OFL),
+   variable 400–800 — le corps du texte reste en pile système */
+@font-face {
+  font-family: "Baloo 2";
+  src: url("/assets/fonts/baloo2-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --titres: "Baloo 2", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
   --bg: #0b1020;
   --bg2: #0e1530;
   --surface: #121a33;
@@ -34,15 +45,35 @@ body {
 
 /* ---------- entête ---------- */
 
-.site-header { max-width: 900px; margin: 0 auto; padding: 38px 20px 10px; text-align: center; }
-.logo-fiole { display: block; width: 88px; height: 88px; margin: 0 auto 2px; }
-.kicker {
-  margin: 0; color: var(--sun); font-size: .8rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
+/* la marque se lit d'un bloc : fiole + nom côte à côte (plus d'empilement en
+   pyramide), le titre-question dessous, quelques étoiles posées dans le ciel */
+.site-header {
+  position: relative;
+  max-width: 900px; margin: 0 auto; padding: 46px 20px 12px; text-align: center;
 }
-.site-header h1 { margin: .22em 0 .3em; font-size: clamp(2rem, 5.5vw, 3rem); line-height: 1.1; }
+.marque {
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  gap: 13px; margin: 0 0 4px;
+}
+.logo-fiole {
+  display: block; width: 64px; height: 64px;
+  filter: drop-shadow(0 0 16px rgba(255, 207, 92, .25));
+  -webkit-filter: drop-shadow(0 0 16px rgba(255, 207, 92, .25));
+}
+.marque-nom {
+  font-family: var(--titres); font-weight: 800; font-size: 2.1rem;
+  line-height: 1; color: var(--text); padding-top: 10px;
+}
+.marque-nom .or { color: var(--sun); }
+.site-header h1 {
+  font-family: var(--titres); font-weight: 700;
+  margin: .35em 0 .25em; font-size: clamp(2rem, 5.5vw, 2.9rem); line-height: 1.12;
+}
 .tagline { margin: 0 auto; max-width: 56ch; color: var(--muted); }
 .tagline strong { color: var(--sun); }
+.etoile-tete { position: absolute; border-radius: 50%; pointer-events: none; }
 
 main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 
@@ -55,7 +86,7 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 /* ---------- la série et ses cartes ---------- */
 
 .serie { margin: 26px 0 8px; }
-.serie h2 { font-size: 1.15rem; margin: 0 0 14px; }
+.serie h2 { font-family: var(--titres); font-weight: 700; font-size: 1.2rem; margin: 0 0 14px; }
 .serie-emoji { margin-right: 6px; }
 
 .cartes { display: block; }
@@ -76,7 +107,7 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
   background: linear-gradient(180deg, var(--surface-2), var(--bg2));
 }
 .carte-emoji { display: block; font-size: 2rem; margin-bottom: 6px; }
-.carte-titre { display: block; font-size: 1.35rem; font-weight: 700; color: var(--sun); }
+.carte-titre { display: block; font-family: var(--titres); font-size: 1.4rem; font-weight: 700; color: var(--sun); }
 .carte-sous { display: block; margin-top: 4px; color: var(--muted); }
 
 /* côte à côte dès qu'il y a la place */
@@ -97,7 +128,7 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
   -webkit-justify-content: space-between; justify-content: space-between;
 }
 .conseils summary::-webkit-details-marker { display: none; }
-.conseils-titre { font-size: 1.05rem; margin: 0; }
+.conseils-titre { font-family: var(--titres); font-weight: 700; font-size: 1.1rem; margin: 0; }
 .conseils summary::after {
   content: "▾"; color: var(--muted); margin-left: 10px;
   font-size: 1.6rem; line-height: 1;

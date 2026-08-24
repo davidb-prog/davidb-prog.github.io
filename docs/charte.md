@@ -38,9 +38,9 @@ Les règles du logo :
   maître de la série d'astronomie, pas la couleur.
 - **Un seul objet par fiole de série** : une scène chargée meurt à 48 px.
 - En dessous de ~64 px : version `fiole-petite` (sans éclats, traits épaissis).
-- Le logotype « Petit labo » accompagne la fiole en rondeur type « Baloo » ;
-  pour l'usage en image il se vectorise en tracés (aucune police téléchargée
-  côté site — les pages restent en pile système).
+- Le logotype « Petit labo » s'écrit en **Baloo 2** graisse 800, « labo » en or,
+  posé à droite de la fiole (jamais dessous : empilés, logo + nom + titre font
+  une pyramide). Pour l'usage en image (og:image…) il se vectorise en tracés.
 
 ## Les couleurs de la famille
 
@@ -61,7 +61,15 @@ Le gabarit commun de variables (rodé par l'astronomie, décliné par chaque sé
 ```
 
 Formes : rayons 14 px, panneaux en dégradé `--surface → --bg2`, formes rondes et
-joueuses. Typographie : pile système, kicker en capitales espacées couleur accent,
+joueuses.
+
+**Typographie** : les titres (et le logotype) parlent en **Baloo 2** — la rondeur
+du logo — auto-hébergée dans le dépôt (`assets/fonts/baloo2-latin.woff2`,
+variable 400–800, ~33 Ko, licence OFL, repli
+`"Arial Rounded MT Bold", "Trebuchet MS", system-ui`). Le corps du texte reste en
+pile système : seule la voix des titres est de la marque. Règle : **aucune police
+tierce à l'exécution** (pas de CDN) — une police libre commitée et servie par le
+même GitHub Pages est permise. Kicker en capitales espacées couleur accent,
 titres-questions, apostrophe typographique « ' ». Le détail (planchers mobiles,
 compat anciens navigateurs) est dans le skill `petit-labo`.
 
@@ -112,8 +120,10 @@ emoji-signature à lui (☀️ 🌍 🌙…), qui sert de favicon à sa page.
 
 ## Où la marque s'applique
 
-- **Portail** : fiole en tête de page (SVG inline), favicon SVG (fiole-petite en
-  data-URI), icônes PWA générées par `tools/build-icons.mjs`.
+- **Portail** : la marque d'un bloc en tête de page — fiole (SVG inline) et nom
+  « Petit labo » côte à côte, titre-question dessous, étoiles de décor — favicon
+  SVG (fiole-petite en data-URI), icônes PWA générées par `tools/build-icons.mjs`,
+  Baloo 2 sur tous les titres.
 - **Épisodes** : gardent leur favicon-emoji (c'est une force, pas une dette) et le
   pied de page série avec l'emoji de série.
 - **À outiller ensuite** : les images de partage `og:image` (1200 × 630 — fond de
@@ -123,7 +133,11 @@ emoji-signature à lui (☀️ 🌍 🌙…), qui sert de favicon à sa page.
 
 À répercuter hors de ce dépôt (fait au fil des chantiers) :
 
-- Le skill `petit-labo` (`references/series.md`) : 🔭 pour l'astronomie, le test
-  du kicker, les rayons 2–4 ci-dessus, et un pointeur vers cette charte.
+- Le skill `petit-labo` (`references/series.md` et `references/conventions.md`) :
+  🔭 pour l'astronomie, le test du kicker, les rayons 2–4 ci-dessus, un pointeur
+  vers cette charte, et l'amendement de la règle des polices (« aucune police
+  téléchargée » → « aucune police tierce à l'exécution ; une police libre
+  auto-hébergée est permise pour les titres »).
 - `la-lune-change-de-forme` : pied de page « Petit labo d'astronomie 🌌 » → 🔭.
-- Les épisodes : balises `og:image` quand le gabarit existera.
+- Les épisodes : Baloo 2 sur les titres (au fil des chantiers, en copiant
+  `assets/fonts/`), et balises `og:image` quand le gabarit existera.

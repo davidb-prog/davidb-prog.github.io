@@ -22,22 +22,30 @@
 <body>
 
   <header class="site-header">
-    <!-- le logo de la famille : la fiole à la question (source : assets/marque/fiole.svg) -->
-    <svg class="logo-fiole" viewBox="0 0 100 100" role="img"
-      aria-label="Le Petit labo — une fiole d'où s'échappe un point d'interrogation">
-      <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
-            fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
-      <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
-      <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
-      <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
-      <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
-      <g transform="rotate(10 53 17)">
-        <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
-              fill="none" stroke="#ffcf5c" stroke-width="5.5" stroke-linecap="round"/>
-        <circle cx="53" cy="29.5" r="2.9" fill="#ffcf5c"/>
-      </g>
-    </svg>
-    <p class="kicker">Petit labo</p>
+    <!-- quelques étoiles posées dans le ciel de l'en-tête (décor) -->
+    <span class="etoile-tete" style="width:4px;height:4px;background:#e9edf8;top:34px;left:16%" aria-hidden="true"></span>
+    <span class="etoile-tete" style="width:3px;height:3px;background:#9aa5c3;top:62px;right:13%" aria-hidden="true"></span>
+    <span class="etoile-tete" style="width:3px;height:3px;background:#46c2a5;top:118px;left:9%" aria-hidden="true"></span>
+    <span class="etoile-tete" style="width:4px;height:4px;background:#ff6b9d;top:96px;right:22%" aria-hidden="true"></span>
+    <span class="etoile-tete" style="width:3px;height:3px;background:#a98bff;top:30px;right:34%" aria-hidden="true"></span>
+    <span class="etoile-tete" style="width:3px;height:3px;background:#9aa5c3;top:140px;left:27%" aria-hidden="true"></span>
+    <!-- la marque d'un bloc : la fiole (assets/marque/fiole.svg) + le nom, côte à côte -->
+    <p class="marque">
+      <svg class="logo-fiole" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+              fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+        <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
+        <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
+        <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
+        <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+        <g transform="rotate(10 53 17)">
+          <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+                fill="none" stroke="#ffcf5c" stroke-width="5.5" stroke-linecap="round"/>
+          <circle cx="53" cy="29.5" r="2.9" fill="#ffcf5c"/>
+        </g>
+      </svg>
+      <span class="marque-nom">Petit <span class="or">labo</span></span>
+    </p>
     <h1>De grandes questions d’enfants</h1>
     <p class="tagline">Des petits sites à toucher, à faire tourner, à écouter.
       Le conteur raconte l’histoire, l’enfant explore.
