@@ -14,12 +14,29 @@
   <meta name="apple-mobile-web-app-title" content="Petit labo">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <!-- favicon vectoriel : la fiole en version petites tailles (assets/marque/fiole-petite.svg) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z' fill='%230e1530' stroke='%23ffcf5c' stroke-width='6.5' stroke-linejoin='round'/%3E%3Crect x='39.5' y='34' width='21' height='6.5' rx='3.25' fill='%23ffcf5c'/%3E%3Cg transform='rotate(10 53 17)'%3E%3Cpath d='M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23' fill='none' stroke='%23ffcf5c' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='53' cy='29.5' r='3.6' fill='%23ffcf5c'/%3E%3C/g%3E%3C/svg%3E">
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
   <header class="site-header">
+    <!-- le logo de la famille : la fiole à la question (source : assets/marque/fiole.svg) -->
+    <svg class="logo-fiole" viewBox="0 0 100 100" role="img"
+      aria-label="Le Petit labo — une fiole d'où s'échappe un point d'interrogation">
+      <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+            fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+      <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
+      <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
+      <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
+      <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+      <g transform="rotate(10 53 17)">
+        <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+              fill="none" stroke="#ffcf5c" stroke-width="5.5" stroke-linecap="round"/>
+        <circle cx="53" cy="29.5" r="2.9" fill="#ffcf5c"/>
+      </g>
+    </svg>
     <p class="kicker">Petit labo</p>
     <h1>De grandes questions d’enfants</h1>
     <p class="tagline">Des petits sites à toucher, à faire tourner, à écouter.
@@ -29,7 +46,7 @@
 
   <main>
     <section class="serie" aria-labelledby="titre-astro">
-      <h2 id="titre-astro"><span class="serie-emoji" aria-hidden="true">🌌</span> Petit labo d’astronomie</h2>
+      <h2 id="titre-astro"><span class="serie-emoji" aria-hidden="true">🔭</span> Petit labo d’astronomie</h2>
 
       <nav class="cartes" aria-label="Les épisodes du Petit labo d’astronomie">
         <a class="carte" href="/ou-va-le-soleil/">

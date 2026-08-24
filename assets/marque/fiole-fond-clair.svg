@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>Petit labo — la fiole à la question (fond clair)</title>
+  <desc>Variante pour fonds clairs (README, impression) : trait, col et question passent à
+    l'or profond, la nuit du labo reste à l'intérieur de la fiole.</desc>
+  <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+        fill="#0e1530" stroke="#ff9f1c" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
+  <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
+  <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
+  <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ff9f1c"/>
+  <g transform="rotate(10 53 17)">
+    <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+          fill="none" stroke="#ff9f1c" stroke-width="5.5" stroke-linecap="round"/>
+    <circle cx="53" cy="29.5" r="2.9" fill="#ff9f1c"/>
+  </g>
+</svg>
