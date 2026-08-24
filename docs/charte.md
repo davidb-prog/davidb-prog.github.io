@@ -130,17 +130,25 @@ Trois niveaux, un usage chacun :
 
 - **Le maître** (la fiole au « ? ») = la famille entière : portail (en-tête,
   favicon), icône PWA, et tout support qui parle du Petit labo en général.
-- **L'emoji de série** (🔭 ✈️ ⛅…) = le texte courant : pieds de page des
-  épisodes, phrases. **Jamais d'emoji en illustration** : en grand, le rendu
-  système (Apple, Google…) jure avec l'univers dessiné à la main — sur le
-  portail, chaque carte d'épisode porte un **médaillon SVG maison** (tuile
-  `#070b17` arrondie, traits or épais, un accent de la famille, une à deux
-  étoiles), et le titre de rayon porte la fiole de sa série en petit.
-  L'emoji-signature d'un épisode reste son favicon.
+- **L'emoji de série** (🔭 ✈️ ⛅…) = le texte courant : la ligne « un épisode
+  du Petit labo de X » des pieds de page, les phrases. **Jamais d'emoji en
+  illustration** : en grand, le rendu système (Apple, Google…) jure avec
+  l'univers dessiné à la main — sur le portail, chaque carte d'épisode porte un
+  **médaillon SVG maison** (tuile `#070b17` arrondie, traits or épais, un
+  accent de la famille, une à deux étoiles), et le titre de rayon porte la
+  fiole de sa série en petit. Les médaillons voyagent aussi dans les épisodes :
+  dans le **pied de page**, chaque lien vers un autre épisode porte le
+  médaillon de sa carte (tuile ~30 px, soulignement sur le titre seul), et le
+  **pont** vers un épisode voisin porte le médaillon de l'épisode d'arrivée —
+  plus d'emoji 🌍/🌙 devant ces liens. L'emoji-signature d'un épisode reste
+  son favicon.
 - **La fiole de série** = la série affichée en image :
-  1. l'**en-tête des épisodes** — chaque épisode porte la fiole de sa série à
-     côté de son kicker, comme le portail porte le maître à côté de son nom
-     (à déployer au fil des chantiers) ;
+  1. l'**en-tête des épisodes** — chaque épisode porte la fiole de sa série en
+     petit (SVG inline, ~24 px) à côté de son kicker, comme le portail porte le
+     maître à côté de son nom (déployé sur `ou-va-le-soleil`, la référence à
+     copier). La fiole reste petite et le kicker centré : le grand logo posé
+     en coin de page a été maquetté puis écarté — une fiole seule dans un
+     coin, sans nom accroché, se lit moins comme une marque ;
   2. les **og:image** (fond de série + fiole de série + titre-question) ;
   3. les sections du portail quand plusieurs séries seront en ligne.
 
@@ -151,8 +159,13 @@ Trois niveaux, un usage chacun :
   SVG (fiole-petite en data-URI), icônes PWA générées par `tools/build-icons.mjs`,
   Baloo 2 sur tous les titres, cartes d'épisodes à médaillon SVG (médaillon +
   texte côte à côte), fiole de série sur les titres de rayons.
-- **Épisodes** : gardent leur favicon-emoji (c'est une force, pas une dette) et le
-  pied de page série avec l'emoji de série.
+- **Épisodes** : gardent leur favicon-emoji (c'est une force, pas une dette) et
+  le pied de page série avec l'emoji de série dans la ligne-titre. Dans ce pied
+  de page, les liens vers les autres épisodes portent leur **médaillon de
+  carte**, et le bouton « Tous les épisodes du Petit labo » porte la **fiole
+  maître au « ? »** en version petites tailles (il parle de la famille entière,
+  c'est le territoire du maître) à la place de l'ancienne éprouvette 🧪.
+  Patron déployé sur `ou-va-le-soleil`, à propager aux voisins.
 - **Les images de partage `og:image`** (1200 × 630 — la carte que WhatsApp,
   iMessage ou les réseaux affichent sous un lien) : gabarit `tools/og.html`,
   génération `node tools/build-og.mjs` (le registre des titres/sous-titres vit
@@ -170,8 +183,12 @@ Trois niveaux, un usage chacun :
   vers cette charte, et l'amendement de la règle des polices (« aucune police
   téléchargée » → « aucune police tierce à l'exécution ; une police libre
   auto-hébergée est permise pour les titres »).
-- `la-lune-change-de-forme` : pied de page « Petit labo d'astronomie 🌌 » → 🔭.
-- Les épisodes : Baloo 2 sur les titres et la fiole de série en en-tête (au fil
-  des chantiers, en copiant `assets/fonts/`). Les `og:image` et leurs balises
+- `la-terre-tourne` et `la-lune-change-de-forme` : pied de page
+  « Petit labo d'astronomie 🌌 » → 🔭 (`ou-va-le-soleil` est fait).
+- Les épisodes : Baloo 2 sur les titres, la fiole de série en en-tête, et le
+  pied de page à médaillons + fiole maître (au fil des chantiers, en copiant
+  `assets/fonts/` et les SVG depuis le portail ou `ou-va-le-soleil`, qui a
+  reçu l'ensemble le premier et sert de référence — restent `la-terre-tourne`
+  et `la-lune-change-de-forme`). Les `og:image` et leurs balises
   sont livrées par le chantier og (une PR par épisode) — après tout changement
   de titre affiché, re-passer `node tools/build-og.mjs` et recopier la carte.
