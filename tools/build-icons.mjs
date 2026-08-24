@@ -93,6 +93,21 @@ function lirePNG(octets) {
   return { largeur, hauteur, canaux, pixels };
 }
 
+// rognage en haut à gauche : la capture est plus grande que la tuile (le
+// « headless » de Chromium ampute le viewport de ses bordures de fenêtre,
+// d'un montant qui varie selon les versions — on capture large, on rogne exact)
+function recadre(img, cibleL, cibleH) {
+  const { largeur, hauteur, canaux, pixels } = img;
+  if (largeur < cibleL || hauteur < cibleH) {
+    throw new Error('capture trop petite (' + largeur + '×' + hauteur + ') pour rogner à ' + cibleL + '×' + cibleH);
+  }
+  const sortie = Buffer.alloc(cibleL * cibleH * canaux);
+  for (let y = 0; y < cibleH; y++) {
+    pixels.copy(sortie, y * cibleL * canaux, y * largeur * canaux, y * largeur * canaux + cibleL * canaux);
+  }
+  return { largeur: cibleL, hauteur: cibleH, canaux, pixels: sortie };
+}
+
 // moyenne de zones (chaque pixel cible = moyenne pondérée de la zone source qu'il
 // recouvre, poids fractionnaires aux bords) — le bon filtre pour réduire une icône
 function reduit(img, cibleL, cibleH) {
@@ -181,7 +196,7 @@ const r = spawnSync(chrome, [
   '--hide-scrollbars',
   '--force-device-scale-factor=1',
   '--screenshot=' + maitre,
-  '--window-size=512,512',
+  '--window-size=700,700', // large exprès : le viewport réel perd les bordures de fenêtre
   page,
 ], { encoding: 'utf8' });
 if (r.status !== 0 || !existsSync(maitre) || statSync(maitre).size === 0) {
@@ -189,9 +204,9 @@ if (r.status !== 0 || !existsSync(maitre) || statSync(maitre).size === 0) {
   if (r.stderr) console.error(r.stderr.trim());
   process.exit(1);
 }
-console.log('  ✓ icons/icon-512.png (512×512, capture Chromium)');
-
-const source = lirePNG(readFileSync(maitre));
+const source = recadre(lirePNG(readFileSync(maitre)), 512, 512);
+writeFileSync(maitre, ecritPNG(source));
+console.log('  ✓ icons/icon-512.png (512×512, capture Chromium rognée)');
 for (const s of [
   { taille: 192, fichier: 'icons/icon-192.png' },
   { taille: 180, fichier: 'apple-touch-icon.png' },
