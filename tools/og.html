@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Image de partage Petit labo — gabarit de rendu</title>
+<!-- Gabarit rendu par tools/build-og.mjs en 1200 × 630 (les cartes « Open Graph »
+     que WhatsApp, iMessage ou les réseaux affichent sous un lien partagé).
+     Paramétré par l'URL : ?fiole=maitre|astro&kicker=…&titre=…&sous=…
+     La règle de la charte : la fiole de SÉRIE illustre un épisode, le MAÎTRE
+     illustre le portail. -->
+<style>
+  @font-face {
+    font-family: "Baloo 2";
+    src: url("../assets/fonts/baloo2-latin.woff2") format("woff2");
+    font-weight: 400 800;
+  }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #070b17; }
+  .carte {
+    position: relative; width: 1200px; height: 630px;
+    background-color: #0b1020;
+    background-image:
+      radial-gradient(900px 560px at 78% -10%, #182450 0%, rgba(11,16,32,0) 62%),
+      radial-gradient(700px 480px at 6% 110%, rgba(169,139,255,.12) 0%, rgba(11,16,32,0) 55%);
+    font-family: "Baloo 2", system-ui, sans-serif;
+    color: #e9edf8;
+  }
+  .etoile { position: absolute; border-radius: 50%; }
+  .fiole { position: absolute; left: 78px; top: 116px; width: 400px; height: 400px;
+    filter: drop-shadow(0 0 60px rgba(255,207,92,.28)); }
+  .fiole[hidden] { display: none; }
+  .textes { position: absolute; left: 540px; top: 0; right: 70px; height: 630px;
+    display: flex; flex-direction: column; justify-content: center; }
+  .kicker { color: #ffcf5c; font-weight: 700; font-size: 30px; letter-spacing: .14em;
+    text-transform: uppercase; margin: 0 0 18px; }
+  h1 { margin: 0; font-weight: 800; font-size: 78px; line-height: 1.08; }
+  h1.long { font-size: 64px; }
+  .sous { color: #9aa5c3; font-size: 33px; margin: 26px 0 0; font-weight: 400; line-height: 1.35; }
+  .domaine { position: absolute; left: 540px; bottom: 54px; color: #9aa5c3; font-size: 27px;
+    font-weight: 600; }
+  .domaine b { color: #ffcf5c; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="carte">
+  <span class="etoile" style="width:7px;height:7px;background:#e9edf8;top:64px;left:220px"></span>
+  <span class="etoile" style="width:5px;height:5px;background:#9aa5c3;top:150px;left:500px"></span>
+  <span class="etoile" style="width:6px;height:6px;background:#ff6b9d;top:520px;left:130px"></span>
+  <span class="etoile" style="width:5px;height:5px;background:#46c2a5;top:420px;left:480px"></span>
+  <span class="etoile" style="width:6px;height:6px;background:#a98bff;top:80px;right:130px"></span>
+  <span class="etoile" style="width:5px;height:5px;background:#e9edf8;bottom:90px;right:260px"></span>
+
+  <!-- le maître : la fiole à la question (portail, famille entière) -->
+  <svg class="fiole" id="fiole-maitre" viewBox="0 0 100 100" aria-hidden="true" hidden>
+    <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+          fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+    <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
+    <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
+    <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
+    <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+    <g transform="rotate(10 53 17)">
+      <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+            fill="none" stroke="#ffcf5c" stroke-width="5.5" stroke-linecap="round"/>
+      <circle cx="53" cy="29.5" r="2.9" fill="#ffcf5c"/>
+    </g>
+  </svg>
+
+  <!-- la fiole de la série astronomie : l'étoile dedans -->
+  <svg class="fiole" id="fiole-astro" viewBox="0 0 100 100" aria-hidden="true" hidden>
+    <path d="M43 22 L43 42 L28 68 A9 9 0 0 0 36 81 L64 81 A9 9 0 0 0 72 68 L57 42 L57 22 Z"
+          fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M50 51 L52 57 L58 59 L52 61 L50 67 L48 61 L42 59 L48 57 Z" fill="#ffcf5c"/>
+    <circle cx="39" cy="70" r="2.2" fill="#a98bff"/>
+    <circle cx="60" cy="72" r="2" fill="#ff6b9d"/>
+    <rect x="38" y="15" width="24" height="7" rx="3.5" fill="#ffcf5c"/>
+  </svg>
+
+  <div class="textes">
+    <p class="kicker" id="kicker"></p>
+    <h1 id="titre"></h1>
+    <p class="sous" id="sous"></p>
+  </div>
+  <p class="domaine"><b>petit-labo.fr</b> · à explorer en famille dès 5 ans</p>
+</div>
+<script>
+  // remplissage par l'URL — page-outil rendue hors site, le JS y est permis
+  var params = new URLSearchParams(location.search);
+  var fiole = params.get('fiole') === 'maitre' ? 'fiole-maitre' : 'fiole-astro';
+  // removeAttribute et non la propriété .hidden : sur un élément SVG, la
+  // propriété n'existe pas (leçon payée : deux fioles restées invisibles)
+  document.getElementById(fiole).removeAttribute('hidden');
+  document.getElementById('kicker').textContent = params.get('kicker') || 'Petit labo';
+  var titre = params.get('titre') || '';
+  var h1 = document.getElementById('titre');
+  h1.textContent = titre;
+  if (titre.length > 28) h1.className = 'long'; // les titres longs descendent d'un cran
+  document.getElementById('sous').textContent = params.get('sous') || '';
+</script>
+</body>
+</html>
