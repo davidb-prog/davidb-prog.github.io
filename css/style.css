@@ -33,6 +33,9 @@
 
 body {
   margin: 0;
+  /* pas de zoom au double-tap sur mobile (le pincement est bloqué par la
+     balise viewport et le garde-fou gesturestart dans index.html) */
+  touch-action: manipulation;
   background-color: var(--bg);
   background-image:
     radial-gradient(1100px 700px at 72% -8%, #182450 0%, rgba(11, 16, 32, 0) 60%),
