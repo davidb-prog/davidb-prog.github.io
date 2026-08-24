@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>Petit labo — la fiole à la question (petites tailles)</title>
+  <desc>Variante 48 px et moins (favicon) : éclats colorés retirés, traits épaissis —
+    seules la fiole et la question doivent rester lisibles.</desc>
+  <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+        fill="#0e1530" stroke="#ffcf5c" stroke-width="6.5" stroke-linejoin="round"/>
+  <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+  <g transform="rotate(10 53 17)">
+    <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+          fill="none" stroke="#ffcf5c" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="53" cy="29.5" r="3.6" fill="#ffcf5c"/>
+  </g>
+</svg>

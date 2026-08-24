@@ -17,6 +17,11 @@ En ligne : <https://petit-labo.fr> (et <https://davidb-prog.github.io>).
 - **Le domaine** (`CNAME`) : `petit-labo.fr` est déclaré ici, sur le site
   utilisateur — les sites de projet (les épisodes) en héritent automatiquement
   (`petit-labo.fr/ou-va-le-soleil/`…).
+- **La marque** (`assets/marque/`, `docs/charte.md`) : le logo de la famille —
+  la fiole à la question — en SVG source, et la charte graphique (couleurs de la
+  famille, registre des séries et leurs palettes, règles du logo). Les icônes de
+  la PWA se régénèrent avec `node tools/build-icons.mjs` (Chromium fait la
+  capture 512 px, le script rééchantillonne en 192 et 180 — zéro dépendance).
 
 ## Épisodes reliés
 
@@ -34,5 +39,6 @@ publication.)
 Zéro dépendance, zéro build : la page s’ouvre avec `python3 -m http.server` et se
 déploie telle quelle sur GitHub Pages (workflow
 `.github/workflows/deploy-pages.yml`, publication à chaque push sur `main`).
-Thème sombre de la série d’astronomie. Les icônes PNG sont générées hors site
-(canvas) et commitées.
+Thème sombre de la série d’astronomie — dont l’or et la nuit sont, par décision de
+charte, les couleurs de la famille entière (voir `docs/charte.md`). Les icônes PNG
+sont générées hors site (`tools/build-icons.mjs`) et commitées.
