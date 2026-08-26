@@ -9,7 +9,8 @@
   'use strict';
 
   var LIEN = 'https://petit-labo.fr';
-  var TEXTE = 'Où va le Soleil la nuit ? De petits sites gratuits à toucher, à faire tourner, à écouter.';
+  /* le jumeau du og:description du <head> : si l'un change, changer l'autre */
+  var TEXTE = 'Où va le Soleil la nuit ? De petits sites à toucher, à faire tourner, à écouter.';
 
   var btn = document.getElementById('btn-partager');
   var etat = document.getElementById('partage-etat');
