@@ -1,0 +1,5 @@
+# Le Petit labo — tout est public, rien à cacher.
+User-agent: *
+Allow: /
+
+Sitemap: https://petit-labo.fr/sitemap.xml
