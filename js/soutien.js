@@ -1,16 +1,12 @@
-/* Le bloc « Offrir une fiole » — soutien libre du parent.
+/* Le bloc « Soutenir le Petit labo » — soutien libre du parent.
    Pourquoi Ko-fi : le donateur n'a pas besoin de créer un compte, le don
    ponctuel est le geste par défaut (pas l'abonnement), et le plan gratuit
    ne prend aucune commission. Un lien sortant, aucun script tiers, aucune
    iframe : la page reste sans cookie et sans pisteur.
 
-   POUR L'ACTIVER — une seule ligne à remplir :
-   1. créer une page sur https://ko-fi.com/ (gratuit)
-   2. noter le pseudo choisi (la page sera ko-fi.com/<pseudo>)
-   3. le recopier dans PSEUDO ci-dessous, puis committer
-
-   Tant que PSEUDO est vide, le bloc reste masqué : on ne montre pas au parent
-   un bouton qui ne mène nulle part. C'est l'état par défaut.
+   PSEUDO est le nom de la page Ko-fi : ko-fi.com/<pseudo>. Le vider suffit à
+   remasquer le bloc — on ne montre jamais au parent un bouton qui ne mène
+   nulle part, et c'est aussi la porte de sortie si la page ferme un jour.
 
    Pour changer de plateforme (Tipeee, Liberapay…), il suffit de remplacer
    l'URL construite plus bas — le reste de la page ne bouge pas.
@@ -19,7 +15,7 @@
 (function () {
   'use strict';
 
-  var PSEUDO = '';
+  var PSEUDO = 'petitlabo';
 
   var bloc = document.getElementById('soutien');
   var lien = document.getElementById('lien-soutien');
