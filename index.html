@@ -140,6 +140,42 @@
       <p class="a-venir">D’autres questions mijotent dans le labo… reviens bientôt&nbsp;!</p>
     </section>
 
+    <!-- Qui est derrière le labo : posé AVANT le bloc de soutien, parce qu'on
+         ne demande rien à quelqu'un qui ne sait pas à qui il a affaire.
+         Replié comme les conseils : c'est du texte de parent, pas d'enfant. -->
+    <section class="panel a-propos" aria-labelledby="titre-a-propos">
+      <details>
+        <summary><h2 class="a-propos-titre" id="titre-a-propos">Qui fabrique le Petit labo&nbsp;?</h2></summary>
+        <div class="a-propos-corps">
+          <p>Ingénieur de formation, papa avant tout&nbsp;: j’ai fabriqué le Petit
+            labo pour mes enfants. Les mots ne manquaient pas&nbsp;— ce qui
+            manquait, c’était de quoi leur montrer. Alors j’ai fait des images
+            qu’on touche et qu’on fait tourner. Puis j’ai eu envie de les
+            partager.</p>
+          <p>Chaque épisode prend une question et lui ajoute ce qu’une explication
+            seule ne peut pas donner&nbsp;: une image, et une expérience à faire du
+            bout du doigt. Vous racontez, l’enfant fait tourner la Terre et voit
+            la nuit arriver.</p>
+          <p>Le labo est ludique mais honnête&nbsp;: on simplifie franchement, on ne
+            ment jamais. Chaque épisode porte sa «&nbsp;note aux parents&nbsp;»
+            qui dit exactement ce qu’il a simplifié, et pourquoi.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Soutien libre : masqué tant que js/soutien.js n'a pas de pseudo —
+         on ne montre jamais au parent un bouton qui ne mène nulle part. -->
+    <section class="panel soutien" id="soutien" aria-labelledby="titre-soutien" hidden>
+      <h2 id="titre-soutien">Le labo tourne à la curiosité</h2>
+      <p>Le Petit labo est gratuit et sans publicité. Si un épisode
+        a sauvé un trajet en voiture ou répondu à une question du soir, vous
+        pouvez glisser une pièce dans la fiole&nbsp;— elle financera le prochain.</p>
+      <p class="soutien-action">
+        <a id="lien-soutien" href="#" rel="noopener noreferrer" target="_blank">
+          Soutenir le Petit labo</a>
+      </p>
+    </section>
+
     <section class="panel conseils">
       <details>
         <summary><h2 class="conseils-titre">📱 Prêter le téléphone à votre enfant</h2></summary>
@@ -177,9 +213,14 @@
   <footer class="site-footer">
     <p>Le Petit labo est un atelier sans publicité ni cookies —
       juste des questions d’enfants et des réponses honnêtes.</p>
+    <p class="footer-mesure">On compte les visites, jamais les visiteurs&nbsp;:
+      la fréquentation est mesurée de façon anonyme, sans cookie et sans
+      profil.</p>
   </footer>
 
   <script src="/js/install.js" defer></script>
+  <script src="/js/soutien.js" defer></script>
+  <script src="/js/mesure.js" defer></script>
   <!-- Safari iOS ignore user-scalable=no dans le navigateur : on bloque
        aussi le geste de pincement lui-même pour empêcher tout zoom -->
   <script>
