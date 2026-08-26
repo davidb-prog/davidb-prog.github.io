@@ -4,19 +4,20 @@
    les mesures d'audience strictement anonymes), et surtout : on ne paie pas
    110 €/an pour compter des visiteurs avant de savoir s'il y en a.
 
-   POUR L'ACTIVER — une seule ligne à remplir :
-   1. créer un compte sur https://www.goatcounter.com/ (gratuit, 30 secondes)
-   2. noter le code choisi (l'app s'appellera <code>.goatcounter.com)
-   3. le recopier dans CODE ci-dessous, puis committer
+   CODE est le nom du compte GoatCounter : les statistiques se lisent sur
+   <code>.goatcounter.com. Le vider suffit à tout couper — le fichier ne
+   charge alors plus rien, aucune requête vers un tiers, aucune trace.
 
-   Tant que CODE est vide, ce fichier ne charge rien du tout : aucune requête
-   vers un tiers, aucune trace. C'est l'état par défaut.
+   Attention si une app payante voit le jour : le palier gratuit de
+   GoatCounter est réservé à l'usage non commercial. Le site vitrine d'une
+   app vendue ne l'est plus, et il faudra basculer sur un plan payant (ou
+   Plausible, ou l'auto-hébergement).
 
    Compat mobiles anciens : pas d'optional chaining ni de nullish. */
 (function () {
   'use strict';
 
-  var CODE = '';
+  var CODE = 'davidb-prog';
 
   if (!CODE) { return; }
 

@@ -46,7 +46,9 @@ ligne à remplir, et tant qu’elle est vide, rien ne se charge et rien ne s’a
 
 **GoatCounter** plutôt qu’une solution payée : gratuit, libre, sans cookie ni
 donnée personnelle — donc aucun bandeau de consentement à afficher, et rien à
-dépenser avant de savoir s’il y a du trafic à compter. **Ko-fi** plutôt que
+dépenser avant de savoir s’il y a du trafic à compter. Son palier gratuit est
+réservé à l’usage non commercial : le jour où une app payante fait du portail
+sa vitrine, il faudra un plan payant, Plausible ou l’auto-hébergement. **Ko-fi** plutôt que
 Tipeee : le donateur n’a pas besoin de créer un compte, le don ponctuel est le
 geste par défaut, et le plan gratuit ne prélève aucune commission. Le bloc de
 soutien est un simple lien sortant — pas de script tiers, pas d’iframe : la
