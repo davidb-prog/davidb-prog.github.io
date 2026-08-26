@@ -34,6 +34,27 @@ En ligne : <https://petit-labo.fr> (et <https://davidb-prog.github.io>).
 (D’autres épisodes existent en chantier et rejoindront le portail à leur
 publication.)
 
+## Mesure d’audience et soutien
+
+Deux réglages du portail, **inactifs par défaut** : chacun tient dans une seule
+ligne à remplir, et tant qu’elle est vide, rien ne se charge et rien ne s’affiche.
+
+| Fichier | Ligne à remplir | Ce que ça active |
+|---|---|---|
+| `js/mesure.js` | `CODE` | La mesure d’audience [GoatCounter](https://www.goatcounter.com/) |
+| `js/soutien.js` | `PSEUDO` | Le bloc « Offrir une fiole », vers [Ko-fi](https://ko-fi.com/) |
+
+**GoatCounter** plutôt qu’une solution payée : gratuit, libre, sans cookie ni
+donnée personnelle — donc aucun bandeau de consentement à afficher, et rien à
+dépenser avant de savoir s’il y a du trafic à compter. **Ko-fi** plutôt que
+Tipeee : le donateur n’a pas besoin de créer un compte, le don ponctuel est le
+geste par défaut, et le plan gratuit ne prélève aucune commission. Le bloc de
+soutien est un simple lien sortant — pas de script tiers, pas d’iframe : la
+promesse « sans publicité ni cookies » du pied de page reste vraie.
+
+Ces deux réglages ne concernent que le portail (page destinée au parent), jamais
+les scènes des épisodes.
+
 ## Conventions
 
 Zéro dépendance, zéro build : la page s’ouvre avec `python3 -m http.server` et se

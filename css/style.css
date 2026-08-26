@@ -174,3 +174,22 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
   max-width: 980px; margin: 0 auto; padding: 10px 20px 44px;
   color: var(--muted); font-size: .88rem; text-align: center;
 }
+
+/* ---------- le soutien libre (masqué tant que js/soutien.js n'est pas réglé) ---------- */
+
+.soutien { margin: 34px 0 0; padding: 20px 22px; }
+.soutien h2 {
+  font-family: var(--titres); font-weight: 700; font-size: 1.1rem;
+  color: var(--sun); margin: 0 0 8px;
+}
+.soutien p { margin: 0; color: var(--muted); }
+.soutien p.soutien-action { margin-top: 16px; text-align: center; }
+.soutien-action a {
+  display: inline-block; text-decoration: none;
+  font-family: var(--titres); font-size: 1rem; font-weight: 700;
+  color: #201500; background: linear-gradient(180deg, var(--sun), var(--sun-deep));
+  border-radius: 999px; padding: 10px 24px;
+}
+.soutien-action a:hover, .soutien-action a:focus { background: var(--sun); }
+
+.footer-mesure { margin-top: 8px; opacity: .75; font-size: .82rem; }

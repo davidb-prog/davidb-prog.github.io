@@ -140,6 +140,19 @@
       <p class="a-venir">D’autres questions mijotent dans le labo… reviens bientôt&nbsp;!</p>
     </section>
 
+    <!-- Soutien libre : masqué tant que js/soutien.js n'a pas de pseudo —
+         on ne montre jamais au parent un bouton qui ne mène nulle part. -->
+    <section class="panel soutien" id="soutien" aria-labelledby="titre-soutien" hidden>
+      <h2 id="titre-soutien">Le labo tourne à la curiosité</h2>
+      <p>Le Petit labo est gratuit, sans publicité, et le restera. Si un épisode
+        a sauvé un trajet en voiture ou répondu à une question du soir, vous
+        pouvez glisser une pièce dans la fiole&nbsp;— elle financera le prochain.</p>
+      <p class="soutien-action">
+        <a id="lien-soutien" href="#" rel="noopener noreferrer" target="_blank">
+          Offrir une fiole</a>
+      </p>
+    </section>
+
     <section class="panel conseils">
       <details>
         <summary><h2 class="conseils-titre">📱 Prêter le téléphone à votre enfant</h2></summary>
@@ -177,9 +190,14 @@
   <footer class="site-footer">
     <p>Le Petit labo est un atelier sans publicité ni cookies —
       juste des questions d’enfants et des réponses honnêtes.</p>
+    <p class="footer-mesure">On compte les visites, jamais les visiteurs&nbsp;:
+      la fréquentation est mesurée de façon anonyme, sans cookie et sans
+      profil.</p>
   </footer>
 
   <script src="/js/install.js" defer></script>
+  <script src="/js/soutien.js" defer></script>
+  <script src="/js/mesure.js" defer></script>
   <!-- Safari iOS ignore user-scalable=no dans le navigateur : on bloque
        aussi le geste de pincement lui-même pour empêcher tout zoom -->
   <script>
