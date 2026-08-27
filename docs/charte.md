@@ -19,14 +19,19 @@ Les fichiers (le SVG est LA source ; les PNG sont générés, jamais retouchés)
 | `assets/marque/fiole.svg` | Le maître, pour fonds sombres — la référence |
 | `assets/marque/fiole-fond-clair.svg` | Fonds clairs (README, impression) : traits à l'or profond `#ff9f1c`, la nuit reste DANS la fiole |
 | `assets/marque/fiole-petite.svg` | 48 px et moins (favicon) : éclats retirés, traits épaissis |
+| `assets/marque/banniere-1600x512.png` | Bandeau large (page presse, en-têtes de profil) — GÉNÉRÉ |
+| `assets/marque/avatar-512.png` | Photo de profil, cadrée pour un rond — GÉNÉRÉ |
 | `tools/icone.html` | Le gabarit d'icône (tuile de nuit étoilée + fiole) |
+| `tools/marque.html` | Le gabarit de la bannière et de l'avatar |
 | `tools/build-icons.mjs` | Génère `icons/icon-512.png`, `icons/icon-192.png`, `apple-touch-icon.png` |
+| `tools/build-marque.mjs` | Génère la bannière et l'avatar |
 
 Régénération (hors site, zéro dépendance — Chromium fait la capture, Node fait le
-reste) : `node tools/build-icons.mjs` (variable `CHROME=/chemin` si le navigateur
-n'est pas trouvé tout seul). Toute retouche du dessin se fait dans `fiole.svg` ET
-dans `tools/icone.html` (qui recopie le dessin dans sa tuile), puis on régénère
-avant de committer.
+reste) : `node tools/build-icons.mjs` et `node tools/build-marque.mjs` (variable
+`CHROME=/chemin` si le navigateur n'est pas trouvé tout seul). Toute retouche du
+dessin se fait dans `fiole.svg` ET dans les gabarits qui le recopient
+(`tools/icone.html`, `tools/marque.html`, `tools/og.html`), puis on régénère avant
+de committer.
 
 Les règles du logo :
 
@@ -169,6 +174,12 @@ Trois niveaux, un usage chacun :
   maître au « ? »** en version petites tailles (il parle de la famille entière,
   c'est le territoire du maître) à la place de l'ancienne éprouvette 🧪.
   Patron déployé sur `ou-va-le-soleil`, à propager aux voisins.
+- **Le dossier de presse** (`/presse/`, dans ce dépôt) : la marque telle qu'on la
+  donne aux autres. Il propose au téléchargement la **bannière** (1600 × 512), l'
+  **avatar** (512 × 512), les deux SVG du logo maître et une **capture** de chaque
+  épisode (`assets/presse/`, générée par `node tools/build-captures.mjs`). C'est
+  aussi la page qui porte la formule de la famille — « gratuit et sans
+  publicité », jamais « toujours gratuit » — et aucune promesse de sortie.
 - **Les images de partage `og:image`** (1200 × 630 — la carte que WhatsApp,
   iMessage ou les réseaux affichent sous un lien) : gabarit `tools/og.html`,
   génération `node tools/build-og.mjs` (le registre des titres/sous-titres vit
