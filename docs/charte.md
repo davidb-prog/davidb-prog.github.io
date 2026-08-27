@@ -61,7 +61,10 @@ Le gabarit commun de variables (rodé par l'astronomie, décliné par chaque sé
 ```
 
 Formes : rayons 14 px, panneaux en dégradé `--surface → --bg2`, formes rondes et
-joueuses.
+joueuses. Boutons : pilules (rayon 999 px), et **un seul bouton plein (or)
+visible par page** — il revient à l'action principale de la page ; toute autre
+action s'écrit en pilule contour (un bouton plein caché dans un panneau replié
+ne compte pas, tant qu'il ne s'affiche pas en même temps qu'un autre plein).
 
 **Typographie** : les titres (et le logotype) parlent en **Baloo 2** — la rondeur
 du logo — auto-hébergée dans le dépôt (`assets/fonts/baloo2-latin.woff2`,
