@@ -31,7 +31,7 @@ import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'no
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { lance, rognePNG, sertLesDepots, trouveChrome } from './rendu-outils.mjs';
+import { ecritPNG, lirePNG, lance, recadre, sertLesDepots, trouveChrome } from './rendu-outils.mjs';
 
 const ici = dirname(fileURLToPath(import.meta.url));
 const racine = resolve(ici, '..');
@@ -39,6 +39,27 @@ const voisins = resolve(racine, '..');
 const sorties = resolve(racine, 'tools/scenes-insta');
 
 const ATTENTE_MS = 1600; // le temps laissé au canvas pour se redessiner
+
+// Une scène est un dessin : elle porte forcément plusieurs teintes. Un cadrage
+// qui rate (canvas hors de la fenêtre de l'iframe, mise en page qui a bougé)
+// sort un aplat de fond — et Chromium ne s'en plaint jamais. On compte donc les
+// teintes sur une grille d'échantillons : sous ce seuil, c'est un raté.
+const TEINTES_MINIMUM = 24;
+
+function assezDeTeintes(img) {
+  const { largeur, hauteur, canaux, pixels } = img;
+  const vues = new Set();
+  const pas = Math.max(1, Math.floor(Math.min(largeur, hauteur) / 60));
+  for (let y = 0; y < hauteur; y += pas) {
+    for (let x = 0; x < largeur; x += pas) {
+      const o = (y * largeur + x) * canaux;
+      // quantifié par 8 : deux dégradés voisins ne comptent pas pour deux teintes
+      vues.add(((pixels[o] >> 3) << 10) | ((pixels[o + 1] >> 3) << 5) | (pixels[o + 2] >> 3));
+      if (vues.size >= TEINTES_MINIMUM) return true;
+    }
+  }
+  return false;
+}
 
 // Chaque scène : l'épisode, le curseur maître et sa valeur, le canvas à
 // photographier, et la taille du fichier. L'échelle 2 garde le dessin net une
@@ -81,10 +102,19 @@ function cadre(url) {
     + '  if(c){c.value=' + attr('valeur') + ';'
     + '    c.dispatchEvent(new Event("input",{bubbles:true}));'
     + '    c.dispatchEvent(new Event("change",{bubbles:true}));}'
-    // le canvas visé remonte au coin : le rognage n'a plus qu'à couper droit
+    // le canvas visé remonte au coin : FAIRE DÉFILER l'épisode jusqu'à lui (un
+    // canvas au-delà de la fenêtre de l'iframe — le globe 3D vit dans la
+    // section du jeu, loin dans la page — sortirait en noir), puis décaler
+    // l'iframe du reste. Et RECALER en continu jusqu'à la capture : la mise en
+    // page bouge encore après le chargement (la boîte-explication s'ouvre sur
+    // ordinateur, la police arrive) et un cadrage fait une seule fois se
+    // retrouve décalé d'autant (leçon payée : deux cartes vides livrées).
     + '  var v=d.querySelector(' + attr('canvas') + ');'
-    + '  if(v){var b=v.getBoundingClientRect();'
-    + '    f.style.left=(-b.left)+"px";f.style.top=(-b.top)+"px";}'
+    + '  if(v){var cale=function(){'
+    + '    v.scrollIntoView({block:"start",inline:"start",behavior:"instant"});'
+    + '    var b=v.getBoundingClientRect();'
+    + '    f.style.left=(-b.left)+"px";f.style.top=(-b.top)+"px";};'
+    + '    cale();setInterval(cale,200);}'
     + '});'
     + '<\/script></body></html>';
 }
@@ -141,15 +171,20 @@ for (const s of scenes) {
     'http://127.0.0.1:' + serveur.port + '/__scene?' + params.toString(),
   ]);
   let ok = r.code === 0 && existsSync(sortie) && statSync(sortie).size > 0;
+  let plat = false;
   if (ok) {
     try {
-      writeFileSync(sortie, rognePNG(readFileSync(sortie), s.l, s.h));
+      const img = recadre(lirePNG(readFileSync(sortie)), s.l, s.h);
+      plat = !assezDeTeintes(img);
+      writeFileSync(sortie, ecritPNG(img));
+      if (plat) ok = false;
     } catch (e) {
       console.error(String(e && e.message ? e.message : e));
       ok = false;
     }
   }
-  console.log((ok ? '  ✓ ' : '  ✗ ') + s.id + '.png (' + s.l + '×' + s.h + ')');
+  console.log((ok ? '  ✓ ' : '  ✗ ') + s.id + '.png (' + s.l + '×' + s.h + ')'
+    + (plat ? '  — image presque unie : le canvas n’était pas dans le cadre' : ''));
   if (!ok) {
     rate = true;
     if (r.err) console.error(r.err.trim());
