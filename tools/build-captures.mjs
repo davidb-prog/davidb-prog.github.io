@@ -8,8 +8,10 @@
 // Les épisodes vivent dans des dépôts VOISINS (../ou-va-le-soleil…) : le script
 // les sert lui-même en HTTP le temps de la capture — un file:// ne marcherait
 // pas, les épisodes sont des modules ES et le navigateur les refuserait.
-// Chromium capture large, Node rogne à 1280 × 1000 exactement — la hauteur qui
-// tient les deux vues de chaque épisode en entier, sans couper un canvas.
+// Chromium capture large, Node rogne exactement. Deux formats par épisode :
+// ordinateur (1280 × 1000, la hauteur qui tient les deux vues sans couper un
+// canvas) et téléphone (visuel 390 × 844 — un iPhone —, capturé à l'échelle 2
+// pour rester net dans une mise en page : fichier 780 × 1688).
 //
 // Les images sortent dans assets/presse/ et sont COMMITÉES : ce sont les
 // visuels proposés au téléchargement sur /presse/. À régénérer après toute
@@ -40,14 +42,24 @@ const ici = dirname(fileURLToPath(import.meta.url));
 const racine = resolve(ici, '..');
 const voisins = resolve(racine, '..'); // le dossier qui contient tous les dépôts
 
-const LARGEUR = 1280;
-const HAUTEUR = 1000;
+// fenêtre : le viewport demandé à Chromium (plus grand que la cible, le
+// « headless » ampute la fenêtre de ses bordures) ; echelle : le
+// device-scale-factor ; largeur/hauteur : le rognage final, en pixels de fichier
+const ORDINATEUR = { largeur: 1280, hauteur: 1000, fenetre: [1320, 1220], echelle: 1 };
+// téléphone : la fenêtre du « headless » ne descend pas sous ~500 px (même
+// leçon que build-icons) — demander 390 rend la page à ~500 et la capture n'en
+// montre que les 390 premiers, côté droit coupé (leçon payée : trois captures
+// amputées). Le viewport de 390 vient donc d'un IFRAME de 390 × 844 exactement
+// (un iframe n'a pas de largeur minimale), servi par la page-cadre
+// /__telephone/<id> du serveur ci-dessous, dans une fenêtre assez large.
+const TELEPHONE = { largeur: 780, hauteur: 1688, fenetre: [520, 900], echelle: 2, cadre: true };
 
-const EPISODES = [
-  { id: 'ou-va-le-soleil', fichier: 'assets/presse/capture-ou-va-le-soleil.png' },
-  { id: 'la-terre-tourne', fichier: 'assets/presse/capture-la-terre-tourne.png' },
-  { id: 'la-lune-change-de-forme', fichier: 'assets/presse/capture-la-lune-change-de-forme.png' },
-];
+const IDS = ['ou-va-le-soleil', 'la-terre-tourne', 'la-lune-change-de-forme'];
+const EPISODES = [];
+for (const id of IDS) {
+  EPISODES.push({ id: id, fichier: 'assets/presse/capture-' + id + '.png', format: ORDINATEUR });
+  EPISODES.push({ id: id, fichier: 'assets/presse/capture-' + id + '-telephone.png', format: TELEPHONE });
+}
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -83,9 +95,20 @@ if (manquants.length) {
 }
 
 // petit serveur statique : la racine sert le DOSSIER DES DÉPÔTS, donc
-// /ou-va-le-soleil/ tombe pile sur le chemin qu'aura le site en production
+// /ou-va-le-soleil/ tombe pile sur le chemin qu'aura le site en production.
+// /__telephone/<id> sert la page-cadre du format téléphone (l'iframe ancré en
+// haut à gauche, aux dimensions CSS d'un iPhone).
 const serveur = createServer((req, rep) => {
   let chemin = decodeURIComponent(req.url.split('?')[0]);
+  const tel = chemin.match(/^\/__telephone\/([a-z0-9-]+)$/);
+  if (tel) {
+    rep.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    rep.end('<!doctype html><html><head><meta charset="utf-8"><style>' +
+      'html,body{margin:0;background:#0b1020}' +
+      'iframe{display:block;width:390px;height:844px;border:0}' +
+      '</style></head><body><iframe src="/' + tel[1] + '/"></iframe></body></html>');
+    return;
+  }
   if (chemin.endsWith('/')) chemin += 'index.html';
   const fichier = join(voisins, normalize(chemin).replace(/^(\.\.[/\\])+/, ''));
   if (fichier.indexOf(voisins) !== 0 || !existsSync(fichier) || statSync(fichier).isDirectory()) {
@@ -107,26 +130,25 @@ for (const e of episodes) {
     '--disable-gpu',
     '--no-sandbox',
     '--hide-scrollbars',
-    '--force-device-scale-factor=1',
+    '--force-device-scale-factor=' + e.format.echelle,
     '--screenshot=' + sortie,
-    // large exprès : le viewport réel perd les bordures de fenêtre.
     // Surtout PAS de --virtual-time-budget ici : les épisodes tournent une
     // boucle rAF sans fin, le budget de temps virtuel ne s'épuise jamais et
     // Chromium ne rend jamais la main (leçon payée). La capture après
     // l'événement « load » suffit : les canvas sont déjà dessinés.
-    '--window-size=' + (LARGEUR + 40) + ',' + (HAUTEUR + 220),
-    'http://127.0.0.1:' + port + '/' + e.id + '/',
+    '--window-size=' + e.format.fenetre[0] + ',' + e.format.fenetre[1],
+    'http://127.0.0.1:' + port + (e.format.cadre ? '/__telephone/' + e.id : '/' + e.id + '/'),
   ]);
   let ok = r.code === 0 && existsSync(sortie) && statSync(sortie).size > 0;
   if (ok) {
     try {
-      writeFileSync(sortie, rognePNG(readFileSync(sortie), LARGEUR, HAUTEUR));
+      writeFileSync(sortie, rognePNG(readFileSync(sortie), e.format.largeur, e.format.hauteur));
     } catch (err) {
       console.error(String(err && err.message ? err.message : err));
       ok = false;
     }
   }
-  console.log((ok ? '  ✓ ' : '  ✗ ') + e.fichier + ' (' + LARGEUR + '×' + HAUTEUR + ')');
+  console.log((ok ? '  ✓ ' : '  ✗ ') + e.fichier + ' (' + e.format.largeur + '×' + e.format.hauteur + ')');
   if (!ok) {
     rate = true;
     if (r.err) console.error(r.err.trim());

@@ -132,6 +132,14 @@ main.presse a { color: var(--sun); }
   .visuel { -webkit-flex: 1 1 290px; flex: 1 1 290px; margin: 0; }
 }
 
+/* la carte des téléphones s'étale sur toute la rangée : trois écrans
+   portrait côte à côte n'ont un sens qu'à pleine largeur */
+.apercu-telephones { gap: 10px; padding: 12px; }
+.apercu-telephones img { -webkit-flex: 1 1 0; flex: 1 1 0; min-width: 0; border-radius: 8px; }
+@media (min-width: 720px) {
+  .visuel-pleine-largeur { -webkit-flex: 1 1 100%; flex: 1 1 100%; }
+}
+
 /* pilule contour : le téléchargement se propose, il ne se brandit pas —
    l'or plein appartient au seul bouton principal de la page (le contact) */
 main.presse .pilule {

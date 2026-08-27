@@ -177,7 +177,10 @@ Trois niveaux, un usage chacun :
 - **Le dossier de presse** (`/presse/`, dans ce dépôt) : la marque telle qu'on la
   donne aux autres. Il propose au téléchargement la **bannière** (1600 × 512), l'
   **avatar** (512 × 512), les deux SVG du logo maître et une **capture** de chaque
-  épisode (`assets/presse/`, générée par `node tools/build-captures.mjs`). C'est
+  épisode en deux formats — ordinateur et téléphone, l'appareil où le labo se
+  joue le plus (`assets/presse/`, générées par `node tools/build-captures.mjs` ;
+  le format téléphone passe par un iframe de 390 px : la fenêtre du « headless »
+  ne descend pas sous ~500 px). C'est
   aussi la page qui porte la formule de la famille — « gratuit et sans
   publicité », jamais « toujours gratuit » — et aucune promesse de sortie.
 - **Les images de partage `og:image`** (1200 × 630 — la carte que WhatsApp,
