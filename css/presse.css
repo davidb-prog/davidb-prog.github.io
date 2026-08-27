@@ -142,6 +142,29 @@ main.presse a { color: var(--sun); }
 @media (min-width: 720px) {
   .visuel-pleine-largeur { -webkit-flex: 1 1 100%; flex: 1 1 100%; }
 }
+/* sur mobile, ses trois boutons se partagent UNE ligne à parts égales — le
+   repli en 2 + 1 flottait (retour de David). Police un cran plus basse :
+   « Les fuseaux » doit tenir dans son tiers à 390 px. */
+@media (max-width: 719px) {
+  .visuel-pleine-largeur p:last-child {
+    display: -webkit-flex; display: flex;
+    gap: 8px;
+  }
+  .visuel-pleine-largeur p:last-child .pilule {
+    -webkit-flex: 1 1 0; flex: 1 1 0;
+    min-width: 0; margin: 0; padding: 6px 2px;
+    font-size: .88rem; text-align: center; white-space: nowrap;
+  }
+}
+/* tout petits écrans (~320 px) : les tiers deviendraient illisibles,
+   retour au repli naturel */
+@media (max-width: 359px) {
+  .visuel-pleine-largeur p:last-child { display: block; }
+  .visuel-pleine-largeur p:last-child .pilule {
+    -webkit-flex: none; flex: none;
+    margin: 0 4px 8px; padding: 6px 18px; font-size: .95rem;
+  }
+}
 
 /* pilule contour : le téléchargement se propose, il ne se brandit pas —
    l'or plein appartient au seul bouton principal de la page (le contact) */
