@@ -89,7 +89,7 @@ main.presse a { color: var(--sun); }
 .episode figcaption { margin-top: 8px; color: var(--muted); font-size: .88rem; }
 .episode h3 { font-size: 1.24rem; }
 .episode h3 a { color: var(--sun); text-decoration: none; }
-.episode h3 a:hover, .episode h3 a:focus { text-decoration: underline; }
+.episode h3 a:focus-visible { text-decoration: underline; }
 .episode p { margin: 0 0 10px; color: var(--muted); }
 .episode-reponse { color: var(--text); }
 .episode-url { font-size: .85rem; color: var(--muted); margin-bottom: 0; }
@@ -110,7 +110,10 @@ main.presse a { color: var(--sun); }
 .visuels { display: block; }
 .visuel { padding: 16px 18px; margin: 0 0 14px; }
 .visuel p { margin: 0 0 10px; color: var(--muted); font-size: .92rem; }
-.visuel p:last-child { margin-bottom: 0; }
+/* le dernier paragraphe d'une carte porte ses boutons : centré, comme toute
+   rangée d'action de la famille (retour de David sur mobile — alignés à
+   gauche, les boutons flottaient) */
+.visuel p:last-child { margin-bottom: 0; text-align: center; }
 .visuel-apercu {
   background: #070b17; border: 1px solid var(--border); border-radius: 10px;
   overflow: hidden; margin-bottom: 12px;
@@ -147,15 +150,15 @@ main.presse .pilule {
   font-family: var(--titres); font-size: .95rem; font-weight: 700;
   color: var(--sun); background: none;
   border: 1.5px solid var(--sun-deep); border-radius: 999px;
-  padding: 6px 18px; margin: 0 6px 6px 0;
+  /* marges symétriques : ces pilules vivent dans des rangées centrées */
+  padding: 6px 18px; margin: 0 4px 8px;
 }
-main.presse .pilule:hover, main.presse .pilule:focus { background: rgba(255, 207, 92, .14); }
 main.presse .pilule:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
 
 /* ---------- contact ---------- */
 
 .contact p { color: var(--muted); margin: 0 0 10px; max-width: 66ch; }
-.contact-action { margin: 18px 0 0; }
+.contact-action { margin: 18px 0 0; text-align: center; }
 /* le seul bouton plein de la page (règle de la charte) : écrire à David est
    l'action que cette page existe pour déclencher */
 main.presse .bouton-plein {
@@ -164,8 +167,16 @@ main.presse .bouton-plein {
   color: #201500; background: linear-gradient(180deg, var(--sun), var(--sun-deep));
   border: none; border-radius: 999px; padding: 10px 26px;
 }
-main.presse .bouton-plein:hover, main.presse .bouton-plein:focus { background: var(--sun); }
 main.presse .bouton-plein:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
+
+/* le survol n'existe que là où un pointeur survole : sur tactile, iOS fige
+   l'état :hover (et :focus) sur le dernier bouton touché — les pilules
+   restaient « allumées » après un téléchargement (retour de David) */
+@media (hover: hover) {
+  main.presse .pilule:hover { background: rgba(255, 207, 92, .14); }
+  main.presse .bouton-plein:hover { background: var(--sun); }
+  .episode h3 a:hover { text-decoration: underline; }
+}
 
 /* ---------- pied de page ---------- */
 
