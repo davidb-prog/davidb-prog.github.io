@@ -48,7 +48,7 @@ const CARTES = [
     p: {
       type: 'scene', kicker: 'Petit labo d’astronomie',
       titre: 'Où va le Soleil la nuit ?',
-      image: '../scenes-insta/soleil-jardin-coucher.png', rogne: '1', pos: '100%',
+      image: 'scenes-insta/soleil-jardin-coucher.png', rogne: '1', pos: '100%',
       sous: 'Il ne va _nulle part_. C’est la Terre qui tourne — et le soir, votre maison lui tourne le dos.',
     },
   },
@@ -59,7 +59,7 @@ const CARTES = [
       titre: 'Quelle heure est-il là-bas ?',
       // le cadre monte à 790 px et la coupe se cale en haut : sinon le cartouche
       // des deux heures — tout le propos de l'épisode — sort de l'image
-      image: '../scenes-insta/terre-pole-midi.png', rogne: '1', hauteur: '790', pos: '0%',
+      image: 'scenes-insta/terre-pole-midi.png', rogne: '1', hauteur: '790', pos: '0%',
       sous: 'Il est midi chez vous. _Sept heures du matin_ en Guadeloupe. La Terre vue de tout en haut, et tout s’explique.',
     },
   },
@@ -68,7 +68,7 @@ const CARTES = [
     p: {
       type: 'scene', kicker: 'Petit labo d’astronomie',
       titre: 'Pourquoi la Lune\nchange de forme ?',
-      image: '../scenes-insta/lune-hublot.png', rogne: '1', pos: '42%',
+      image: 'scenes-insta/lune-hublot.png', rogne: '1', pos: '42%',
       sous: 'Elle ne change pas. Elle est _toujours à moitié éclairée_ — c’est nous qui la voyons d’un autre côté chaque nuit.',
     },
   },
@@ -80,8 +80,8 @@ const CARTES = [
       titre: 'Le même moment,\ndeux regards',
       etiquette1: 'Depuis le jardin',
       etiquette2: 'Depuis l’espace',
-      image: '../scenes-insta/soleil-jardin-nuit.png', pos: '60%',
-      image2: '../scenes-insta/soleil-espace-nuit.png', pos2: '50%',
+      image: 'scenes-insta/soleil-jardin-nuit.png', pos: '60%',
+      image2: 'scenes-insta/soleil-espace-nuit.png', pos2: '50%',
       sous: 'Les deux vues bougent ensemble. C’est là que l’enfant comprend.',
     },
   },
@@ -99,7 +99,7 @@ const CARTES = [
     p: {
       type: 'scene', kicker: 'Comment ça se joue',
       titre: 'Vous lisez.\nL’enfant explore.',
-      image: '../scenes-insta/terre-globe.png', rogne: '1',
+      image: 'scenes-insta/terre-globe.png', rogne: '1',
       sous: 'Peu de texte, de gros dessins, et une voix qui raconte si vous préférez écouter. Dès 5 ans, avant de savoir lire.',
     },
   },
@@ -121,7 +121,7 @@ const CARTES = [
     p: {
       type: 'scene', kicker: 'La vérité derrière l’épisode',
       titre: 'La Lune ne change\npas de forme',
-      image: '../scenes-insta/lune-orbite.png', rogne: '1', pos: '50%',
+      image: 'scenes-insta/lune-orbite.png', rogne: '1', pos: '50%',
       sous: 'Vue de l’espace, sa moitié éclairée fait _toujours_ face au Soleil. Ce qui change, c’est notre point de vue.',
     },
   },
@@ -153,6 +153,22 @@ const filtre = process.argv[2];
 const cartes = filtre ? CARTES.filter(c => c.id === filtre) : CARTES;
 if (!cartes.length) {
   console.error('Carte inconnue : ' + filtre + ' (ids : ' + CARTES.map(c => c.id).join(', ') + ')');
+  process.exit(1);
+}
+
+// chaque scène référencée doit exister À CÔTÉ du gabarit avant de capturer
+const absentes = [];
+for (const c of cartes) {
+  for (const champ of ['image', 'image2']) {
+    if (c.p[champ] && !existsSync(resolve(ici, c.p[champ]))) {
+      absentes.push(c.id + ' → ' + c.p[champ]);
+    }
+  }
+}
+if (absentes.length) {
+  console.error('Scène(s) introuvable(s) — le rendu ferait des cadres vides :');
+  for (const a of absentes) console.error('  ✗ ' + a);
+  console.error('Relancer node tools/build-insta-scenes.mjs, ou corriger le chemin.');
   process.exit(1);
 }
 
