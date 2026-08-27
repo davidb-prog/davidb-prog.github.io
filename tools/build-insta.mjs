@@ -76,7 +76,7 @@ const CARTES = [
     id: '05-deux-regards', taille: POST,
     p: {
       type: 'duo',
-      kicker: 'Le principe du Petit labo',
+      kicker: 'La série d’astronomie',
       titre: 'Le même moment,\ndeux regards',
       etiquette1: 'Depuis le jardin',
       etiquette2: 'Depuis l’espace',
@@ -106,12 +106,12 @@ const CARTES = [
   {
     id: '08-promesses', taille: POST,
     p: {
-      type: 'liste', fiole: 'maitre', kicker: 'Ce qu’il y a — et pas',
-      titre: 'Ce que vous ouvrez\nquand vous cliquez',
+      type: 'liste', fiole: 'maitre', kicker: 'Ce que vous ouvrez',
+      titre: 'Ce qu’il n’y a pas\nderrière le lien',
       liste: [
-        'Gratuit, sans publicité~Aucune bannière, aucune vidéo à regarder pour continuer.',
-        'Sans compte, sans inscription~Une adresse, une page. Rien à créer, rien à donner.',
-        'Sans pisteur ni cookie~La mesure d’audience compte les visites, jamais les visiteurs.',
+        'Pas de prix, pas de publicité~Tout se lit et se joue en entier, sans rien payer. Aucune bannière, rien qui clignote.',
+        'Pas de compte~Une adresse, une page. Rien à créer, rien à donner.',
+        'Pas de pisteur, pas de cookie~La mesure d’audience compte les visites, jamais les visiteurs.',
       ].join('|'),
       pied: 'à explorer en famille dès 5 ans',
     },
@@ -128,7 +128,7 @@ const CARTES = [
   {
     id: '10-la-fiole', taille: POST,
     p: {
-      type: 'fioles', fiole: 'maitre', kicker: 'La marque',
+      type: 'fioles', fiole: 'maitre', kicker: 'Le logo',
       titre: 'L’expérience fait\nnaître la question',
       sous: 'Le logo raconte ça : une fiole d’où s’échappe un point d’interrogation.',
       pied: 'à explorer en famille dès 5 ans',
