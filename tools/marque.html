@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Bannière et avatar Petit labo — gabarit de rendu</title>
+<!-- Gabarit rendu par tools/build-marque.mjs. Deux formats, un seul fichier :
+       ?format=banniere  → 1600 × 512 (bandeau large : page presse, en-têtes de profil)
+       ?format=avatar    → 512 × 512  (photo de profil, recadrée en rond par les réseaux)
+     Comme tools/icone.html : tailles en PIXELS FIXES, dessin ancré en haut à
+     gauche — le « headless » de Chromium ampute le viewport de ses bordures de
+     fenêtre, le script capture plus grand puis rogne au pixel près.
+     La règle de la charte : ces images parlent de la famille entière, elles
+     portent donc la fiole MAÎTRE (le « ? » dehors), jamais une fiole de série. -->
+<style>
+  @font-face {
+    font-family: "Baloo 2";
+    src: url("../assets/fonts/baloo2-latin.woff2") format("woff2");
+    font-weight: 400 800;
+  }
+  html, body { margin: 0; background: #070b17; }
+  .scene {
+    position: absolute; top: 0; left: 0; overflow: hidden;
+    background-color: #0b1020;
+    font-family: "Baloo 2", system-ui, sans-serif;
+    color: #e9edf8;
+  }
+  .scene[hidden] { display: none; }
+  .etoile { position: absolute; border-radius: 50%; }
+
+  /* ---------- le bandeau 1600 × 512 ---------- */
+  #banniere {
+    width: 1600px; height: 512px;
+    background-image:
+      radial-gradient(1100px 620px at 74% -18%, #182450 0%, rgba(11,16,32,0) 62%),
+      radial-gradient(820px 520px at 4% 120%, rgba(169,139,255,.13) 0%, rgba(11,16,32,0) 58%);
+  }
+  /* la composition est CENTRÉE : les réseaux qui servent de bandeau rognent les
+     bords sur mobile — ce qui compte doit vivre au milieu. Flex plutôt que des
+     positions calculées à la main : le bloc reste centré quel que soit le texte. */
+  #banniere .bloc {
+    position: absolute; top: 0; left: 0; width: 1600px; height: 512px;
+    display: flex; align-items: center; justify-content: center; gap: 26px;
+  }
+  #banniere .fiole {
+    flex: 0 0 auto; width: 320px; height: 320px;
+    filter: drop-shadow(0 0 54px rgba(255,207,92,.30));
+  }
+  #banniere .nom { margin: 0; font-weight: 800; font-size: 92px; line-height: 1; }
+  #banniere .nom .or { color: #ffcf5c; }
+  #banniere .phrase { margin: 20px 0 0; font-weight: 600; font-size: 40px; color: #e9edf8; }
+  #banniere .domaine { margin: 22px 0 0; font-weight: 600; font-size: 30px; color: #9aa5c3; }
+  #banniere .domaine b { color: #ffcf5c; font-weight: 700; }
+
+  /* ---------- l'avatar 512 × 512 ---------- */
+  /* les réseaux le recadrent en ROND : tout ce qui compte reste dans le cercle
+     inscrit (rayon 256), et même dans les ~88 % centraux de ce cercle */
+  #avatar {
+    width: 512px; height: 512px;
+    background-color: #070b17;
+    background-image: radial-gradient(369px 369px at 68% 22%, #16204a 0%, #070b17 72%);
+  }
+  #avatar svg {
+    /* un cran plus petit que la tuile PWA (522 px) : le cercle de recadrage
+       mord les coins, la fiole a besoin d'air tout autour */
+    position: absolute; top: 44px; left: 21px; width: 470px; height: 470px;
+    filter: drop-shadow(0 0 26px rgba(255,207,92,.22));
+  }
+</style>
+</head>
+<body>
+
+<div class="scene" id="banniere" hidden>
+  <span class="etoile" style="width:8px;height:8px;background:#e9edf8;top:74px;left:88px"></span>
+  <span class="etoile" style="width:6px;height:6px;background:#9aa5c3;top:392px;left:104px"></span>
+  <span class="etoile" style="width:7px;height:7px;background:#46c2a5;top:150px;left:600px"></span>
+  <span class="etoile" style="width:6px;height:6px;background:#ff6b9d;top:428px;left:520px"></span>
+  <span class="etoile" style="width:8px;height:8px;background:#a98bff;top:96px;left:1180px"></span>
+  <span class="etoile" style="width:6px;height:6px;background:#e9edf8;top:330px;left:1360px"></span>
+  <span class="etoile" style="width:5px;height:5px;background:#9aa5c3;top:200px;left:1470px"></span>
+
+  <div class="bloc">
+  <svg class="fiole" viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+          fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+    <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
+    <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
+    <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
+    <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+    <g transform="rotate(10 53 17)">
+      <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+            fill="none" stroke="#ffcf5c" stroke-width="5.5" stroke-linecap="round"/>
+      <circle cx="53" cy="29.5" r="2.9" fill="#ffcf5c"/>
+    </g>
+  </svg>
+
+  <div class="textes">
+    <p class="nom">Petit <span class="or">labo</span></p>
+    <p class="phrase">De grandes questions d’enfants</p>
+    <p class="domaine"><b>petit-labo.fr</b> · à explorer en famille dès 5 ans</p>
+  </div>
+  </div>
+</div>
+
+<div class="scene" id="avatar" hidden>
+  <span class="etoile" style="width:12px;height:12px;background:#e9edf8;top:104px;left:118px"></span>
+  <span class="etoile" style="width:9px;height:9px;background:#9aa5c3;top:150px;left:378px"></span>
+  <span class="etoile" style="width:9px;height:9px;background:#46c2a5;top:392px;left:116px"></span>
+  <span class="etoile" style="width:11px;height:11px;background:#ff6b9d;top:376px;left:376px"></span>
+  <span class="etoile" style="width:7px;height:7px;background:#a98bff;top:250px;left:86px"></span>
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+          fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+    <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
+    <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
+    <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
+    <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+    <g transform="rotate(10 53 17)">
+      <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+            fill="none" stroke="#ffcf5c" stroke-width="5.5" stroke-linecap="round"/>
+      <circle cx="53" cy="29.5" r="2.9" fill="#ffcf5c"/>
+    </g>
+  </svg>
+</div>
+
+<script>
+  // page-outil rendue hors site : le JS y est permis
+  var format = new URLSearchParams(location.search).get('format') === 'avatar' ? 'avatar' : 'banniere';
+  document.getElementById(format).removeAttribute('hidden');
+</script>
+</body>
+</html>

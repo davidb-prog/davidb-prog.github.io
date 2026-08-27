@@ -1,0 +1,173 @@
+/* Petit labo — la page presse (/presse/).
+   Se pose SUR css/style.css : mêmes variables, même thème de nuit, même
+   rondeur. Ici le lecteur n'est ni un enfant ni un parent pressé mais un
+   journaliste : plus de texte, des blocs qui se parcourent en diagonale,
+   et des visuels qui se téléchargent en un clic.
+   Compat mobiles anciens : pas d'inset, pas d'aspect-ratio requis,
+   -webkit- devant flex et ses propriétés. */
+
+/* la page presse se lit et se cite : contrairement au portail, on y
+   sélectionne du texte (le portail, lui, se manipule) */
+.page-presse { -webkit-user-select: text; user-select: text; }
+
+/* ---------- en-tête ---------- */
+
+.presse-header { padding-bottom: 4px; }
+.marque-lien {
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  gap: 13px; text-decoration: none; color: inherit;
+}
+.presse-header .logo-fiole { width: 46px; height: 46px; }
+.presse-header .marque-nom { font-size: 1.5rem; padding-top: 7px; }
+.presse-header .kicker {
+  font-family: var(--titres); font-weight: 700;
+  text-transform: uppercase; letter-spacing: .16em;
+  font-size: .82rem; color: var(--sun); margin: 18px 0 0;
+}
+.presse-header h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin: .2em 0 .3em; }
+
+/* ---------- ossature ---------- */
+
+main.presse { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
+.bloc { margin: 30px 0 0; }
+.panel.bloc { padding: 22px 24px; }
+.bloc > h2 {
+  font-family: var(--titres); font-weight: 700; font-size: 1.25rem;
+  margin: 0 0 14px;
+}
+.bloc h3 { font-family: var(--titres); font-weight: 700; font-size: 1.06rem; margin: 0 0 6px; }
+.chapo { margin: 0 0 18px; color: var(--muted); max-width: 62ch; }
+.texte p { margin: 0 0 12px; color: var(--muted); max-width: 66ch; }
+.texte p:last-child { margin-bottom: 0; }
+.signature { color: var(--text); font-weight: 600; }
+.mention { margin: 18px 0 0; color: var(--muted); font-size: .88rem; max-width: 66ch; }
+/* les liens de TEXTE prennent l'or. Attention : « main.presse a » (0-1-2)
+   l'emporte sur une simple classe (0-1-0) — les deux boutons plus bas sont
+   donc scopés eux aussi, sinon l'or du lien recouvrait leur propre couleur
+   (leçon payée : un libellé or posé sur un bouton or, illisible). */
+main.presse a { color: var(--sun); }
+
+/* ---------- « en bref » : une fiche à deux colonnes ---------- */
+
+.fiche { margin: 0; }
+.fiche-ligne {
+  display: -webkit-flex; display: flex;
+  -webkit-flex-wrap: wrap; flex-wrap: wrap;
+  gap: 4px 18px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+.fiche-ligne:first-child { border-top: none; padding-top: 0; }
+.fiche dt {
+  -webkit-flex: 0 0 160px; flex: 0 0 160px;
+  font-family: var(--titres); font-weight: 700; color: var(--text);
+}
+.fiche dd { -webkit-flex: 1 1 300px; flex: 1 1 300px; margin: 0; color: var(--muted); }
+
+/* ---------- ce qui distingue : des cartes en grille ---------- */
+
+.points { display: block; }
+.point { padding: 18px 20px; margin: 0 0 14px; }
+.point p { margin: 0; color: var(--muted); }
+@media (min-width: 720px) {
+  .points {
+    display: -webkit-flex; display: flex;
+    -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 14px;
+  }
+  .point { -webkit-flex: 1 1 290px; flex: 1 1 290px; margin: 0; }
+}
+
+/* ---------- les épisodes ---------- */
+
+.episode { padding: 18px 20px; margin: 0 0 16px; }
+.episode figure { margin: 0 0 16px; }
+.episode img {
+  display: block; width: 100%; height: auto;
+  border-radius: 10px; border: 1px solid var(--border);
+}
+.episode figcaption { margin-top: 8px; color: var(--muted); font-size: .88rem; }
+.episode h3 { font-size: 1.24rem; }
+.episode h3 a { color: var(--sun); text-decoration: none; }
+.episode h3 a:hover, .episode h3 a:focus { text-decoration: underline; }
+.episode p { margin: 0 0 10px; color: var(--muted); }
+.episode-reponse { color: var(--text); }
+.episode-url { font-size: .85rem; color: var(--muted); margin-bottom: 0; }
+/* côte à côte dès qu'il y a la place : la capture d'un côté, le texte de l'autre */
+@media (min-width: 800px) {
+  .episode {
+    display: -webkit-flex; display: flex;
+    -webkit-align-items: flex-start; align-items: flex-start;
+    gap: 22px;
+  }
+  .episode figure { -webkit-flex: 0 0 46%; flex: 0 0 46%; margin: 0; }
+  .episode-texte { -webkit-flex: 1 1 auto; flex: 1 1 auto; min-width: 0; }
+  .episode h3 { margin-top: 0; }
+}
+
+/* ---------- les visuels téléchargeables ---------- */
+
+.visuels { display: block; }
+.visuel { padding: 16px 18px; margin: 0 0 14px; }
+.visuel p { margin: 0 0 10px; color: var(--muted); font-size: .92rem; }
+.visuel p:last-child { margin-bottom: 0; }
+.visuel-apercu {
+  background: #070b17; border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; margin-bottom: 12px;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+}
+.visuel-apercu img { display: block; max-width: 100%; height: auto; }
+/* les aperçus carrés ne prennent pas toute la largeur : un avatar étiré en
+   pleine carte se lirait comme une image de couverture */
+.apercu-carre img { width: 148px; height: auto; }
+.visuel-vectoriel { padding: 20px 0; }
+.visuel-vectoriel img { width: 120px; }
+@media (min-width: 720px) {
+  .visuels {
+    display: -webkit-flex; display: flex;
+    -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 14px;
+  }
+  .visuel { -webkit-flex: 1 1 290px; flex: 1 1 290px; margin: 0; }
+}
+
+/* la carte des téléphones s'étale sur toute la rangée : trois écrans
+   portrait côte à côte n'ont un sens qu'à pleine largeur */
+.apercu-telephones { gap: 10px; padding: 12px; }
+.apercu-telephones img { -webkit-flex: 1 1 0; flex: 1 1 0; min-width: 0; border-radius: 8px; }
+@media (min-width: 720px) {
+  .visuel-pleine-largeur { -webkit-flex: 1 1 100%; flex: 1 1 100%; }
+}
+
+/* pilule contour : le téléchargement se propose, il ne se brandit pas —
+   l'or plein appartient au seul bouton principal de la page (le contact) */
+main.presse .pilule {
+  display: inline-block; text-decoration: none;
+  font-family: var(--titres); font-size: .95rem; font-weight: 700;
+  color: var(--sun); background: none;
+  border: 1.5px solid var(--sun-deep); border-radius: 999px;
+  padding: 6px 18px; margin: 0 6px 6px 0;
+}
+main.presse .pilule:hover, main.presse .pilule:focus { background: rgba(255, 207, 92, .14); }
+main.presse .pilule:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
+
+/* ---------- contact ---------- */
+
+.contact p { color: var(--muted); margin: 0 0 10px; max-width: 66ch; }
+.contact-action { margin: 18px 0 0; }
+/* le seul bouton plein de la page (règle de la charte) : écrire à David est
+   l'action que cette page existe pour déclencher */
+main.presse .bouton-plein {
+  display: inline-block; text-decoration: none;
+  font-family: var(--titres); font-size: 1.05rem; font-weight: 700;
+  color: #201500; background: linear-gradient(180deg, var(--sun), var(--sun-deep));
+  border: none; border-radius: 999px; padding: 10px 26px;
+}
+main.presse .bouton-plein:hover, main.presse .bouton-plein:focus { background: var(--sun); }
+main.presse .bouton-plein:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
+
+/* ---------- pied de page ---------- */
+
+.page-presse .site-footer p { margin: 0 0 10px; }
+.page-presse .site-footer a { color: var(--sun); }

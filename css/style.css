@@ -193,6 +193,12 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
   max-width: 980px; margin: 0 auto; padding: 10px 20px 44px;
   color: var(--muted); font-size: .88rem; text-align: center;
 }
+.site-footer p { margin: 0 0 8px; }
+/* le lien vers le dossier de presse : plus discret encore que le pied de
+   page — il ne s'adresse pas au parent venu jouer */
+.pied-presse { font-size: .82rem; }
+.pied-presse a { color: var(--muted); }
+.pied-presse a:hover, .pied-presse a:focus { color: var(--sun); }
 
 /* ---------- le soutien libre (masqué tant que js/soutien.js n'est pas réglé) ---------- */
 

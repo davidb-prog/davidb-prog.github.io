@@ -22,6 +22,10 @@ En ligne : <https://petit-labo.fr> (et <https://davidb-prog.github.io>).
   famille, registre des séries et leurs palettes, règles du logo). Les icônes de
   la PWA se régénèrent avec `node tools/build-icons.mjs` (Chromium fait la
   capture 512 px, le script rééchantillonne en 192 et 180 — zéro dépendance).
+- **Le dossier de presse** (`presse/index.html`, `css/presse.css`) : une page
+  sobre pour qui veut écrire sur le labo — l’histoire, les faits, les trois
+  épisodes et les visuels à télécharger. Reliée discrètement depuis le pied du
+  portail et listée au `sitemap.xml`.
 
 ## Épisodes reliés
 
@@ -63,5 +67,20 @@ Zéro dépendance, zéro build : la page s’ouvre avec `python3 -m http.server`
 déploie telle quelle sur GitHub Pages (workflow
 `.github/workflows/deploy-pages.yml`, publication à chaque push sur `main`).
 Thème sombre de la série d’astronomie — dont l’or et la nuit sont, par décision de
-charte, les couleurs de la famille entière (voir `docs/charte.md`). Les icônes PNG
-sont générées hors site (`tools/build-icons.mjs`) et commitées.
+charte, les couleurs de la famille entière (voir `docs/charte.md`).
+
+Toutes les images PNG du dépôt sont **générées hors site puis commitées**, jamais
+retouchées à la main. Quatre générateurs, une seule boîte à outils
+(`tools/rendu-outils.mjs` : trouver Chromium, lire / rogner / rééchantillonner /
+écrire un PNG — zéro dépendance, zlib de Node) :
+
+| Commande | Ce qu’elle produit |
+|---|---|
+| `node tools/build-icons.mjs` | `icons/icon-512.png`, `icons/icon-192.png`, `apple-touch-icon.png` |
+| `node tools/build-og.mjs` | `assets/og.png` (portail) et les cartes des épisodes dans `tools/sorties-og/` |
+| `node tools/build-marque.mjs` | `assets/marque/banniere-1600x512.png`, `assets/marque/avatar-512.png` |
+| `node tools/build-captures.mjs` | `assets/presse/capture-*.png` — les copies d’écran des épisodes |
+
+`build-captures` a besoin des dépôts d’épisodes **clonés à côté** du portail
+(`../ou-va-le-soleil`…) : il les sert lui-même en HTTP le temps de la capture. À
+relancer après toute évolution visuelle d’un épisode.
