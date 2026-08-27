@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Carte Instagram Petit labo — gabarit de rendu</title>
+<!-- Gabarit rendu par tools/insta/build-insta.mjs, même mécanique que tools/og.html :
+     Chromium capture la page, paramétrée par l'URL, puis le script rogne au pixel.
+     Formats : 1080 × 1350 (publication) et 1080 × 1080 (avatar).
+     Paramètres : ?type=…&kicker=…&titre=…&sous=…&image=…&image2=…&pied=…
+     Les « \n » dans titre/sous/liste coupent les lignes. -->
+<style>
+  @font-face {
+    font-family: "Baloo 2";
+    src: url("../../assets/fonts/baloo2-latin.woff2") format("woff2");
+    font-weight: 400 800;
+  }
+  html, body { margin: 0; background: #070b17; overflow: hidden; }
+  .carte {
+    position: relative; width: 1080px; height: 1350px; overflow: hidden;
+    background-color: #0b1020;
+    background-image:
+      radial-gradient(880px 720px at 82% -8%, #182450 0%, rgba(11,16,32,0) 62%),
+      radial-gradient(760px 640px at 4% 106%, rgba(169,139,255,.13) 0%, rgba(11,16,32,0) 56%);
+    font-family: "Baloo 2", system-ui, sans-serif;
+    color: #e9edf8;
+    display: flex; flex-direction: column;
+  }
+  .carte.carree { height: 1080px; }
+
+  .etoile { position: absolute; border-radius: 50%; }
+
+  /* ---- en-tête : la fiole de série et le kicker, comme sur les épisodes ---- */
+  .tete { display: flex; align-items: center; gap: 18px; padding: 64px 72px 0; }
+  .tete svg { width: 52px; height: 52px; flex: none; }
+  .kicker { color: #ffcf5c; font-weight: 700; font-size: 27px; letter-spacing: .15em;
+    text-transform: uppercase; margin: 0; }
+
+  .corps { flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding: 26px 72px 0; min-height: 0; }
+
+  h1 { margin: 0; font-weight: 800; font-size: 76px; line-height: 1.06; letter-spacing: -.01em; }
+  h1.moyen { font-size: 64px; }
+  h1.petit { font-size: 54px; }
+  .sous { color: #9aa5c3; font-size: 34px; line-height: 1.38; margin: 26px 0 0; font-weight: 400; }
+  .sous b { color: #e9edf8; font-weight: 600; }
+
+  /* ---- la scène : le dessin de l'épisode, cadré comme un hublot ---- */
+  .scene { margin: 44px 0 0; border-radius: 28px; overflow: hidden;
+    border: 2px solid rgba(255,207,92,.28);
+    box-shadow: 0 26px 70px -30px rgba(0,0,0,.9), 0 0 0 10px rgba(255,207,92,.05); }
+  .scene img { display: block; width: 100%; height: auto; }
+  .scene.rogne { height: var(--hscene, 700px); }
+  .scene.rogne img { height: 100%; width: 100%; object-fit: cover; object-position: center; }
+  .scene img[data-pos] { object-position: center var(--pos); }
+  .duo { display: flex; flex-direction: column; gap: 20px; margin-top: 34px; }
+  .duo .scene { margin: 0; }
+  .duo .scene.rogne { height: 300px; }
+  .etiquette { color: #ffcf5c; font-size: 25px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; margin: 0 0 10px; }
+
+  /* ---- la marque : fiole en grand + logotype ---- */
+  .marque { display: flex; flex-direction: column; align-items: center; text-align: center;
+    justify-content: center; flex: 1; padding: 0 72px; }
+  .marque .grande-fiole { width: 330px; height: 330px;
+    filter: drop-shadow(0 0 60px rgba(255,207,92,.3)); }
+  .logotype { font-weight: 800; font-size: 96px; margin: 18px 0 0; letter-spacing: -.01em; }
+  .logotype b { color: #ffcf5c; font-weight: 800; }
+  .marque h1 { margin-top: 34px; }
+  .marque .sous { max-width: 20ch; }
+
+  /* ---- la citation ---- */
+  .citation { flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding: 0 84px; position: relative; }
+  .guillemet { display: block; font-size: 150px; line-height: .52; margin: 0 0 6px;
+    color: rgba(255,207,92,.6); font-weight: 800; }
+  .citation p.propos { position: relative; margin: 0; font-weight: 800; font-size: 86px; line-height: 1.1; }
+  .citation p.propos em { font-style: normal; color: #ffcf5c; }
+  .citation p.signature { margin: 46px 0 0; color: #9aa5c3; font-size: 31px; line-height: 1.4;
+    font-weight: 400; }
+  .citation p.signature::before { content: ""; display: block; width: 74px; height: 3px;
+    border-radius: 2px; background: #ffcf5c; margin-bottom: 26px; }
+
+  /* ---- la liste (les promesses) ---- */
+  .liste { margin: 60px 0 0; padding: 0; list-style: none; }
+  .liste li { display: flex; align-items: flex-start; gap: 28px; margin: 0 0 46px;
+    font-size: 46px; font-weight: 600; line-height: 1.2; }
+  .liste li:last-child { margin-bottom: 0; }
+  .liste li span { flex: none; width: 46px; height: 46px; border-radius: 50%; margin-top: 6px;
+    border: 3px solid #ffcf5c; position: relative; }
+  .liste li span::after { content: ""; position: absolute; left: 11px; top: 15px; width: 17px;
+    height: 9px; border-left: 4px solid #ffcf5c; border-bottom: 4px solid #ffcf5c;
+    transform: rotate(-45deg); }
+  .liste li i { font-style: normal; display: block; color: #9aa5c3; font-size: 29px;
+    font-weight: 400; margin-top: 6px; }
+
+  /* ---- les deux fioles côte à côte (le maître et la série) ---- */
+  .fioles { display: flex; gap: 44px; margin: 58px 0 0; }
+  .fioles figure { margin: 0; flex: 1; background: linear-gradient(180deg, #141b30, #0b1020);
+    border: 1px solid #283253; border-radius: 28px; padding: 40px 28px 30px; text-align: center; }
+  .fioles svg { width: 210px; height: 210px; }
+  .fioles figcaption { margin-top: 22px; font-size: 28px; font-weight: 600; color: #e9edf8; }
+  .fioles figcaption i { display: block; font-style: normal; color: #9aa5c3; font-size: 24px;
+    font-weight: 400; margin-top: 6px; line-height: 1.3; }
+
+  /* ---- pied de page commun ---- */
+  .pied { display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+    padding: 0 72px 64px; color: #9aa5c3; font-size: 30px; font-weight: 600; }
+  .pied b { color: #ffcf5c; font-weight: 700; font-size: 34px; }
+  .pied[hidden] { display: none; }
+
+  /* ---- avatar carré ---- */
+  .avatar { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .avatar svg { width: 950px; height: 950px; filter: drop-shadow(0 0 70px rgba(255,207,92,.32)); }
+</style>
+</head>
+<body>
+<div class="carte" id="carte">
+  <span class="etoile" style="width:7px;height:7px;background:#e9edf8;top:120px;left:880px"></span>
+  <span class="etoile" style="width:5px;height:5px;background:#9aa5c3;top:250px;left:120px"></span>
+  <span class="etoile" style="width:6px;height:6px;background:#ff6b9d;top:1180px;left:150px"></span>
+  <span class="etoile" style="width:5px;height:5px;background:#46c2a5;top:980px;left:940px"></span>
+  <span class="etoile" style="width:6px;height:6px;background:#a98bff;top:70px;left:420px"></span>
+  <span class="etoile" style="width:5px;height:5px;background:#e9edf8;top:1290px;left:660px"></span>
+  <span class="etoile" style="width:4px;height:4px;background:#9aa5c3;top:660px;left:1020px"></span>
+
+  <div class="tete" id="tete">
+    <span id="emplacement-fiole"></span>
+    <p class="kicker" id="kicker"></p>
+  </div>
+
+  <div id="zone"></div>
+
+  <p class="pied" id="pied"><b>petit-labo.fr</b> <span id="pied-droite"></span></p>
+</div>
+
+<!-- les deux fioles de la charte, recopiées de assets/marque et tools/og.html -->
+<template id="fiole-maitre">
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+          fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+    <circle cx="43" cy="72" r="2.2" fill="#a98bff"/>
+    <circle cx="57" cy="70.5" r="2.2" fill="#ff6b9d"/>
+    <circle cx="50" cy="77.5" r="1.7" fill="#46c2a5"/>
+    <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+    <g transform="rotate(10 53 17)">
+      <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+            fill="none" stroke="#ffcf5c" stroke-width="5.5" stroke-linecap="round"/>
+      <circle cx="53" cy="29.5" r="2.9" fill="#ffcf5c"/>
+    </g>
+  </svg>
+</template>
+<template id="fiole-astro">
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M43 22 L43 42 L28 68 A9 9 0 0 0 36 81 L64 81 A9 9 0 0 0 72 68 L57 42 L57 22 Z"
+          fill="#0e1530" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M50 51 L52 57 L58 59 L52 61 L50 67 L48 61 L42 59 L48 57 Z" fill="#ffcf5c"/>
+    <circle cx="39" cy="70" r="2.2" fill="#a98bff"/>
+    <circle cx="60" cy="72" r="2" fill="#ff6b9d"/>
+    <rect x="38" y="15" width="24" height="7" rx="3.5" fill="#ffcf5c"/>
+  </svg>
+</template>
+
+<script>
+  // page-outil rendue hors site : le JS y est permis, comme dans tools/og.html
+  var p = new URLSearchParams(location.search);
+  var val = function (nom, defaut) { var v = p.get(nom); return v === null ? (defaut || '') : v; };
+  // les coupures arrivent soit en vrai saut de ligne, soit écrites « \n »
+  var lignes = function (t) { return t.replace(/\\n/g, '\n').split('\n'); };
+  var echappe = function (t) {
+    return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  };
+  // « *mot* » met le mot en or dans les citations, « _mot_ » le met en clair ailleurs
+  var riche = function (t) {
+    return echappe(t).replace(/\*([^*]+)\*/g, '<em>$1</em>').replace(/_([^_]+)_/g, '<b>$1</b>');
+  };
+  var multi = function (t) { return lignes(t).map(riche).join('<br>'); };
+
+  var fiole = function (quelle) {
+    var tpl = document.getElementById(quelle === 'maitre' ? 'fiole-maitre' : 'fiole-astro');
+    return tpl.innerHTML;
+  };
+
+  var type = val('type', 'scene');
+  var carte = document.getElementById('carte');
+  var zone = document.getElementById('zone');
+  var tete = document.getElementById('tete');
+  var pied = document.getElementById('pied');
+
+  if (val('format') === 'carre') carte.classList.add('carree');
+  // certaines scènes ont besoin d'un cadre plus haut pour ne rien perdre à la coupe
+  if (val('hauteur')) carte.style.setProperty('--hscene', val('hauteur') + 'px');
+
+  document.getElementById('kicker').textContent = val('kicker', 'Petit labo');
+  document.getElementById('emplacement-fiole').innerHTML = fiole(val('fiole', 'astro'));
+  document.getElementById('pied-droite').textContent = val('pied', 'gratuit, sans publicité');
+
+  function classeTitre(t) {
+    var plusLongue = 0;
+    lignes(t).forEach(function (l) { if (l.length > plusLongue) plusLongue = l.length; });
+    if (plusLongue > 26) return 'petit';
+    if (plusLongue > 19) return 'moyen';
+    return '';
+  }
+
+  function blocScene(src, rogne, pos) {
+    var style = pos ? ' data-pos style="--pos:' + echappe(pos) + '"' : '';
+    return '<div class="scene' + (rogne ? ' rogne' : '') + '"><img src="' + echappe(src)
+      + '"' + style + ' alt=""></div>';
+  }
+
+  var titre = val('titre');
+  var sous = val('sous');
+  var html = '';
+
+  if (type === 'avatar') {
+    tete.remove(); pied.remove();
+    zone.className = 'avatar';
+    html = fiole(val('fiole', 'maitre'));
+  } else if (type === 'marque') {
+    tete.remove();
+    zone.className = 'marque';
+    html = '<span class="grande-fiole">' + fiole(val('fiole', 'maitre')) + '</span>'
+      + '<p class="logotype">Petit <b>labo</b></p>'
+      + (titre ? '<h1 class="' + classeTitre(titre) + '">' + multi(titre) + '</h1>' : '')
+      + (sous ? '<p class="sous">' + multi(sous) + '</p>' : '');
+  } else if (type === 'citation') {
+    zone.className = 'citation';
+    html = '<span class="guillemet">«</span>'
+      + '<p class="propos">' + multi(titre) + '</p>'
+      + (sous ? '<p class="signature">' + multi(sous) + '</p>' : '');
+  } else if (type === 'liste') {
+    zone.className = 'corps';
+    var items = val('liste').split('|').filter(Boolean).map(function (it) {
+      var bouts = it.split('~');
+      return '<li><span></span><div>' + riche(bouts[0])
+        + (bouts[1] ? '<i>' + riche(bouts[1]) + '</i>' : '') + '</div></li>';
+    }).join('');
+    html = '<h1 class="' + classeTitre(titre) + '">' + multi(titre) + '</h1>'
+      + '<ul class="liste">' + items + '</ul>';
+  } else if (type === 'fioles') {
+    zone.className = 'corps';
+    html = '<h1 class="' + classeTitre(titre) + '">' + multi(titre) + '</h1>'
+      + (sous ? '<p class="sous">' + multi(sous) + '</p>' : '')
+      + '<div class="fioles">'
+      + '<figure>' + fiole('maitre') + '<figcaption>La fiole au « ? »'
+      + '<i>la famille entière — la question est dehors</i></figcaption></figure>'
+      + '<figure>' + fiole('astro') + '<figcaption>La fiole à l\u2019étoile'
+      + '<i>le Petit labo d\u2019astronomie — la réponse est dedans</i></figcaption></figure>'
+      + '</div>';
+  } else if (type === 'duo') {
+    zone.className = 'corps';
+    html = '<h1 class="' + classeTitre(titre) + '">' + multi(titre) + '</h1>'
+      + '<div class="duo">'
+      + '<div><p class="etiquette">' + riche(val('etiquette1')) + '</p>'
+      + blocScene(val('image'), true, val('pos')) + '</div>'
+      + '<div><p class="etiquette">' + riche(val('etiquette2')) + '</p>'
+      + blocScene(val('image2'), true, val('pos2')) + '</div>'
+      + '</div>'
+      + (sous ? '<p class="sous">' + multi(sous) + '</p>' : '');
+  } else {
+    zone.className = 'corps';
+    html = '<h1 class="' + classeTitre(titre) + '">' + multi(titre) + '</h1>'
+      + blocScene(val('image'), val('rogne') === '1', val('pos'))
+      + (sous ? '<p class="sous">' + multi(sous) + '</p>' : '');
+  }
+  zone.innerHTML = html;
+</script>
+</body>
+</html>
