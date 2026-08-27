@@ -151,16 +151,16 @@
         </a>
       </nav>
 
-      <p class="a-venir">D’autres questions mijotent dans le labo… reviens bientôt&nbsp;!</p>
     </section>
 
     <!-- Le partage accompagne les épisodes sans leur voler la vedette : une
-         phrase et un bouton sous les cartes. js/partage.js fait le geste
+         phrase et un bouton sous les cartes (l'« à venir » et l'invitation à
+         partager fusionnés en un seul moment). js/partage.js fait le geste
          (partage natif du téléphone si le navigateur sait, copie du lien
          sinon, jamais d'échec silencieux). -->
     <div class="partage">
-      <p class="partage-phrase">Le labo ne voyage que de parent en parent&nbsp;:
-        passez-le autour de vous.</p>
+      <p class="partage-phrase">D’autres questions mijotent dans le labo…
+        en attendant, passez le mot autour de vous.</p>
       <p class="partage-action">
         <button id="btn-partager" type="button">Partager</button>
         <span id="partage-etat" role="status" aria-live="polite" hidden></span>
@@ -188,19 +188,6 @@
             qui dit exactement ce qu’il a simplifié, et pourquoi.</p>
         </div>
       </details>
-    </section>
-
-    <!-- Soutien libre : masqué tant que js/soutien.js n'a pas de pseudo —
-         on ne montre jamais au parent un bouton qui ne mène nulle part. -->
-    <section class="panel soutien" id="soutien" aria-labelledby="titre-soutien" hidden>
-      <h2 id="titre-soutien">Le labo tourne à la curiosité</h2>
-      <p>Le Petit labo est gratuit et sans publicité. Si un épisode
-        a sauvé un trajet en voiture ou répondu à une question du soir, vous
-        pouvez glisser une pièce dans la fiole&nbsp;— elle financera le prochain.</p>
-      <p class="soutien-action">
-        <a id="lien-soutien" href="#" rel="noopener noreferrer" target="_blank">
-          Soutenir le Petit labo</a>
-      </p>
     </section>
 
     <section class="panel conseils">
@@ -235,14 +222,29 @@
         </div>
       </details>
     </section>
+
+    <!-- Soutien libre : en dernier, juste avant le pied de page — la place
+         d'un pourboire, on le propose après, on ne le brandit pas pendant.
+         Masqué tant que js/soutien.js n'a pas de pseudo : on ne montre
+         jamais au parent un bouton qui ne mène nulle part. -->
+    <section class="panel soutien" id="soutien" aria-labelledby="titre-soutien" hidden>
+      <h2 id="titre-soutien">Le labo tourne à la curiosité</h2>
+      <p>Le Petit labo est gratuit et sans publicité. Si un épisode
+        a sauvé un trajet en voiture ou répondu à une question du soir, vous
+        pouvez glisser une pièce dans la fiole&nbsp;— elle financera le prochain.</p>
+      <p class="soutien-action">
+        <a id="lien-soutien" href="#" rel="noopener noreferrer" target="_blank">
+          Soutenir le Petit labo</a>
+      </p>
+    </section>
   </main>
 
   <footer class="site-footer">
+    <!-- un seul paragraphe : la promesse et la mesure disaient deux fois
+         « sans cookie » — fusionnées, l'argument porte mieux -->
     <p>Le Petit labo est un atelier sans publicité ni cookies —
-      juste des questions d’enfants et des réponses honnêtes.</p>
-    <p class="footer-mesure">On compte les visites, jamais les visiteurs&nbsp;:
-      la fréquentation est mesurée de façon anonyme, sans cookie et sans
-      profil.</p>
+      juste des questions d’enfants et des réponses honnêtes.
+      On y compte les visites, jamais les visiteurs.</p>
   </footer>
 
   <script src="/js/install.js" defer></script>
