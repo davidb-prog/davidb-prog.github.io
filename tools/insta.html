@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <title>Carte Instagram Petit labo — gabarit de rendu</title>
-<!-- Gabarit rendu par tools/insta/build-insta.mjs, même mécanique que tools/og.html :
-     Chromium capture la page, paramétrée par l'URL, puis le script rogne au pixel.
-     Formats : 1080 × 1350 (publication) et 1080 × 1080 (avatar).
+<!-- Gabarit rendu par tools/build-insta.mjs, même mécanique que tools/og.html et
+     tools/marque.html : Chromium capture la page, paramétrée par l'URL, puis
+     rendu-outils rogne au pixel. Format unique : 1080 × 1350, la publication
+     portrait — l'AVATAR du compte vient de tools/marque.html (assets/marque/
+     avatar-512.png), la charte ne veut qu'une source par image de marque.
      Paramètres : ?type=…&kicker=…&titre=…&sous=…&image=…&image2=…&pied=…
      Les « \n » dans titre/sous/liste coupent les lignes. -->
 <style>
   @font-face {
     font-family: "Baloo 2";
-    src: url("../../assets/fonts/baloo2-latin.woff2") format("woff2");
+    src: url("../assets/fonts/baloo2-latin.woff2") format("woff2");
     font-weight: 400 800;
   }
   html, body { margin: 0; background: #070b17; overflow: hidden; }
@@ -25,7 +27,6 @@
     color: #e9edf8;
     display: flex; flex-direction: column;
   }
-  .carte.carree { height: 1080px; }
 
   .etoile { position: absolute; border-radius: 50%; }
 
@@ -107,10 +108,6 @@
     padding: 0 72px 64px; color: #9aa5c3; font-size: 30px; font-weight: 600; }
   .pied b { color: #ffcf5c; font-weight: 700; font-size: 34px; }
   .pied[hidden] { display: none; }
-
-  /* ---- avatar carré ---- */
-  .avatar { flex: 1; display: flex; align-items: center; justify-content: center; }
-  .avatar svg { width: 950px; height: 950px; filter: drop-shadow(0 0 70px rgba(255,207,92,.32)); }
 </style>
 </head>
 <body>
@@ -186,7 +183,6 @@
   var tete = document.getElementById('tete');
   var pied = document.getElementById('pied');
 
-  if (val('format') === 'carre') carte.classList.add('carree');
   // certaines scènes ont besoin d'un cadre plus haut pour ne rien perdre à la coupe
   if (val('hauteur')) carte.style.setProperty('--hscene', val('hauteur') + 'px');
 
@@ -212,11 +208,7 @@
   var sous = val('sous');
   var html = '';
 
-  if (type === 'avatar') {
-    tete.remove(); pied.remove();
-    zone.className = 'avatar';
-    html = fiole(val('fiole', 'maitre'));
-  } else if (type === 'marque') {
+  if (type === 'marque') {
     tete.remove();
     zone.className = 'marque';
     html = '<span class="grande-fiole">' + fiole(val('fiole', 'maitre')) + '</span>'

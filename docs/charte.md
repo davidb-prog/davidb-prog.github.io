@@ -25,6 +25,8 @@ Les fichiers (le SVG est LA source ; les PNG sont générés, jamais retouchés)
 | `tools/marque.html` | Le gabarit de la bannière et de l'avatar |
 | `tools/build-icons.mjs` | Génère `icons/icon-512.png`, `icons/icon-192.png`, `apple-touch-icon.png` |
 | `tools/build-marque.mjs` | Génère la bannière et l'avatar |
+| `tools/insta.html` | Le gabarit des publications du compte vitrine (1080 × 1350) |
+| `tools/build-insta.mjs` | Génère ces publications (avec `tools/build-insta-scenes.mjs` pour les scènes) |
 
 Régénération (hors site, zéro dépendance — Chromium fait la capture, Node fait le
 reste) : `node tools/build-icons.mjs` et `node tools/build-marque.mjs` (variable
@@ -183,6 +185,13 @@ Trois niveaux, un usage chacun :
   ne descend pas sous ~500 px). C'est
   aussi la page qui porte la formule de la famille — « gratuit et sans
   publicité », jamais « toujours gratuit » — et aucune promesse de sortie.
+- **Le compte vitrine** (Instagram) : la même marque, au format du fil. Sa photo
+  de profil est l'**avatar** de `assets/marque/` — celui de la page presse, pas
+  une seconde version —, et ses publications se génèrent (`tools/insta.html`,
+  1080 × 1350) sur la palette et les fioles de cette charte : fiole de **série**
+  quand la carte parle d'un épisode, fiole **maître** quand elle parle de la
+  famille. Elles portent la même signature que la bannière — « petit-labo.fr ·
+  à explorer en famille dès 5 ans » — et les mêmes interdits que la page presse.
 - **Les images de partage `og:image`** (1200 × 630 — la carte que WhatsApp,
   iMessage ou les réseaux affichent sous un lien) : gabarit `tools/og.html`,
   génération `node tools/build-og.mjs` (le registre des titres/sous-titres vit

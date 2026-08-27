@@ -70,9 +70,10 @@ Thème sombre de la série d’astronomie — dont l’or et la nuit sont, par d
 charte, les couleurs de la famille entière (voir `docs/charte.md`).
 
 Toutes les images PNG du dépôt sont **générées hors site puis commitées**, jamais
-retouchées à la main. Quatre générateurs, une seule boîte à outils
-(`tools/rendu-outils.mjs` : trouver Chromium, lire / rogner / rééchantillonner /
-écrire un PNG — zéro dépendance, zlib de Node) :
+retouchées à la main. Six générateurs, une seule boîte à outils
+(`tools/rendu-outils.mjs` : trouver Chromium et le lancer, servir les dépôts
+d’épisodes, lire / rogner / rééchantillonner / écrire un PNG — zéro dépendance,
+zlib de Node) :
 
 | Commande | Ce qu’elle produit |
 |---|---|
@@ -80,7 +81,16 @@ retouchées à la main. Quatre générateurs, une seule boîte à outils
 | `node tools/build-og.mjs` | `assets/og.png` (portail) et les cartes des épisodes dans `tools/sorties-og/` |
 | `node tools/build-marque.mjs` | `assets/marque/banniere-1600x512.png`, `assets/marque/avatar-512.png` |
 | `node tools/build-captures.mjs` | `assets/presse/capture-*.png` — les copies d’écran des épisodes |
+| `node tools/build-insta-scenes.mjs` | `tools/scenes-insta/` — les scènes des épisodes, amenées au bon moment par leur curseur maître |
+| `node tools/build-insta.mjs` | `tools/sorties-insta/` — les publications du compte vitrine (1080 × 1350) |
 
-`build-captures` a besoin des dépôts d’épisodes **clonés à côté** du portail
-(`../ou-va-le-soleil`…) : il les sert lui-même en HTTP le temps de la capture. À
-relancer après toute évolution visuelle d’un épisode.
+`build-captures` et `build-insta-scenes` ont besoin des dépôts d’épisodes
+**clonés à côté** du portail (`../ou-va-le-soleil`…) : ils les servent eux-mêmes
+en HTTP le temps de la capture. À relancer après toute évolution visuelle d’un
+épisode.
+
+Les deux derniers produisent le **kit du compte vitrine** (tâche T7 du plan
+d’acquisition) : leurs sorties sont gitignorées, comme celles des `og:image` —
+elles se déposent dans Instagram, elles n’ont rien à faire dans l’historique.
+L’avatar du compte, lui, est `assets/marque/avatar-512.png` : le fichier que la
+page presse propose déjà, pas une seconde version.
