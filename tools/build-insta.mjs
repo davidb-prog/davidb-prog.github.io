@@ -80,8 +80,10 @@ const CARTES = [
       titre: 'Le même moment,\ndeux regards',
       etiquette1: 'Depuis le jardin',
       etiquette2: 'Depuis l’espace',
-      image: 'scenes-insta/soleil-jardin-nuit.png', pos: '60%',
-      image2: 'scenes-insta/soleil-espace-nuit.png', pos2: '50%',
+      image: 'scenes-insta/soleil-jardin-nuit.png', pos: '62%',
+      // la Terre et son Soleil touchent les bords du dessin : elle se montre
+      // entière, jamais recadrée — sinon on ne voit plus de quoi on parle
+      image2: 'scenes-insta/soleil-espace-nuit.png', entier2: '1',
       sous: 'Les deux vues bougent ensemble. C’est là que l’enfant comprend.',
     },
   },
