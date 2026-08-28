@@ -17,26 +17,11 @@
 // visuels proposés au téléchargement sur /presse/. À régénérer après toute
 // évolution visuelle d'un épisode.
 
-import { spawn } from 'node:child_process';
-import { createServer } from 'node:http';
-import { createReadStream, existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
-import { dirname, extname, join, normalize, resolve } from 'node:path';
+import { existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { rognePNG, trouveChrome } from './rendu-outils.mjs';
-
-// Chromium est lancé en ASYNCHRONE, jamais en spawnSync : le serveur statique
-// ci-dessous vit dans CE processus, et un spawnSync bloquerait la boucle
-// d'événements — le navigateur attendrait indéfiniment une page que Node ne
-// servirait jamais (leçon payée).
-function lance(commande, args) {
-  return new Promise(ok => {
-    const p = spawn(commande, args, { stdio: ['ignore', 'ignore', 'pipe'] });
-    let err = '';
-    p.stderr.on('data', d => { err += d; });
-    p.on('close', code => ok({ code: code, err: err }));
-  });
-}
+import { lance, rognePNG, sertLesDepots, trouveChrome } from './rendu-outils.mjs';
 
 const ici = dirname(fileURLToPath(import.meta.url));
 const racine = resolve(ici, '..');
@@ -61,18 +46,6 @@ for (const id of IDS) {
   EPISODES.push({ id: id, fichier: 'assets/presse/capture-' + id + '-telephone.png', format: TELEPHONE });
 }
 
-const TYPES = {
-  '.html': 'text/html; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.mjs': 'text/javascript; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.svg': 'image/svg+xml',
-  '.png': 'image/png',
-  '.woff2': 'font/woff2',
-  '.mp3': 'audio/mpeg',
-};
-
 const chrome = trouveChrome();
 if (!chrome) {
   console.error('Chromium/Chrome introuvable. Indiquer le binaire : CHROME=/chemin node tools/build-captures.mjs');
@@ -94,33 +67,18 @@ if (manquants.length) {
   process.exit(1);
 }
 
-// petit serveur statique : la racine sert le DOSSIER DES DÉPÔTS, donc
-// /ou-va-le-soleil/ tombe pile sur le chemin qu'aura le site en production.
-// /__telephone/<id> sert la page-cadre du format téléphone (l'iframe ancré en
-// haut à gauche, aux dimensions CSS d'un iPhone).
-const serveur = createServer((req, rep) => {
-  let chemin = decodeURIComponent(req.url.split('?')[0]);
-  const tel = chemin.match(/^\/__telephone\/([a-z0-9-]+)$/);
-  if (tel) {
-    rep.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    rep.end('<!doctype html><html><head><meta charset="utf-8"><style>' +
-      'html,body{margin:0;background:#0b1020}' +
-      'iframe{display:block;width:390px;height:844px;border:0}' +
-      '</style></head><body><iframe src="/' + tel[1] + '/"></iframe></body></html>');
-    return;
-  }
-  if (chemin.endsWith('/')) chemin += 'index.html';
-  const fichier = join(voisins, normalize(chemin).replace(/^(\.\.[/\\])+/, ''));
-  if (fichier.indexOf(voisins) !== 0 || !existsSync(fichier) || statSync(fichier).isDirectory()) {
-    rep.writeHead(404).end('introuvable');
-    return;
-  }
-  rep.writeHead(200, { 'Content-Type': TYPES[extname(fichier)] || 'application/octet-stream' });
-  createReadStream(fichier).pipe(rep);
+// Le serveur statique vient de rendu-outils (partagé avec build-insta-scenes).
+// /__telephone/<id> est la page-cadre du format téléphone : l'iframe ancré en
+// haut à gauche, aux dimensions CSS d'un iPhone.
+const serveur = await sertLesDepots({
+  '/__telephone/': url => '<!doctype html><html><head><meta charset="utf-8"><style>'
+    + 'html,body{margin:0;background:#0b1020}'
+    + 'iframe{display:block;width:390px;height:844px;border:0}'
+    + '</style></head><body><iframe src="/'
+    + url.pathname.slice('/__telephone/'.length).replace(/[^a-z0-9-]/g, '')
+    + '/"></iframe></body></html>',
 });
-
-await new Promise(ok => serveur.listen(0, '127.0.0.1', ok));
-const port = serveur.address().port;
+const port = serveur.port;
 
 let rate = false;
 for (const e of episodes) {
