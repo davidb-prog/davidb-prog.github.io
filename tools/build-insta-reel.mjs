@@ -223,9 +223,13 @@ execFileSync(ffmpeg, [
   '-framerate', String(REEL.fps), '-i', resolve(cadres, 'espace_%04d.png'),
   '-loop', '1', '-i', resolve(cadres, 'habillage.png'),
   '-filter_complex',
+  // le shortest vit sur le PREMIER overlay : le fond coloré et l'habillage
+  // bouclé sont des sources infinies — arrêté seulement à la fin, le graphe
+  // n'aurait plus aucun flux fini pour le borner et encoderait sans fin
+  // (leçon payée : un mp4 de 250 Mo qui ne se terminait jamais)
   `color=c=0x0b1020:s=1080x1920:r=${REEL.fps}[fond];` +
   `[0:v]scale=${j.l}:${j.h}[jv];[1:v]scale=${e.l}:${e.h}[ev];` +
-  `[fond][jv]overlay=${j.x}:${j.y}[t1];[t1][ev]overlay=${e.x}:${e.y}[t2];` +
+  `[fond][jv]overlay=${j.x}:${j.y}:shortest=1[t1];[t1][ev]overlay=${e.x}:${e.y}[t2];` +
   `[t2][2:v]overlay=0:0:shortest=1`,
   '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '19', '-preset', 'medium',
   '-movflags', '+faststart',
