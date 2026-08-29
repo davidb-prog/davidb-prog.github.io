@@ -63,6 +63,11 @@
   .duo .scene.rogne { height: 458px; }
   .etiquette { color: #ffcf5c; font-size: 25px; font-weight: 700; letter-spacing: .1em;
     text-transform: uppercase; margin: 0 0 10px; }
+  /* signalétique du site (.view-head des épisodes) : bas-de-casse, gras, la
+     couleur de la vue — pour que la carte ressemble à ce qu'on trouvera en
+     cliquant. L'emoji de l'intitulé reste dehors (charte). */
+  .etiquette.produit { text-transform: none; letter-spacing: 0; font-size: 31px;
+    font-weight: 800; }
 
   /* ---- la marque : fiole en grand + logotype ---- */
   .marque { display: flex; flex-direction: column; align-items: center; text-align: center;
@@ -203,6 +208,15 @@
     return '';
   }
 
+  // une couleur fournie = signalétique du site ; sans couleur, libellé de carte
+  function etiquette(texte, couleur) {
+    if (couleur) {
+      return '<p class="etiquette produit" style="color:' + echappe(couleur) + '">'
+        + riche(texte) + '</p>';
+    }
+    return '<p class="etiquette">' + riche(texte) + '</p>';
+  }
+
   function blocScene(src, rogne, pos, entier) {
     var style = pos ? ' data-pos style="--pos:' + echappe(pos) + '"' : '';
     return '<div class="scene' + (rogne ? ' rogne' : '') + (entier ? ' entier' : '')
@@ -248,9 +262,9 @@
     zone.className = 'corps';
     html = '<h1 class="' + classeTitre(titre) + '">' + multi(titre) + '</h1>'
       + '<div class="duo">'
-      + '<div><p class="etiquette">' + riche(val('etiquette1')) + '</p>'
+      + '<div>' + etiquette(val('etiquette1'), val('couleur1'))
       + blocScene(val('image'), true, val('pos'), val('entier') === '1') + '</div>'
-      + '<div><p class="etiquette">' + riche(val('etiquette2')) + '</p>'
+      + '<div>' + etiquette(val('etiquette2'), val('couleur2'))
       + blocScene(val('image2'), true, val('pos2'), val('entier2') === '1') + '</div>'
       + '</div>'
       + (sous ? '<p class="sous">' + multi(sous) + '</p>' : '');

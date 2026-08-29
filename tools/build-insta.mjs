@@ -78,8 +78,11 @@ const CARTES = [
       type: 'duo',
       kicker: 'La série d’astronomie',
       titre: 'Le même moment,\ndeux regards',
-      etiquette1: 'Depuis le jardin',
-      etiquette2: 'Depuis l’espace',
+      // la signalétique du site, mot pour mot et dans ses couleurs (.view-head
+      // d'ou-va-le-soleil) : la carte doit ressembler à ce qu'on trouve en
+      // cliquant — l'emoji de l'intitulé (🌳/🚀) reste dans la légende
+      etiquette1: 'Depuis ton jardin', couleur1: '#46c2a5',
+      etiquette2: 'Depuis l’espace', couleur2: '#a98bff',
       image: 'scenes-insta/soleil-jardin-nuit.png', pos: '62%',
       // la Terre et son Soleil touchent les bords du dessin : elle se montre
       // entière, jamais recadrée — sinon on ne voit plus de quoi on parle
@@ -134,6 +137,32 @@ const CARTES = [
       titre: 'L’expérience fait\nnaître la question',
       sous: 'Le logo raconte ça : une fiole d’où s’échappe un point d’interrogation.',
       pied: 'à explorer en famille dès 5 ans',
+    },
+  },
+  // les cartes 11 et 12 sont nées des tests du skill post-instagram-petit-labo,
+  // conservées telles quelles à la demande de David
+  {
+    id: '11-fais-tourner-la-terre', taille: POST,
+    p: {
+      type: 'duo',
+      kicker: 'Apprendre en jouant',
+      titre: 'Fais lever le soleil\ndans ton jardin !',
+      etiquette1: 'Le moment à fabriquer',
+      etiquette2: 'La Terre sous le doigt',
+      // le jardin au lever : le soleil vient de passer l'horizon, en bas à
+      // gauche du dessin — la coupe carrée garde le bas
+      image: 'scenes-insta/soleil-jardin-lever.png', pos: '100%',
+      // la Terre et son Soleil touchent les bords : dessin entier, jamais recadré
+      image2: 'scenes-insta/soleil-espace-lever.png', entier2: '1',
+      sous: 'Le jeu demande un moment — le matin, midi, la nuit… — et l’enfant le _fabrique_ en faisant tourner la Terre du doigt.',
+    },
+  },
+  {
+    id: '12-citation-narrateur', taille: POST,
+    p: {
+      type: 'citation', fiole: 'maitre', kicker: 'Comment ça se lit',
+      titre: 'Le narrateur,\nc’est vous.\n*Plus de voix ?*\n*Le conteur prend*\n*le relais.*',
+      sous: 'Sur chaque page, un bouton « avec la voix » : une voix enregistrée raconte la même histoire, autant de fois que l’enfant la demande.',
     },
   },
 ];
