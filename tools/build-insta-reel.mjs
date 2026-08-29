@@ -49,8 +49,10 @@ const REEL = {
   secondes: 15,
   vues: [
     // capture à l'échelle 2 : jardin 612×490 CSS → 1224×980 px de fichier
-    { canvas: '#garden-view', nom: 'jardin', etiquette: 'Depuis le jardin' },
-    { canvas: '#space-view', nom: 'espace', etiquette: 'Depuis l’espace' },
+    // la signalétique du site, mot pour mot et dans ses couleurs (.view-head) —
+    // l'emoji de l'intitulé (🌳/🚀) reste dans la légende, jamais dans l'image
+    { canvas: '#garden-view', nom: 'jardin', etiquette: 'Depuis ton jardin', couleur: '#46c2a5' },
+    { canvas: '#space-view', nom: 'espace', etiquette: 'Depuis l’espace', couleur: '#a98bff' },
   ],
 };
 
@@ -83,8 +85,7 @@ function pageHabillage() {
   .fiole { position: absolute; left: 64px; top: 52px; width: 52px; height: 52px; }
   h1 { position: absolute; left: 64px; top: 108px; margin: 0; color: #e9edf8;
     font-weight: 800; font-size: 60px; }
-  .etiquette { color: #ffcf5c; font-size: 25px; font-weight: 700;
-    letter-spacing: .1em; text-transform: uppercase; }
+  .etiquette { font-size: 31px; font-weight: 800; }
   .cadre { position: absolute; border: 2px solid rgba(255,207,92,.28);
     border-radius: ${r}px; box-shadow: 0 0 0 10px rgba(255,207,92,.05); }
   .pied { position: absolute; bottom: 40px; left: 64px; right: 64px;
@@ -116,9 +117,9 @@ function pageHabillage() {
   </svg>
   <div class="texte kicker">Petit labo d’astronomie</div>
   <h1>${REEL.titre}</h1>
-  <div class="etiquette" style="position:absolute;left:${j.x}px;top:${j.y - 40}px">${REEL.vues[0].etiquette}</div>
+  <div class="etiquette" style="position:absolute;left:${j.x}px;top:${j.y - 46}px;color:${REEL.vues[0].couleur}">${REEL.vues[0].etiquette}</div>
   <div class="cadre" style="left:${j.x - 2}px;top:${j.y - 2}px;width:${j.l}px;height:${j.h}px"></div>
-  <div class="etiquette" style="position:absolute;left:${j.x}px;top:${e.y - 40}px">${REEL.vues[1].etiquette}</div>
+  <div class="etiquette" style="position:absolute;left:${j.x}px;top:${e.y - 46}px;color:${REEL.vues[1].couleur}">${REEL.vues[1].etiquette}</div>
   <div class="cadre" style="left:${e.x - 2}px;top:${e.y - 2}px;width:${e.l}px;height:${e.h}px"></div>
   <div class="pied"><b>petit-labo.fr</b><span>gratuit, sans publicité</span></div>
   </body></html>`;
