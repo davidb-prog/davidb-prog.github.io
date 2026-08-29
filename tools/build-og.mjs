@@ -54,6 +54,12 @@ const CARTES = [
     titre: 'Pourquoi la Lune change de forme ?',
     sous: 'La Lune ne change pas — on la voit autrement chaque nuit.',
   },
+  {
+    id: 'la-terre-est-penchee', fichier: 'tools/sorties-og/la-terre-est-penchee.png',
+    fiole: 'astro', kicker: 'Petit labo d’astronomie',
+    titre: 'Pourquoi il y a des saisons ?',
+    sous: 'La Terre est penchée… et elle garde son penchant toute l’année !',
+  },
 ];
 
 const chrome = trouveChrome();
