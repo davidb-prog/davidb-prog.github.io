@@ -136,6 +136,32 @@ const CARTES = [
       pied: 'à explorer en famille dès 5 ans',
     },
   },
+  // les cartes 11 et 12 sont nées des tests du skill post-instagram-petit-labo,
+  // conservées telles quelles à la demande de David
+  {
+    id: '11-fais-tourner-la-terre', taille: POST,
+    p: {
+      type: 'duo',
+      kicker: 'Apprendre en jouant',
+      titre: 'Fais lever le soleil\ndans ton jardin !',
+      etiquette1: 'Le moment à fabriquer',
+      etiquette2: 'La Terre sous le doigt',
+      // le jardin au lever : le soleil vient de passer l'horizon, en bas à
+      // gauche du dessin — la coupe carrée garde le bas
+      image: 'scenes-insta/soleil-jardin-lever.png', pos: '100%',
+      // la Terre et son Soleil touchent les bords : dessin entier, jamais recadré
+      image2: 'scenes-insta/soleil-espace-lever.png', entier2: '1',
+      sous: 'Le jeu demande un moment — le matin, midi, la nuit… — et l’enfant le _fabrique_ en faisant tourner la Terre du doigt.',
+    },
+  },
+  {
+    id: '12-citation-narrateur', taille: POST,
+    p: {
+      type: 'citation', fiole: 'maitre', kicker: 'Comment ça se lit',
+      titre: 'Le narrateur,\nc’est vous.\n*Plus de voix ?*\n*Le conteur prend*\n*le relais.*',
+      sous: 'Sur chaque page, un bouton « avec la voix » : une voix enregistrée raconte la même histoire, autant de fois que l’enfant la demande.',
+    },
+  },
 ];
 
 const chrome = trouveChrome();

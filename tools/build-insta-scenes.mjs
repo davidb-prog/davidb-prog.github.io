@@ -71,6 +71,14 @@ const SCENES = [
     curseur: '#time-slider', valeur: '0', canvas: '#garden-view', l: 1224, h: 980 },
   { id: 'soleil-espace-nuit', episode: 'ou-va-le-soleil',
     curseur: '#time-slider', valeur: '0', canvas: '#space-view', l: 980, h: 980 },
+  // le jeu « Fais tourner la Terre ! » : le défi du lever, réussi — 6 h 30,
+  // dans la fenêtre de ±45 min du défi (le soleil vient de passer l'horizon).
+  // Capture CARRÉE de la moitié gauche du jardin : le soleil se lève à l'est,
+  // tout à gauche du dessin — la coupe centrée du duo le perdrait
+  { id: 'soleil-jardin-lever', episode: 'ou-va-le-soleil',
+    curseur: '#time-slider', valeur: '6.5', canvas: '#garden-view', l: 980, h: 980 },
+  { id: 'soleil-espace-lever', episode: 'ou-va-le-soleil',
+    curseur: '#time-slider', valeur: '6.5', canvas: '#space-view', l: 980, h: 980 },
   { id: 'terre-pole-midi', episode: 'la-terre-tourne',
     curseur: '#time-slider', valeur: '12', canvas: '#pole-view', l: 1260, h: 1260 },
   { id: 'terre-globe', episode: 'la-terre-tourne',
