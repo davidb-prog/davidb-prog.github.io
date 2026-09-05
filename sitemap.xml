@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Le plan du site : le portail, son dossier de presse, et les trois épisodes
+<!-- Le plan du site : le portail, son dossier de presse, et les quatre épisodes
      publiés. Les épisodes
      vivent chacun dans leur dépôt mais sont servis comme des chemins du même
      domaine — le sitemap du domaine les couvre donc tous. À compléter à chaque
@@ -10,4 +10,5 @@
   <url><loc>https://petit-labo.fr/ou-va-le-soleil/</loc></url>
   <url><loc>https://petit-labo.fr/la-terre-tourne/</loc></url>
   <url><loc>https://petit-labo.fr/la-lune-change-de-forme/</loc></url>
+  <url><loc>https://petit-labo.fr/la-terre-est-penchee/</loc></url>
 </urlset>
