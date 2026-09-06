@@ -130,10 +130,25 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 .carte-titre { display: block; font-family: var(--titres); font-size: 1.32rem; line-height: 1.2; font-weight: 700; color: var(--sun); }
 .carte-sous { display: block; margin-top: 4px; color: var(--muted); }
 
-/* côte à côte dès qu'il y a la place */
+/* côte à côte dès qu'il y a la place : deux colonnes, jamais trois.
+   Avec trois colonnes la quatrième carte restait seule et s'étirait sur toute
+   la largeur ; en deux colonnes les épisodes se rangent par paires, chaque
+   carte est assez large pour que son titre tienne sur une ligne ou deux, et
+   la grille égalise les hauteurs d'une même rangée. */
 @media (min-width: 720px) {
-  .cartes { display: -webkit-flex; display: flex; -webkit-flex-wrap: wrap; flex-wrap: wrap; gap: 14px; }
-  .carte { -webkit-flex: 1 1 280px; flex: 1 1 280px; margin: 0; }
+  .cartes {
+    display: -webkit-flex; display: flex;          /* repli des vieux moteurs */
+    -webkit-flex-wrap: wrap; flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  /* têtes de cartes alignées : quand la carte voisine a une ligne de plus,
+     le médaillon et le titre restent sur la même ligne de départ */
+  .carte {
+    -webkit-flex: 1 1 320px; flex: 1 1 320px; margin: 0;
+    -webkit-align-items: flex-start; align-items: flex-start;
+  }
 }
 
 /* ---------- le partage (sous les cartes : il accompagne, il ne domine pas) ---------- */
