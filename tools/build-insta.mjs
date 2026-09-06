@@ -7,7 +7,7 @@
 //   node tools/build-insta.mjs 02-ou-va-le-soleil   (une seule carte)
 //   CHROME=/chemin node tools/build-insta.mjs
 //
-// Les SCÈNES (les dessins des trois épisodes) ne se dessinent pas ici : elles
+// Les SCÈNES (les dessins des épisodes) ne se dessinent pas ici : elles
 // sont photographiées sur les sites par tools/build-insta-scenes.mjs, qui les
 // dépose dans tools/scenes-insta/. Lancer ce script-là AVANT celui-ci.
 //
@@ -163,6 +163,18 @@ const CARTES = [
       type: 'citation', fiole: 'maitre', kicker: 'Comment ça se lit',
       titre: 'Le narrateur,\nc’est vous.\n*Plus de voix ?*\n*Le conteur prend*\n*le relais.*',
       sous: 'Sur chaque page, un bouton « avec la voix » : une voix enregistrée raconte la même histoire, autant de fois que l’enfant la demande.',
+    },
+  },
+  {
+    // T14 : l'annonce du quatrième épisode. La vue de l'espace au solstice
+    // d'été — la Terre penchée, le faisceau qui frappe notre moitié bien en
+    // face, la maison et le kangourou — c'est le dessin qui dit « saisons »
+    id: '13-pourquoi-les-saisons', taille: POST,
+    p: {
+      type: 'scene', kicker: 'Petit labo d’astronomie',
+      titre: 'Pourquoi il y a\ndes saisons ?',
+      image: 'scenes-insta/saisons-orbite-ete.png', rogne: '1', pos: '50%',
+      sous: 'La Terre n’est pas plus près du Soleil en été. Elle _penche_ — et elle garde son penchant toute l’année.',
     },
   },
 ];

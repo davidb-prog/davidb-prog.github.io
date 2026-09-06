@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Captures d'écran des épisodes pour la page presse — HORS site, zéro dépendance.
 //
-//   node tools/build-captures.mjs                     (les trois)
+//   node tools/build-captures.mjs                     (tous les épisodes)
 //   node tools/build-captures.mjs la-terre-tourne     (un seul)
 //   CHROME=/chemin node tools/build-captures.mjs
 //
@@ -39,7 +39,7 @@ const ORDINATEUR = { largeur: 1280, hauteur: 1000, fenetre: [1320, 1220], echell
 // /__telephone/<id> du serveur ci-dessous, dans une fenêtre assez large.
 const TELEPHONE = { largeur: 780, hauteur: 1688, fenetre: [520, 900], echelle: 2, cadre: true };
 
-const IDS = ['ou-va-le-soleil', 'la-terre-tourne', 'la-lune-change-de-forme'];
+const IDS = ['ou-va-le-soleil', 'la-terre-tourne', 'la-lune-change-de-forme', 'la-terre-est-penchee'];
 const EPISODES = [];
 for (const id of IDS) {
   EPISODES.push({ id: id, fichier: 'assets/presse/capture-' + id + '.png', format: ORDINATEUR });
