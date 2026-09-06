@@ -87,6 +87,16 @@ const SCENES = [
     curseur: '#curseur-jours', valeur: '4.2', canvas: '#canvas-hublot', l: 846, h: 782 },
   { id: 'lune-orbite', episode: 'la-lune-change-de-forme',
     curseur: '#curseur-jours', valeur: '7.4', canvas: '#canvas-orbite', l: 1078, h: 838 },
+  // les saisons : le curseur maître est le jour de l'année (0–365) ; solstice
+  // d'été au jour 171, d'hiver à 353,5, équinoxes à 79,75 et 262,25
+  { id: 'saisons-fenetre-ete', episode: 'la-terre-est-penchee',
+    curseur: '#curseur-jours', valeur: '171', canvas: '#canvas-fenetre', l: 976, h: 854 },
+  { id: 'saisons-orbite-ete', episode: 'la-terre-est-penchee',
+    curseur: '#curseur-jours', valeur: '171', canvas: '#canvas-orbite', l: 1212, h: 942 },
+  { id: 'saisons-fenetre-hiver', episode: 'la-terre-est-penchee',
+    curseur: '#curseur-jours', valeur: '353.5', canvas: '#canvas-fenetre', l: 976, h: 854 },
+  { id: 'saisons-orbite-hiver', episode: 'la-terre-est-penchee',
+    curseur: '#curseur-jours', valeur: '353.5', canvas: '#canvas-orbite', l: 1212, h: 942 },
 ];
 
 // La page-cadre : un iframe large (le site s'y déploie comme sur un ordinateur),

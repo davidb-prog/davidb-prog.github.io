@@ -23,7 +23,7 @@ En ligne : <https://petit-labo.fr> (et <https://davidb-prog.github.io>).
   la PWA se régénèrent avec `node tools/build-icons.mjs` (Chromium fait la
   capture 512 px, le script rééchantillonne en 192 et 180 — zéro dépendance).
 - **Le dossier de presse** (`presse/index.html`, `css/presse.css`) : une page
-  sobre pour qui veut écrire sur le labo — l’histoire, les faits, les trois
+  sobre pour qui veut écrire sur le labo — l’histoire, les faits, les
   épisodes et les visuels à télécharger. Reliée discrètement depuis le pied du
   portail et listée au `sitemap.xml`.
 
