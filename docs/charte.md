@@ -132,7 +132,19 @@ de langage 💬.
 Les palettes des séries non lancées sont des points de départ : chacune se rode au
 premier épisode, dans le même gabarit de variables. L'emoji de série apparaît sur
 le portail et dans les pieds de page ; chaque **épisode** garde en plus son
-emoji-signature à lui (☀️ 🌍 🌙…), qui sert de favicon à sa page.
+emoji-signature à lui (☀️ 🌍 🌙 🦘…), qui sert de favicon à sa page.
+
+**L'emoji-signature, précisément** : c'est l'emoji *public* de l'épisode —
+celui de la bio du compte vitrine (« De grandes questions d'enfants ☀️ 🌍 🌙 🦘 »),
+de la liste des questions de sa publication d'ouverture, et de la ligne de lien
+des légendes (« 🦘 petit-labo.fr/la-terre-est-penchee/ »). Le favicon de
+l'épisode la reprend par défaut, mais les deux peuvent diverger : « Où va le
+Soleil la nuit ? » a 🌅 en favicon et ☀️ partout ailleurs, parce que le 🌅 rend
+mal en tout petit dans une bio. En cas de doute, la signature fait foi, et son
+registre vit dans la référence `series.md` du skill `petit-labo`. Une signature
+par épisode, **jamais deux fois la même** (l'épisode des saisons est parti avec
+🌍, déjà pris par les fuseaux horaires, et a changé la veille de sa sortie) ; on
+la choisit avec le titre-question, avant la mise en ligne.
 
 ## Quelle fiole, quel emoji, où ?
 
@@ -151,7 +163,7 @@ Trois niveaux, un usage chacun :
   médaillon de sa carte (tuile ~30 px, soulignement sur le titre seul), et le
   **pont** vers un épisode voisin porte le médaillon de l'épisode d'arrivée —
   plus d'emoji 🌍/🌙 devant ces liens. L'emoji-signature d'un épisode reste
-  son favicon.
+  son favicon (ou, pour le Soleil, l'exception notée plus haut).
 - **La fiole de série** = la série affichée en image :
   1. l'**en-tête des épisodes** — chaque épisode porte la fiole de sa série en
      petit (SVG inline, ~24 px) à côté de son kicker, comme le portail porte le
