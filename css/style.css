@@ -96,7 +96,15 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 }
 .serie-fiole { width: 30px; height: 30px; -webkit-flex-shrink: 0; flex-shrink: 0; }
 
-.cartes { display: block; }
+/* une seule colonne sur mobile, mais des rangées de hauteur égale : sans cela
+   la carte « Où va le Soleil la nuit ? », dont le titre tient sur une ligne,
+   était visiblement plus courte que ses voisines à deux lignes. */
+.cartes {
+  display: block;                                  /* repli des vieux moteurs */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: 1fr;
+}
 
 /* carte = médaillon SVG maison + texte, côte à côte (les emojis-illustrations
    sont bannis du portail : langage de la fiole partout) */
