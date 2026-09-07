@@ -34,6 +34,7 @@ En ligne : <https://petit-labo.fr> (et <https://davidb-prog.github.io>).
 | [`ou-va-le-soleil`](https://github.com/davidb-prog/ou-va-le-soleil) | « Où va le Soleil la nuit ? » |
 | [`la-terre-tourne`](https://github.com/davidb-prog/la-terre-tourne) | « Quelle heure est-il là-bas ? » |
 | [`la-lune-change-de-forme`](https://github.com/davidb-prog/la-lune-change-de-forme) | « Pourquoi la Lune change de forme ? » |
+| [`la-terre-est-penchee`](https://github.com/davidb-prog/la-terre-est-penchee) | « Pourquoi il y a des saisons ? » |
 
 (D’autres épisodes existent en chantier et rejoindront le portail à leur
 publication.)
