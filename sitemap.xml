@@ -3,12 +3,28 @@
      publiés. Les épisodes
      vivent chacun dans leur dépôt mais sont servis comme des chemins du même
      domaine — le sitemap du domaine les couvre donc tous. À compléter à chaque
-     sortie d'épisode. -->
+     sortie d'épisode.
+
+     Le lastmod dit à Google quoi réexplorer en priorité — c'est ce qui fait
+     passer une page de « détectée » à « indexée » sans attendre son tour. Il
+     n'est utile qu'à une condition : être vrai. Une date avancée pour faire
+     joli, ou remise au jour du commit pour un mot retouché, et Google cesse de
+     lire le champ sur tout le domaine.
+
+     Donc, à la main, et seulement quand le contenu d'une page change pour de
+     bon (un épisode ajouté, un texte réécrit ; pas une couleur retouchée). La
+     date exacte est celle du dernier commit qui a touché l'index.html de la
+     page, dans le dépôt qui l'héberge — le portail pour les deux premières
+     adresses, le dépôt de l'épisode pour les autres. Elle se lit avec
+     « git log » (format court %cs) sur ce fichier.
+
+     Une date un peu ancienne ne coûte rien ; une date trop récente coûte le
+     champ tout entier. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://petit-labo.fr/</loc></url>
-  <url><loc>https://petit-labo.fr/presse/</loc></url>
-  <url><loc>https://petit-labo.fr/ou-va-le-soleil/</loc></url>
-  <url><loc>https://petit-labo.fr/la-terre-tourne/</loc></url>
-  <url><loc>https://petit-labo.fr/la-lune-change-de-forme/</loc></url>
-  <url><loc>https://petit-labo.fr/la-terre-est-penchee/</loc></url>
+  <url><loc>https://petit-labo.fr/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://petit-labo.fr/presse/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://petit-labo.fr/ou-va-le-soleil/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://petit-labo.fr/la-terre-tourne/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://petit-labo.fr/la-lune-change-de-forme/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://petit-labo.fr/la-terre-est-penchee/</loc><lastmod>2026-09-06</lastmod></url>
 </urlset>
