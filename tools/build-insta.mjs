@@ -69,7 +69,7 @@ const CARTES = [
       type: 'scene', kicker: 'Petit labo d’astronomie',
       titre: 'Pourquoi la Lune\nchange de forme ?',
       image: 'scenes-insta/lune-hublot.png', rogne: '1', pos: '42%',
-      sous: 'Elle ne change pas. Elle est _toujours à moitié éclairée_ — c’est nous qui voyons sa moitié éclairée d’un autre côté chaque nuit.',
+      sous: 'Elle ne change pas. Elle est _toujours à moitié éclairée_ — et chaque nuit, c’est nous qui voyons cette moitié d’un autre côté.',
     },
   },
   {
