@@ -83,10 +83,13 @@ const SCENES = [
     curseur: '#time-slider', valeur: '12', canvas: '#pole-view', l: 1260, h: 1260 },
   { id: 'terre-globe', episode: 'la-terre-tourne',
     curseur: '#time-slider', valeur: '12', canvas: '#globe3d-view', l: 884, h: 884 },
+  // la Lune : depuis le bloc « Le même soir, deux regards » (largeur de la
+  // famille, plafonnée par la hauteur visible), le hublot est presque carré et
+  // les deux canvas font 473 px de haut — mesurés dans le cadre de capture
   { id: 'lune-hublot', episode: 'la-lune-change-de-forme',
-    curseur: '#curseur-jours', valeur: '4.2', canvas: '#canvas-hublot', l: 846, h: 782 },
+    curseur: '#curseur-jours', valeur: '4.2', canvas: '#canvas-hublot', l: 974, h: 946 },
   { id: 'lune-orbite', episode: 'la-lune-change-de-forme',
-    curseur: '#curseur-jours', valeur: '7.4', canvas: '#canvas-orbite', l: 1078, h: 838 },
+    curseur: '#curseur-jours', valeur: '7.4', canvas: '#canvas-orbite', l: 1218, h: 946 },
   // les saisons : le curseur maître est le jour de l'année (0–365) ; solstice
   // d'été au jour 171, d'hiver à 353,5, équinoxes à 79,75 et 262,25
   { id: 'saisons-fenetre-ete', episode: 'la-terre-est-penchee',
