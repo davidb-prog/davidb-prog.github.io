@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- zoom navigateur verrouillé : un enfant qui pince partout ne doit jamais se
+       retrouver avec une page minuscule — les zooms d'accessibilité du système
+       restent utilisables -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>D’où viennent les nuages ? — l’eau invisible qui monte au ciel, expliquée aux enfants</title>
+  <meta name="description" content="Un nuage, c’est de l’eau montée dans le ciel sans qu’on la voie ! Suis une goutte à toucher, de la mer au nuage et à la pluie. Dès 5 ans, gratuit et sans publicité.">
+  <!-- socle SEO : adresse canonique (petit-labo.fr, sans www — le site est servi
+       comme un chemin du domaine du portail) -->
+  <link rel="canonical" href="https://petit-labo.fr/d-ou-viennent-les-nuages/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%81%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <!-- carte de partage (WhatsApp, iMessage, réseaux) — docs/og.png, générée par
+       tools/build-og.mjs du dépôt du portail (davidb-prog.github.io) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://petit-labo.fr/d-ou-viennent-les-nuages/">
+  <meta property="og:title" content="D’où viennent les nuages ?">
+  <meta property="og:description" content="D’où viennent les nuages ? De petits sites à toucher, à faire tourner, à écouter.">
+  <meta property="og:image" content="https://petit-labo.fr/d-ou-viennent-les-nuages/docs/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- carte d'identité pour les moteurs de recherche : une page éducative,
+       gratuite, en français — rien que des faits déjà affichés sur la page -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "D’où viennent les nuages ?",
+    "description": "Un nuage, c’est de l’eau montée dans le ciel sans qu’on la voie ! Un petit site à toucher pour suivre une goutte, de la mer au nuage et à la pluie, dès 5 ans.",
+    "url": "https://petit-labo.fr/d-ou-viennent-les-nuages/",
+    "inLanguage": "fr",
+    "learningResourceType": "simulation interactive",
+    "typicalAgeRange": "5+",
+    "isAccessibleForFree": true,
+    "isPartOf": { "@type": "WebSite", "name": "Petit labo", "url": "https://petit-labo.fr/" }
+  }
+  </script>
+</head>
+<body>
+
+  <header class="entete">
+    <!-- la fiole de la série (le nuage d'orage dedans) à côté du kicker —
+         règle de la charte : le maître pose la question DEHORS, chaque série
+         met sa réponse DEDANS -->
+    <p class="kicker">
+      <svg class="kicker-fiole" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M43 22 L43 42 L28 68 A9 9 0 0 0 36 81 L64 81 A9 9 0 0 0 72 68 L57 42 L57 22 Z"
+              fill="#1a2338" stroke="#ffcf5c" stroke-width="6" stroke-linejoin="round"/>
+        <rect x="38" y="15" width="24" height="7" rx="3.5" fill="#ffcf5c"/>
+        <g fill="#e9edf8">
+          <circle cx="43" cy="59" r="5.5"/><circle cx="51" cy="55" r="7"/><circle cx="59" cy="60" r="5"/>
+          <rect x="40" y="59" width="22" height="5.5" rx="2.75"/>
+        </g>
+        <path d="M52 66 L48.5 71.5 L53 71.5 L50 77" fill="none" stroke="#ffcf5c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Petit labo de météorologie</span></p>
+    <h1>D’où viennent les nuages&nbsp;?</h1>
+    <p class="tagline">
+      Le matin, le ciel est tout bleu… et l’après-midi, voilà des nuages&#8239;! D’où sortent-ils&nbsp;?
+      <strong>De la mer, montée dans le ciel sans qu’on la voie&#8239;!</strong> Attrape la goutte
+      et promène-la dans son grand voyage.
+    </p>
+  </header>
+
+  <main>
+
+    <!-- Le cœur interactif : les deux vues, toujours synchronisées sur le même instant. -->
+    <section class="panneau panneau-scene" id="panneau-scene" aria-labelledby="titre-scene">
+      <div class="entete-scene">
+        <span class="titre-scene" id="titre-scene">Le même instant, deux regards</span>
+      </div>
+
+      <div class="grille-vues">
+        <div class="bloc-vue">
+          <div class="entete-vue entete-vue-dehors">🏔️ Dehors <span class="hint">la mer, la montagne, et le Soleil qui chauffe</span></div>
+          <div class="cadre-canvas ratio-dehors">
+            <canvas id="canvas-dehors"
+              aria-label="Le paysage : la mer à gauche, la montagne enneigée à droite, le Soleil fixe en haut à gauche. Une goutte d’eau souriante fait son grand voyage : elle flotte dans la mer, s’envole en vapeur invisible quand le Soleil la chauffe, réapparaît dans le froid tout en haut pour faire un nuage, tombe en pluie sur la montagne, et revient à la mer par la rivière. Attrape la goutte avec le doigt ou la souris et promène-la le long de son chemin en pointillés."></canvas>
+          </div>
+          <p class="phrase-vue" id="phrase-dehors" aria-live="polite"></p>
+          <!-- la bulle « attrape-moi » vit SOUS le canvas : rien ne recouvre les vues -->
+          <div class="bulle-geste" id="bulle-geste"><span class="bulle-geste-pilule">✋ Attrape la goutte et promène-la&#8239;!</span></div>
+        </div>
+
+        <div class="bloc-vue">
+          <!-- le ⏸/▶ vit ICI, dans la ligne de la seconde vue : sur téléphone il
+               reste sous le pouce ; sur grand écran le CSS le pose en haut à
+               droite du panneau (un seul bouton, un seul câblage) -->
+          <div class="entete-vue entete-vue-loupe"><span class="titre-vue">🔍 De tout près</span>
+            <button id="bouton-lecture" class="bouton-lecture" aria-pressed="true"><span
+                class="lecture-on" aria-hidden="true">⏸ Pause</span><span
+                class="lecture-off" aria-hidden="true">▶ Lecture</span></button>
+            <span class="hint">la même eau, vue à la loupe</span></div>
+          <div class="cadre-canvas ratio-loupe">
+            <canvas id="canvas-loupe"
+              aria-label="La loupe : la même eau vue de tout près. Douze billes d’eau serrées les unes contre les autres dans la mer ; chauffées, elles s’écartent et s’effacent, c’est la vapeur ; dans le froid, elles se rapprochent en petites gouttelettes, c’est le nuage ; collées en une grosse goutte, c’est la pluie. Cette vue suit la goutte de la scène, elle ne se manipule pas."></canvas>
+          </div>
+          <p class="phrase-vue" id="phrase-loupe" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- Le grand curseur maître : le voyage de la goutte. -->
+      <div class="commande-voyage">
+        <div class="piste-emojis" aria-hidden="true">
+          <span class="repere-mer">🌊</span><span class="repere-montee">☀️</span><span class="repere-nuage">☁️</span><span class="repere-pluie">🌧️</span><span class="repere-riviere">🏞️</span>
+        </div>
+        <input type="range" id="curseur-voyage" min="0" max="100" step="0.1" value="4"
+          aria-label="Le voyage de la goutte, de la mer au nuage, à la pluie et à la rivière : fais glisser pour avancer ou reculer dans le voyage.">
+        <div class="piste-etapes" aria-hidden="true">
+          <span style="left:5%">mer</span><span style="left:22%">ça monte</span><span style="left:46%">nuage</span><span style="left:67%">pluie</span><span style="left:88%">rivière</span>
+        </div>
+        <p class="legende-curseur">Fais glisser pour suivre la goutte dans son grand voyage&#8239;!</p>
+      </div>
+    </section>
+
+    <!-- Les boutons-scénarios : les quatre moments-clés du voyage. -->
+    <section class="panneau panneau-scenarios" aria-labelledby="titre-scenarios">
+      <div class="titre-scenarios" id="titre-scenarios">
+        <span>🎲 Joue avec la goutte</span>
+        <button id="bouton-voix-scn" class="bouton-voix" aria-pressed="false"
+          title="La voix du conteur raconte chaque moment choisi"><span
+            class="voix-on" aria-hidden="true">🔊 <span class="libelle">avec la voix</span></span><span
+            class="voix-off" aria-hidden="true">🔇 <span class="libelle">sans la voix</span></span></button>
+      </div>
+      <div class="boutons-scenarios" id="boutons-scenarios"></div>
+      <div class="histoire-scn" id="histoire-scn"></div>
+    </section>
+
+    <!-- La boîte d'explication : à lire… ou à écouter. Repliée sur mobile. -->
+    <details class="panneau panneau-explication" id="explication-pli" open>
+      <summary class="resume-explication"><h2>💡 D’où viennent les nuages&nbsp;?</h2>
+        <span class="hint">(l’histoire complète, à lire ou à écouter)</span></summary>
+      <div class="entete-explication">
+        <h2>💡 D’où viennent les nuages&nbsp;?</h2>
+        <button id="bouton-ecouter" class="bouton-ecouter" hidden aria-pressed="false">🔊 Écouter l’histoire</button>
+      </div>
+      <p class="conseil-voix" id="conseil-voix" hidden>
+        🗣 Pour une plus jolie voix, ouvre cette page dans Chrome ou Edge, ou installe une voix
+        française « améliorée » dans les réglages de l’appareil.
+      </p>
+      <div class="texte-explication" id="texte-explication">
+        <p>Regarde la mer, les lacs, les rivières&nbsp;: partout, il y a de l’eau. Et toute la journée, le Soleil la chauffe.</p>
+        <p>Quand l’eau est bien chaude, de toutes petites gouttes s’envolent dans l’air. Elles sont si petites qu’on ne les voit plus du tout&#8239;! Mais elles sont là, autour de nous, invisibles. On appelle ça de la vapeur.</p>
+        <p>Ces gouttes invisibles montent, montent… Et plus on monte dans le ciel, plus il fait froid. Tu le sais&nbsp;: tout en haut des montagnes, il y a de la neige&#8239;!</p>
+        <p>Dans le froid, les gouttes invisibles se rapprochent et se collent les unes aux autres. Elles redeviennent des petites gouttes qu’on peut voir. Des milliards de petites gouttes toutes ensemble… c’est ça, un nuage&#8239;!</p>
+        <p>Alors, d’où viennent les nuages&nbsp;? De la mer, des lacs et des rivières&#8239;! C’est de l’eau qui est montée dans le ciel sans qu’on la voie.</p>
+        <p>Essaie à la maison&nbsp;: souffle sur une vitre bien froide. Des petites gouttes apparaissent&#8239;! C’est la vapeur invisible de ton souffle qui redevient de l’eau, comme dans un nuage.</p>
+        <p>Quand les petites gouttes du nuage se collent encore, elles deviennent trop lourdes pour rester en l’air. Elles tombent&nbsp;: il pleut&#8239;! La pluie coule dans les rivières, retourne à la mer… et le Soleil recommence à la chauffer. L’eau tourne en rond, toujours la même, depuis très, très longtemps.</p>
+      </div>
+    </details>
+
+    <!-- Le jeu : fabriquer le moment demandé en promenant la goutte. -->
+    <section class="panneau panneau-jeu" aria-labelledby="titre-jeu">
+      <div class="entete-jeu">
+        <h2 id="titre-jeu">🎯 Fabrique le moment&#8239;!</h2>
+        <div class="actions-jeu">
+          <button id="bouton-voix-jeu" class="bouton-voix" hidden aria-pressed="false" aria-label="La voix du conteur dans le jeu"
+            title="La voix du conteur lit les consignes et les bravos"><span
+              class="voix-on" aria-hidden="true">🔊 <span class="libelle">avec la voix</span></span><span
+              class="voix-off" aria-hidden="true">🔇 <span class="libelle">sans la voix</span></span></button>
+          <button id="bouton-encore" class="bouton-jeu" hidden>🎲 Encore une&#8239;!</button>
+          <button id="bouton-jouer" class="bouton-jeu" aria-expanded="false">🎮 Jouer</button>
+        </div>
+      </div>
+      <div id="zone-jeu" hidden>
+        <p class="consigne-jeu">Promène la goutte le long de son voyage et fabrique…</p>
+        <p class="defi-jeu" id="defi-jeu" aria-live="polite"></p>
+        <div class="vues-jeu">
+          <div class="cadre-canvas ratio-dehors cadre-jeu-dehors">
+            <canvas id="canvas-dehors-jeu"
+              aria-label="Le même paysage que plus haut, synchronisé : promène la goutte ici pour fabriquer le moment demandé."></canvas>
+          </div>
+          <div class="cadre-canvas ratio-loupe cadre-jeu-loupe">
+            <canvas id="canvas-loupe-jeu"
+              aria-label="La même loupe que plus haut, synchronisée : l’eau de tout près, au moment que tu fabriques."></canvas>
+          </div>
+        </div>
+        <p class="bravo-jeu" id="bravo-jeu" aria-live="polite" hidden></p>
+      </div>
+    </section>
+
+    <!-- La note aux parents : mode d'emploi, puis les licences assumées. -->
+    <details class="panneau parents">
+      <summary>📝 La note aux parents <span class="hint">(mode d’emploi et petites simplifications)</span></summary>
+
+      <h3>Comment on s’en sert</h3>
+      <ul>
+        <li><strong>Le grand curseur du voyage commande tout.</strong> Les deux vues montrent
+          toujours le même instant&nbsp;: le paysage dehors, et la même eau vue à la loupe. Le voyage
+          avance tout seul (un tour en une minute et demie) — le bouton ⏸ (ou la barre d’espace) le
+          met en pause.</li>
+        <li><strong>Le geste préféré des enfants&nbsp;:</strong> attraper la goutte sur le paysage et la
+          promener le long de son chemin en pointillés, dans un sens ou dans l’autre. Le moment
+          magique, c’est quand elle disparaît en montant&nbsp;: elle est toujours là, sous le doigt
+          (un pointillé la suit), et elle réapparaît dans le froid, tout en haut.</li>
+        <li><strong>Les quatre boutons-moments</strong> font glisser la goutte en douceur jusqu’au
+          moment choisi, puis racontent le même instant des deux regards. Le bouton 🔇/🔊 allume la
+          voix du conteur (les moments, la grande histoire, les consignes du jeu)&#8239;; le choix
+          est retenu d’une visite à l’autre, et rien ne part sur Internet.</li>
+        <li><strong>Le jeu « Fabrique le moment&#8239;! »</strong> demande de fabriquer un moment du
+          voyage en promenant la goutte&nbsp;: la faire disparaître, fabriquer un nuage, faire pleuvoir
+          sur la montagne, la ramener à la mer.</li>
+        <li><strong>Sur téléphone,</strong> un médaillon en haut à droite montre la loupe dès qu’elle
+          sort de l’écran — un tap y ramène.</li>
+      </ul>
+
+      <h3>Ce que le site simplifie</h3>
+      <ul>
+        <li><strong>Une seule goutte fait tout le voyage.</strong> En vrai, l’eau se mélange sans
+          cesse&nbsp;: la vapeur partie de la mer retombe le plus souvent ailleurs — sur une autre
+          montagne, un champ, ou directement dans l’océan — et met des jours à des années à
+          revenir. Le site suit une goutte-héroïne pour que l’enfant voie que c’est <em>la même
+          eau</em> qui tourne en rond&nbsp;: c’est le cœur du message.</li>
+        <li><strong>La vapeur est dessinée en pointillé.</strong> La vraie vapeur d’eau est un gaz
+          parfaitement invisible. Le pointillé n’est là que pour que l’enfant sache où est sa
+          goutte — et le petit nuage blanc au-dessus d’une casserole n’est pas de la vapeur&nbsp;:
+          ce sont déjà des gouttelettes recondensées, comme dans un vrai nuage.</li>
+        <li><strong>Il pleut « sur la montagne ».</strong> Il pleut partout où l’air humide se
+          refroidit assez, pas seulement en montagne. Le relief force juste l’air à monter et
+          à se refroidir, c’est pourquoi il pleut souvent plus sur les versants exposés au vent.</li>
+        <li><strong>Douze billes d’eau à la loupe.</strong> Une seule goutte de pluie contient des
+          millions de milliards de molécules d’eau, et une gouttelette de nuage est cent fois
+          plus petite qu’une goutte de pluie (un centième de millimètre contre un millimètre). Les
+          billes racontent le principe&nbsp;: serrées dans le liquide, éparses dans la vapeur.</li>
+        <li><strong>Le froid tout en haut.</strong> L’air perd à peu près 6&nbsp;°C à chaque kilomètre
+          d’altitude&nbsp;: la base d’un nuage d’été se trouve souvent entre 1&nbsp;000 et 2&nbsp;000 mètres,
+          là où l’air monté du sol est devenu assez froid. Le site place « le froid » à une hauteur
+          fixe pour que l’enfant le repère d’un coup d’œil.</li>
+        <li><strong>Ni vent, ni neige, ni grêle.</strong> Le nuage glisse vers la montagne « tout
+          seul »&nbsp;: c’est le vent qui le pousse. Et quand il fait très froid, les gouttelettes
+          gèlent&nbsp;: flocons et grêlons ont leur propre histoire.</li>
+        <li><strong>Les plantes et le sol aussi.</strong> Une bonne part de la vapeur vient des
+          feuilles des plantes et du sol humide, pas seulement de la mer, des lacs et des
+          rivières. Le site s’en tient aux étendues d’eau que l’enfant reconnaît.</li>
+      </ul>
+
+      <p class="parents-mot">Les mots savants à retenir&nbsp;: l’<strong>évaporation</strong> (l’eau
+        liquide devient vapeur invisible sous l’effet de la chaleur) et la
+        <strong>condensation</strong> (la vapeur refroidie redevient des gouttelettes). Un nuage,
+        c’est de la condensation&#8239;; l’ensemble du voyage s’appelle le <strong>cycle de
+        l’eau</strong>.</p>
+    </details>
+
+  </main>
+
+  <!-- Le médaillon flottant (mobile) : la loupe en miniature, toujours
+       visible quand la vraie loupe est sortie de l'écran. Un tap y ramène. -->
+  <button id="medaillon-loupe" class="medaillon-loupe" hidden
+    aria-label="L’eau à la loupe en ce moment — remonter à la loupe">
+    <canvas id="canvas-medaillon" aria-hidden="true"></canvas>
+  </button>
+
+  <!-- pied de page harmonisé de la famille : la série, les épisodes cousins
+       en liens, puis le bouton du menu vers le portail -->
+  <footer class="pied-site">
+    <p class="pied-serie">« D’où viennent les nuages&#8239;? » — le premier épisode du <strong>Petit labo de météorologie</strong> ⛅</p>
+    <p class="pied-cousins">Et du côté du Petit labo d’astronomie 🔭&nbsp;:</p>
+    <!-- chaque épisode porte son médaillon SVG (repris de sa carte sur le portail),
+         et le bouton du menu porte la fiole maître au « ? » (version petites tailles) -->
+    <ul class="episodes-pied">
+      <li><a href="https://petit-labo.fr/ou-va-le-soleil/">
+        <span class="ep-medaillon" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <defs><clipPath id="med-soleil"><rect x="0" y="0" width="100" height="64"/></clipPath></defs>
+            <g clip-path="url(#med-soleil)">
+              <circle cx="50" cy="66" r="17" fill="#ffcf5c"/>
+              <path d="M50 39 L50 31" stroke="#ffcf5c" stroke-width="5" stroke-linecap="round"/>
+              <path d="M30 46 L24.5 40.5" stroke="#ffcf5c" stroke-width="5" stroke-linecap="round"/>
+              <path d="M70 46 L75.5 40.5" stroke="#ffcf5c" stroke-width="5" stroke-linecap="round"/>
+            </g>
+            <path d="M16 66 L84 66" stroke="#46c2a5" stroke-width="4.5" stroke-linecap="round"/>
+            <circle cx="24" cy="25" r="2" fill="#9aa5c3"/>
+            <circle cx="79" cy="21" r="2.4" fill="#e9edf8"/>
+          </svg>
+        </span>
+        <span class="ep-titre">Où va le Soleil la nuit&#8239;?</span></a></li>
+      <li><a href="https://petit-labo.fr/la-terre-tourne/">
+        <span class="ep-medaillon" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="36" cy="44" r="16" fill="#ffe9b0"/>
+            <circle cx="36" cy="44" r="16" fill="none" stroke="#ffcf5c" stroke-width="4.5"/>
+            <path d="M36 44 L36 33.5" stroke="#070b17" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M36 44 L43.5 47" stroke="#070b17" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="64" cy="62" r="16" fill="#0e1530"/>
+            <circle cx="64" cy="62" r="16" fill="none" stroke="#a98bff" stroke-width="4.5"/>
+            <path d="M64 62 L64 51.5" stroke="#a98bff" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M64 62 L56.5 65" stroke="#a98bff" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="74" cy="28" r="2" fill="#e9edf8"/>
+            <circle cx="22" cy="76" r="1.7" fill="#ff6b9d"/>
+          </svg>
+        </span>
+        <span class="ep-titre">Quelle heure est-il là-bas&#8239;?</span></a></li>
+      <li><a href="https://petit-labo.fr/la-lune-change-de-forme/">
+        <span class="ep-medaillon" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="48" cy="54" r="20" fill="#ffcf5c"/>
+            <circle cx="57" cy="48" r="17.5" fill="#070b17"/>
+            <circle cx="26" cy="26" r="2.2" fill="#a98bff"/>
+            <circle cx="76" cy="30" r="2" fill="#ff6b9d"/>
+            <circle cx="72" cy="74" r="1.8" fill="#9aa5c3"/>
+            <circle cx="22" cy="70" r="1.6" fill="#e9edf8"/>
+          </svg>
+        </span>
+        <span class="ep-titre">Pourquoi la Lune change de forme&#8239;?</span></a></li>
+      <li><a href="https://petit-labo.fr/la-terre-est-penchee/">
+        <span class="ep-medaillon" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <path d="M36 78 L64 30" stroke="#cdd5ea" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="50" cy="54" r="18" fill="#2f6fb5"/>
+            <path d="M34.4 45 A18 18 0 0 1 65.6 63 Z" fill="#3fa98e"/>
+            <path d="M34.4 45 L65.6 63" stroke="#ffcf5c" stroke-width="3.5" stroke-linecap="round"/>
+            <g stroke="#bcd9ff" stroke-width="2.6" stroke-linecap="round">
+              <path d="M17 10 L17 24 M10 17 L24 17 M12 12 L22 22 M22 12 L12 22"/>
+            </g>
+            <g fill="#ffb3cd">
+              <circle cx="83" cy="12.5" r="3"/><circle cx="87.3" cy="15.6" r="3"/>
+              <circle cx="85.6" cy="20.7" r="3"/><circle cx="80.4" cy="20.7" r="3"/>
+              <circle cx="78.7" cy="15.6" r="3"/>
+            </g>
+            <circle cx="83" cy="17" r="2.2" fill="#ffcf5c"/>
+            <circle cx="83" cy="83" r="5.5" fill="#ffcf5c"/>
+            <g stroke="#ffcf5c" stroke-width="2.4" stroke-linecap="round">
+              <path d="M83 73.5 L83 76.5 M83 89.5 L83 92.5 M73.5 83 L76.5 83 M89.5 83 L92.5 83
+                       M76.3 76.3 L78.4 78.4 M87.6 87.6 L89.7 89.7 M89.7 76.3 L87.6 78.4 M78.4 87.6 L76.3 89.7"/>
+            </g>
+            <ellipse cx="17" cy="83" rx="6" ry="3.4" fill="#e8934a" transform="rotate(-35 17 83)"/>
+            <path d="M13 87 L11 89.5" stroke="#e8934a" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="ep-titre">Pourquoi il y a des saisons&#8239;?</span></a></li>
+    </ul>
+    <p class="menu-pied"><a class="bouton-menu-labo" href="https://petit-labo.fr/">
+      <svg class="fiole-labo" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M44 40 L44 54 L30 72 A8 8 0 0 0 37 84 L63 84 A8 8 0 0 0 70 72 L56 54 L56 40 Z"
+              fill="#0e1530" stroke="#ffcf5c" stroke-width="6.5" stroke-linejoin="round"/>
+        <rect x="39.5" y="34" width="21" height="6.5" rx="3.25" fill="#ffcf5c"/>
+        <g transform="rotate(10 53 17)">
+          <path d="M45.5 13 A7.5 7.5 0 1 1 53 20.5 L53 23"
+                fill="none" stroke="#ffcf5c" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="53" cy="29.5" r="3.6" fill="#ffcf5c"/>
+        </g>
+      </svg>
+      Tous les épisodes du Petit labo</a></p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
