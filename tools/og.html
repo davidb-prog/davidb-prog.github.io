@@ -5,7 +5,9 @@
 <title>Image de partage Petit labo — gabarit de rendu</title>
 <!-- Gabarit rendu par tools/build-og.mjs en 1200 × 630 (les cartes « Open Graph »
      que WhatsApp, iMessage ou les réseaux affichent sous un lien partagé).
-     Paramétré par l'URL : ?fiole=maitre|astro&kicker=…&titre=…&sous=…
+     Paramétré par l'URL : ?fiole=maitre|astro|meteo&kicker=…&titre=…&sous=…
+     (la fiole choisit aussi le FOND de la carte : la nuit pour le maître et
+     l'astronomie, le ciel d'un jour de pluie pour la météorologie)
      La règle de la charte : la fiole de SÉRIE illustre un épisode, le MAÎTRE
      illustre le portail. -->
 <style>
@@ -40,6 +42,16 @@
   .domaine { position: absolute; left: 460px; bottom: 54px; color: #9aa5c3; font-size: 27px;
     font-weight: 600; }
   .domaine b { color: #ffcf5c; font-weight: 700; }
+  /* le fond de la série météorologie : le ciel d'un jour de pluie (charte,
+     rayon 2) — pas d'étoiles, des nuées douces */
+  .carte.meteo {
+    background-color: #232f47;
+    background-image:
+      radial-gradient(900px 560px at 78% -10%, #2f4470 0%, rgba(35,47,71,0) 62%),
+      radial-gradient(700px 480px at 6% 110%, rgba(124,196,255,.14) 0%, rgba(35,47,71,0) 55%);
+  }
+  .carte.meteo .etoile { display: none; }
+  .carte.meteo .fiole { filter: drop-shadow(0 0 50px rgba(124,196,255,.28)); }
 </style>
 </head>
 <body>
@@ -76,6 +88,18 @@
     <rect x="38" y="15" width="24" height="7" rx="3.5" fill="#ffcf5c"/>
   </svg>
 
+  <!-- la fiole de la série météorologie : le nuage d'orage et son éclair dedans -->
+  <svg class="fiole" id="fiole-meteo" viewBox="0 0 100 100" aria-hidden="true" hidden>
+    <path d="M43 22 L43 42 L28 68 A9 9 0 0 0 36 81 L64 81 A9 9 0 0 0 72 68 L57 42 L57 22 Z"
+          fill="#1a2338" stroke="#ffcf5c" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="38" y="15" width="24" height="7" rx="3.5" fill="#ffcf5c"/>
+    <g fill="#e9edf8">
+      <circle cx="43" cy="59" r="5.5"/><circle cx="51" cy="55" r="7"/><circle cx="59" cy="60" r="5"/>
+      <rect x="40" y="59" width="22" height="5.5" rx="2.75"/>
+    </g>
+    <path d="M52 66 L48.5 71.5 L53 71.5 L50 77" fill="none" stroke="#ffcf5c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
   <div class="textes">
     <p class="kicker" id="kicker"></p>
     <h1 id="titre"></h1>
@@ -86,7 +110,9 @@
 <script>
   // remplissage par l'URL — page-outil rendue hors site, le JS y est permis
   var params = new URLSearchParams(location.search);
-  var fiole = params.get('fiole') === 'maitre' ? 'fiole-maitre' : 'fiole-astro';
+  var serie = params.get('fiole');
+  var fiole = serie === 'maitre' ? 'fiole-maitre' : serie === 'meteo' ? 'fiole-meteo' : 'fiole-astro';
+  if (serie === 'meteo') document.querySelector('.carte').className = 'carte meteo';
   // removeAttribute et non la propriété .hidden : sur un élément SVG, la
   // propriété n'existe pas (leçon payée : deux fioles restées invisibles)
   document.getElementById(fiole).removeAttribute('hidden');

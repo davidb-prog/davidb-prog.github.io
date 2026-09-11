@@ -60,6 +60,12 @@ const CARTES = [
     titre: 'Pourquoi il y a des saisons ?',
     sous: 'La Terre est penchée… et elle garde son penchant toute l’année !',
   },
+  {
+    id: 'd-ou-viennent-les-nuages', fichier: 'tools/sorties-og/d-ou-viennent-les-nuages.png',
+    fiole: 'meteo', kicker: 'Petit labo de météorologie',
+    titre: 'D’où viennent les nuages ?',
+    sous: 'De la mer, montée dans le ciel sans qu’on la voie\u00a0!',
+  },
 ];
 
 const chrome = trouveChrome();
