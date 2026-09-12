@@ -100,12 +100,21 @@ const CARTES = [
     },
   },
   {
+    // en liste, sans image (12 septembre) : la carte parle d'une relation —
+    // un parent qui lit, un enfant qui touche — et aucun dessin du catalogue
+    // ne la contient ; un globe ou un jardin sous ce titre n'était qu'un décor.
+    // Troisième épinglée, à la place de la 08 : le trio dit ce que c'est,
+    // comment c'est écrit, et comment ça se joue
     id: '07-a-deux', taille: POST,
     p: {
-      type: 'scene', kicker: 'Comment ça se joue',
+      type: 'liste', fiole: 'maitre', kicker: 'Comment ça se joue',
       titre: 'Vous lisez.\nL’enfant explore.',
-      image: 'scenes-insta/terre-globe.png', rogne: '1',
-      sous: 'Peu de texte, de gros dessins, et une voix qui raconte si vous préférez écouter. Dès 5 ans, avant de savoir lire.',
+      liste: [
+        'Pour vous~Des phrases courtes, écrites pour être lues à voix haute. Et une note en bas de page, si vous voulez le détail d’adulte.',
+        'Pour votre enfant~De gros dessins, rien à taper : tout se manipule au doigt, avant même de savoir lire.',
+        'Pour les soirs sans voix~Un bouton, et le conteur raconte à votre place — autant de fois que l’enfant le redemande.',
+      ].join('|'),
+      pied: 'à explorer en famille dès 5 ans',
     },
   },
   {
