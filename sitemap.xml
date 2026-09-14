@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Le plan du site : le portail, son dossier de presse, et les quatre épisodes
-     publiés. Les épisodes
+<!-- Le plan du site : le portail, son dossier de presse, ses mentions légales
+     et les quatre épisodes publiés. Les épisodes
      vivent chacun dans leur dépôt mais sont servis comme des chemins du même
      domaine — le sitemap du domaine les couvre donc tous. À compléter à chaque
      sortie d'épisode.
@@ -14,7 +14,7 @@
      Donc, à la main, et seulement quand le contenu d'une page change pour de
      bon (un épisode ajouté, un texte réécrit ; pas une couleur retouchée). La
      date exacte est celle du dernier commit qui a touché l'index.html de la
-     page, dans le dépôt qui l'héberge — le portail pour les deux premières
+     page, dans le dépôt qui l'héberge — le portail pour les trois premières
      adresses, le dépôt de l'épisode pour les autres. Elle se lit avec
      « git log » (format court %cs) sur ce fichier.
 
@@ -23,6 +23,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://petit-labo.fr/</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://petit-labo.fr/presse/</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://petit-labo.fr/mentions-legales/</loc><lastmod>2026-09-14</lastmod></url>
   <url><loc>https://petit-labo.fr/ou-va-le-soleil/</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://petit-labo.fr/la-terre-tourne/</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://petit-labo.fr/la-lune-change-de-forme/</loc><lastmod>2026-09-06</lastmod></url>
