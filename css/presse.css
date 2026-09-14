@@ -182,8 +182,13 @@ main.presse .pilule:focus-visible { outline: 2px solid var(--sun); outline-offse
 
 /* ---------- contact ---------- */
 
-.contact p { color: var(--muted); margin: 0 0 10px; max-width: 66ch; }
-.contact-action { margin: 18px 0 0; text-align: center; }
+/* tout le bloc est centré, titre compris : c'est le point d'arrivée de la
+   page, pas une fiche de plus — il fait le pont vers le pied de page, centré
+   lui aussi. Le texte reste court (un centré se lit mal au-delà de quatre
+   lignes) et étroit. */
+.contact { text-align: center; }
+.contact p { color: var(--muted); margin: 0 auto 10px; max-width: 50ch; }
+.contact-action { margin: 18px 0 0; }
 /* le seul bouton plein de la page (règle de la charte) : écrire à David est
    l'action que cette page existe pour déclencher */
 main.presse .bouton-plein {
