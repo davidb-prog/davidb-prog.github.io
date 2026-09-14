@@ -62,6 +62,29 @@ promesse « sans publicité ni cookies » du pied de page reste vraie.
 Ces deux réglages ne concernent que le portail (page destinée au parent), jamais
 les scènes des épisodes.
 
+## Les deux portes vers la boîte du labo
+
+Sous les cartes, le bloc « la suite » propose au parent deux `mailto:` pré-remplis
+vers `bonjour@petit-labo.fr` — objet et corps déjà écrits, il n’a qu’à envoyer :
+
+| Objet du mail | Ce que le parent demande | Ce qu’on en fait |
+|---|---|---|
+| « Les prochains épisodes du Petit labo » | Recevoir un mot à chaque nouvel épisode | Son adresse rejoint la liste des sorties (copie cachée, tenue à la main dans OVH). On confirme en une ligne. Il se désinscrit en répondant. |
+| « Une question d’enfant pour le Petit labo » | Une question qui revient à la maison | Elle nourrit le vivier des épisodes. On remercie, sans promettre ni date ni sujet. |
+
+**Pourquoi un `mailto` et pas un formulaire** : le site est statique et sans tiers.
+Un champ « votre adresse » exigerait un service (Formspree, Brevo…), donc un point
+de sortie tiers et une collecte à déclarer. Ici on ne collecte rien : c’est le
+parent qui écrit. Le prix : sur un ordinateur sans messagerie configurée, le clic
+ne fait rien. Le jour où la liste dépasse quelques dizaines d’adresses — ou que
+des parents disent ne pas réussir à écrire —, passer à un outil de lettre
+(Brevo : français, formulaire HTML nu possible, envoi inclus) ; c’est l’envoi en
+copie cachée qui casse en premier, pas la collecte.
+
+**La promesse à tenir** : « à chaque nouvel épisode » veut dire à chaque épisode, sans exception. Écrire à
+la liste fait partie de la mise en ligne d’un épisode, au même titre que la
+relance T14 du plan d’acquisition et la carte Instagram.
+
 ## Conventions
 
 Zéro dépendance, zéro build : la page s’ouvre avec `python3 -m http.server` et se
