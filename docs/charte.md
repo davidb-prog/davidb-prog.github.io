@@ -200,7 +200,7 @@ Trois niveaux, un usage chacun :
   aussi la page qui porte la formule de la famille — « gratuit et sans
   publicité », jamais « toujours gratuit » — et aucune promesse de sortie.
 - **Les deux portes** (`bonjour@petit-labo.fr`) : sous les cartes du portail, une
-  pilule contour « Recevoir un mot à chaque sortie » et une ligne « Une question
+  pilule contour « Recevoir un mot à chaque nouvel épisode » et une ligne « Une question
   revient souvent chez vous ? Envoyez-la ». Deux `mailto:` pré-remplis, objets
   distincts ; aucun formulaire, aucun tiers (le pourquoi est dans le README du
   portail). La règle d'or de la page tient : Partager reste le seul bouton plein,
@@ -247,7 +247,7 @@ Trois niveaux, un usage chacun :
 
   ```html
   <p class="portes">
-    <a class="pilule-contour" href="mailto:bonjour@petit-labo.fr?subject=Les%20prochains%20%C3%A9pisodes%20du%20Petit%20labo&amp;body=Bonjour%20David%2C%0A%0AUn%20petit%20mot%20%C3%A0%20chaque%20nouvel%20%C3%A9pisode%20%3F%0A%0AMerci%20!">Recevoir un mot à chaque sortie</a>
+    <a class="pilule-contour" href="mailto:bonjour@petit-labo.fr?subject=Les%20prochains%20%C3%A9pisodes%20du%20Petit%20labo&amp;body=Bonjour%20David%2C%0A%0AUn%20petit%20mot%20%C3%A0%20chaque%20nouvel%20%C3%A9pisode%20%3F%0A%0AMerci%20!">Recevoir un mot à chaque nouvel épisode</a>
   </p>
   <p class="portes-suite">Une question revient souvent chez vous&nbsp;?
     <a href="mailto:bonjour@petit-labo.fr?subject=Une%20question%20d%E2%80%99enfant%20pour%20le%20Petit%20labo&amp;body=Bonjour%20David%2C%0A%0AVoici%20une%20question%20qui%20revient%20souvent%20%C3%A0%20la%20maison%20%3A%0A%0A">Envoyez-la</a>,

@@ -69,7 +69,7 @@ vers `bonjour@petit-labo.fr` — objet et corps déjà écrits, il n’a qu’à
 
 | Objet du mail | Ce que le parent demande | Ce qu’on en fait |
 |---|---|---|
-| « Les prochains épisodes du Petit labo » | Recevoir un mot à chaque sortie | Son adresse rejoint la liste des sorties (copie cachée, tenue à la main dans OVH). On confirme en une ligne. Il se désinscrit en répondant. |
+| « Les prochains épisodes du Petit labo » | Recevoir un mot à chaque nouvel épisode | Son adresse rejoint la liste des sorties (copie cachée, tenue à la main dans OVH). On confirme en une ligne. Il se désinscrit en répondant. |
 | « Une question d’enfant pour le Petit labo » | Une question qui revient à la maison | Elle nourrit le vivier des épisodes. On remercie, sans promettre ni date ni sujet. |
 
 **Pourquoi un `mailto` et pas un formulaire** : le site est statique et sans tiers.
@@ -81,7 +81,7 @@ des parents disent ne pas réussir à écrire —, passer à un outil de lettre
 (Brevo : français, formulaire HTML nu possible, envoi inclus) ; c’est l’envoi en
 copie cachée qui casse en premier, pas la collecte.
 
-**La promesse à tenir** : « à chaque sortie » veut dire à chaque sortie. Écrire à
+**La promesse à tenir** : « à chaque nouvel épisode » veut dire à chaque épisode, sans exception. Écrire à
 la liste fait partie de la mise en ligne d’un épisode, au même titre que la
 relance T14 du plan d’acquisition et la carte Instagram.
 
