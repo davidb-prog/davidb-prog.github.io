@@ -189,7 +189,13 @@ Trois niveaux, un usage chacun :
   c'est le territoire du maître) à la place de l'ancienne éprouvette 🧪.
   Patron déployé sur `ou-va-le-soleil`, à propager aux voisins. Ce pied de page
   porte aussi les **deux portes** du portail (voir ci-dessous) : c'est là que le
-  parent arrivé par un lien partagé finit l'épisode, pas sur l'accueil.
+  parent arrivé par un lien partagé finit l'épisode, pas sur l'accueil. Et sa
+  **dernière ligne**, sous le bouton « Tous les épisodes », est le lien
+  « Mentions légales » vers <https://petit-labo.fr/mentions-legales/> — en
+  petit et un peu effacé (gris `--muted`, pas l'or des liens), présent sur
+  tout épisode : une seule page pour toute la famille, personne n'a sa copie.
+  Il est obligatoire, et c'est la première chose qu'un professionnel regarde ;
+  il ne s'adresse jamais au parent qui vient jouer.
 - **Le dossier de presse** (`/presse/`, dans ce dépôt) : la marque telle qu'on la
   donne aux autres. Il propose au téléchargement la **bannière** (1600 × 512), l'
   **avatar** (512 × 512), les deux SVG du logo maître et une **capture** de chaque
