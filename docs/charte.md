@@ -187,7 +187,9 @@ Trois niveaux, un usage chacun :
   carte**, et le bouton « Tous les épisodes du Petit labo » porte la **fiole
   maître au « ? »** en version petites tailles (il parle de la famille entière,
   c'est le territoire du maître) à la place de l'ancienne éprouvette 🧪.
-  Patron déployé sur `ou-va-le-soleil`, à propager aux voisins.
+  Patron déployé sur `ou-va-le-soleil`, à propager aux voisins. Ce pied de page
+  porte aussi les **deux portes** du portail (voir ci-dessous) : c'est là que le
+  parent arrivé par un lien partagé finit l'épisode, pas sur l'accueil.
 - **Le dossier de presse** (`/presse/`, dans ce dépôt) : la marque telle qu'on la
   donne aux autres. Il propose au téléchargement la **bannière** (1600 × 512), l'
   **avatar** (512 × 512), les deux SVG du logo maître et une **capture** de chaque
@@ -197,6 +199,14 @@ Trois niveaux, un usage chacun :
   ne descend pas sous ~500 px). C'est
   aussi la page qui porte la formule de la famille — « gratuit et sans
   publicité », jamais « toujours gratuit » — et aucune promesse de sortie.
+- **Les deux portes** (`bonjour@petit-labo.fr`) : sous les cartes du portail, une
+  pilule contour « Recevoir un mot à chaque sortie » et une ligne « Une question
+  revient souvent chez vous ? Envoyez-la ». Deux `mailto:` pré-remplis, objets
+  distincts ; aucun formulaire, aucun tiers (le pourquoi est dans le README du
+  portail). La règle d'or de la page tient : Partager reste le seul bouton plein,
+  les portes sont en contour ou en texte. Le compte vitrine s'y annonce en lien
+  texte nu (`@petitlabo.fr`), jamais en widget — « ni bouton de réseau social qui
+  vous suit », dit la page presse.
 - **Le compte vitrine** (Instagram) : la même marque, au format du fil. Sa photo
   de profil est l'**avatar** de `assets/marque/` — celui de la page presse, pas
   une seconde version —, et ses publications se génèrent (`tools/insta.html`,
@@ -230,3 +240,18 @@ Trois niveaux, un usage chacun :
   et `la-lune-change-de-forme`). Les `og:image` et leurs balises
   sont livrées par le chantier og (une PR par épisode) — après tout changement
   de titre affiché, re-passer `node tools/build-og.mjs` et recopier la carte.
+- Les épisodes, pied de page : les deux portes et le lien Instagram, sous le
+  bouton « Tous les épisodes du Petit labo » (à faire sur les quatre épisodes en
+  ligne, puis dans le skill `petit-labo` pour les suivants). Patron, à styler
+  comme la pilule contour du portail (`.pilule-contour` dans `css/style.css`) :
+
+  ```html
+  <p class="portes">
+    <a class="pilule-contour" href="mailto:bonjour@petit-labo.fr?subject=Les%20prochains%20%C3%A9pisodes%20du%20Petit%20labo&amp;body=Bonjour%20David%2C%0A%0AUn%20petit%20mot%20%C3%A0%20chaque%20nouvel%20%C3%A9pisode%20%3F%0A%0AMerci%20!">Recevoir un mot à chaque sortie</a>
+  </p>
+  <p class="portes-suite">Une question revient souvent chez vous&nbsp;?
+    <a href="mailto:bonjour@petit-labo.fr?subject=Une%20question%20d%E2%80%99enfant%20pour%20le%20Petit%20labo&amp;body=Bonjour%20David%2C%0A%0AVoici%20une%20question%20qui%20revient%20souvent%20%C3%A0%20la%20maison%20%3A%0A%0A">Envoyez-la</a>,
+    elle pourra alimenter un prochain épisode.
+    Le labo est aussi sur Instagram&nbsp;:
+    <a href="https://www.instagram.com/petitlabo.fr/" rel="noopener">@petitlabo.fr</a>.</p>
+  ```

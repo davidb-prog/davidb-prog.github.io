@@ -183,18 +183,32 @@
 
     </section>
 
-    <!-- Le partage accompagne les épisodes sans leur voler la vedette : une
-         phrase et un bouton sous les cartes (l'« à venir » et l'invitation à
-         partager fusionnés en un seul moment). js/partage.js fait le geste
-         (partage natif du téléphone si le navigateur sait, copie du lien
-         sinon, jamais d'échec silencieux). -->
+    <!-- La suite, sous les cartes : l'« à venir », le partage et les deux
+         portes vers bonjour@petit-labo.fr en un seul moment. Partager garde
+         l'or plein (bouche-à-oreille = canal n° 1 du plan) ; « Recevoir un
+         mot à chaque sortie » est un mailto pré-rempli en pilule contour : le
+         parent n'a rien à taper, il envoie. Le site est statique, on ne
+         collecte aucune adresse — c'est le parent qui écrit, et il se
+         désinscrit en répondant. Objets distincts pour trier d'un coup d'œil
+         dans la boîte. Instagram : un lien texte nu, jamais un widget (« ni
+         bouton de réseau social qui vous suit », page presse).
+         js/partage.js fait le geste de partage (natif sinon copie du lien,
+         jamais d'échec silencieux). -->
     <div class="partage">
       <p class="partage-phrase">D’autres questions mijotent dans le labo…
-        en attendant, passez le mot autour de vous.</p>
+        en attendant, passez le mot autour de vous — ou demandez qu’on vous
+        fasse signe à chaque nouvel épisode.</p>
       <p class="partage-action">
         <button id="btn-partager" type="button">Partager</button>
+        <a class="pilule-contour" href="mailto:bonjour@petit-labo.fr?subject=Les%20prochains%20%C3%A9pisodes%20du%20Petit%20labo&amp;body=Bonjour%20David%2C%0A%0AUn%20petit%20mot%20%C3%A0%20chaque%20nouvel%20%C3%A9pisode%20%3F%0A%0AMerci%20!">Recevoir
+          un mot à chaque sortie</a>
         <span id="partage-etat" role="status" aria-live="polite" hidden></span>
       </p>
+      <p class="partage-suite">Une question revient souvent chez vous&nbsp;?
+        <a href="mailto:bonjour@petit-labo.fr?subject=Une%20question%20d%E2%80%99enfant%20pour%20le%20Petit%20labo&amp;body=Bonjour%20David%2C%0A%0AVoici%20une%20question%20qui%20revient%20souvent%20%C3%A0%20la%20maison%20%3A%0A%0A">Envoyez-la</a>,
+        elle pourra alimenter un prochain épisode.
+        Le labo est aussi sur Instagram&nbsp;:
+        <a href="https://www.instagram.com/petitlabo.fr/" rel="noopener">@petitlabo.fr</a>.</p>
     </div>
 
     <!-- Qui est derrière le labo : posé AVANT le bloc de soutien, parce qu'on

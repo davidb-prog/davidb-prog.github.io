@@ -163,10 +163,14 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 
 .partage { margin: 30px 0 0; text-align: center; }
 .partage-phrase { margin: 0 auto; max-width: 46ch; color: var(--muted); font-size: .95rem; }
-.partage-action { margin: 12px 0 0; }
+/* deux pilules côte à côte, qui passent l'une sous l'autre sur un petit écran */
+.partage-action {
+  margin: 12px 0 0;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 14px;
+}
 /* le seul bouton plein visible de la page (règle de la charte) : il revient
    à l'action principale, et le bouche-à-oreille est le canal n° 1 du plan —
-   le soutien, lui, passe en contour */
+   « recevoir un mot à chaque sortie » et le soutien passent en contour */
 #btn-partager {
   font-family: var(--titres); font-size: 1rem; font-weight: 700;
   color: #201500; background: linear-gradient(180deg, var(--sun), var(--sun-deep));
@@ -175,7 +179,11 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 }
 #btn-partager:hover, #btn-partager:focus { background: var(--sun); }
 #btn-partager:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
-#partage-etat { display: block; margin-top: 10px; color: var(--teal); font-size: .95rem; }
+#partage-etat { flex-basis: 100%; margin-top: 2px; color: var(--teal); font-size: .95rem; }
+/* les deux portes vers la boîte du labo, et le compte vitrine : une ligne
+   discrète, des liens en or comme tout lien de la famille */
+.partage-suite { margin: 16px auto 0; max-width: 52ch; color: var(--muted); font-size: .9rem; }
+.partage-suite a { color: var(--sun); }
 
 /* ---------- blocs repliés destinés au parent (conseils, à propos) ---------- */
 
@@ -238,13 +246,14 @@ main { max-width: 980px; margin: 0 auto; padding: 18px 20px 40px; }
 .soutien p { margin: 0; color: var(--muted); }
 .soutien p.soutien-action { margin-top: 16px; text-align: center; }
 /* en contour : le pourboire se propose, il ne se brandit pas — l'or plein
-   appartient au bouton Partager */
-.soutien-action a {
+   appartient au bouton Partager. Même pilule contour pour « recevoir un mot à
+   chaque sortie » sous les cartes. */
+.soutien-action a, .pilule-contour {
   display: inline-block; text-decoration: none;
   font-family: var(--titres); font-size: 1rem; font-weight: 700;
   color: var(--sun); background: none;
   border: 1.5px solid var(--sun-deep); border-radius: 999px;
   padding: 8px 24px;
 }
-.soutien-action a:hover, .soutien-action a:focus { background: rgba(255, 207, 92, .14); }
-.soutien-action a:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
+.soutien-action a:hover, .soutien-action a:focus, .pilule-contour:hover, .pilule-contour:focus { background: rgba(255, 207, 92, .14); }
+.soutien-action a:focus-visible, .pilule-contour:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
